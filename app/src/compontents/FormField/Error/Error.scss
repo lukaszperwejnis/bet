@@ -1,0 +1,7 @@
+@import "../../..../../styles/config";
+
+.form-field-error {
+  margin-top: $spacing-small;
+  font-size: $fontSize-tiny;
+  color: $semColor-error;
+}

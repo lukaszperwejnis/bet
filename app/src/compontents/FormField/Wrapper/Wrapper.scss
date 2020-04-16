@@ -1,0 +1,7 @@
+@import "../../..../../styles/config";
+
+.form-field-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: $spacing-normal;
+}

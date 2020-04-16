@@ -1,0 +1,15 @@
+@import "../..../styles/config";
+
+.login__layout.login__layout {
+  min-height: 100vh;
+  justify-content: center;
+}
+.login__password-reset {
+  text-align: right;
+  margin-top: $spacing-small;
+}
+
+.login__submit {
+  margin-top: $spacing-big;
+  text-align: center;
+}

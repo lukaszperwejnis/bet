@@ -1,0 +1,26 @@
+@function spacing($n) {
+  @return $n * 5px;
+}
+
+$spacing-tiny: spacing(1);
+$spacing-small: spacing(2);
+$spacing-normal: spacing(3);
+$spacing-large: spacing(4);
+$spacing-big: spacing(5);
+
+$fontSize-tiny: 8px;
+$fontSize-small: 12px;
+$fontSize-normal: 16px;
+$fontSize-large: 24px;
+
+$fontWeight-bold: bold;
+
+$color-amethyst: #8860D0;
+$color-cornflowerBlue: #5680E9;
+$color-seagull: #84CEEB;
+$color-pictonBlue: #5AB9EA;
+$color-periwinkleGray: #C1C8E4;
+$color-guardsmanRed: #CC0000;
+
+$semColor-text: $color-periwinkleGray;
+$semColor-error: $color-guardsmanRed;
