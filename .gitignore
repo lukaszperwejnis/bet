@@ -1,11 +1,11 @@
 # compiled output
-/server/dist/
+/**/dist/
 
 # dependencies
 /**/node_modules/
 
 # IDEs and editors
-/.idea
-.project
-.classpath
+/**/.idea
+/**/.project
+/**/.classpath
 

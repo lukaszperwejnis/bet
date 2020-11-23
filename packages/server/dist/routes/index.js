@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var signupRoutes_1 = require("./signupRoutes");
+exports.SignupRoutes = signupRoutes_1.SignupRoutes;
+var signinRoutes_1 = require("./signinRoutes");
+exports.SigninRoutes = signinRoutes_1.SigninRoutes;
+var gamesRoutes_1 = require("./gamesRoutes");
+exports.GamesRoutes = gamesRoutes_1.GamesRoutes;
+var TeamRoutes_1 = require("./TeamRoutes");
+exports.TeamRoutes = TeamRoutes_1.TeamRoutes;
+var gameBetRoutes_1 = require("./gameBetRoutes");
+exports.GameBetRoutes = gameBetRoutes_1.GameBetRoutes;
+var championBetRoutes_1 = require("./championBetRoutes");
+exports.ChampionBetRoutes = championBetRoutes_1.ChampionBetRoutes;
+var invitationRoutes_1 = require("./invitationRoutes");
+exports.InvitationRoutes = invitationRoutes_1.InvitationRoutes;
+var verifyRoutes_1 = require("./verifyRoutes");
+exports.VerifyRoutes = verifyRoutes_1.VerifyRoutes;
+var resetPasswordRoutes_1 = require("./resetPasswordRoutes");
+exports.ResetPasswordRoutes = resetPasswordRoutes_1.ResetPasswordRoutes;
+//# sourceMappingURL=index.js.map

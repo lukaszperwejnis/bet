@@ -1,0 +1,28 @@
+.icon.icon--default {
+    color: #3d5170;
+}
+
+.icon.icon--primary {
+    color: #007bff;
+}
+
+.icon.icon--secondary {
+    color: #e4e4e4;
+}
+
+.icon.icon--error {
+    color: #CD0000;
+}
+
+.icon.icon--small {
+    width: 15px;
+}
+
+.icon.icon--normal {
+    width: 30px;
+}
+
+.icon.icon--large {
+    width: 45px;
+}
+

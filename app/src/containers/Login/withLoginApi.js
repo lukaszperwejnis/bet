@@ -7,7 +7,7 @@ export const withLoginApi = (WrappedComponent) => {
         constructor(props) {
             super(props);
             this.apiService = new APIService();
-            this.authService = new AuthService();
+            this.userService = new AuthService();
             this.signin = this.signin.bind(this);
         }
 

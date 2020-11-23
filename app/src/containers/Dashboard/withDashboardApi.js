@@ -7,7 +7,7 @@ export const withDashboardApi = (WrappedComponent) => {
         constructor(props) {
             super(props);
             this.apiService = new APIService();
-            this.authService = new AuthService();
+            this.userService = new AuthService();
 
             this.state = {
                 isLoading: false,

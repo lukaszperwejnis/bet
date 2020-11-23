@@ -1,0 +1,1 @@
+{"version":3,"file":"gameWinnerTypeByScores.js","sourceRoot":"","sources":["../../lib/helpers/gameWinnerTypeByScores.ts"],"names":[],"mappings":";;AAEA,SAAgB,sBAAsB,CAAC,SAAiB,EAAE,SAAiB;IACvE,QAAQ,IAAI,EAAE;QACV,KAAK,SAAS,GAAG,SAAS;YACtB,mCAA6B;QACjC,KAAK,SAAS,GAAG,SAAS;YACtB,mCAA6B;QACjC;YACI,yBAAwB;KAC/B;AACL,CAAC;AATD,wDASC"}

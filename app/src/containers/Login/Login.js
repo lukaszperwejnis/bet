@@ -30,9 +30,11 @@ class LoginComponent extends React.PureComponent {
         return Yup.object({
             email: Yup.string()
                 .email(this.getTranslation("validation.email.syntax"))
-                .required(this.getTranslation("validation.email.required")),
+                .required(this.getTranslation("validation.email.required"))
+                .trim(),
             password: Yup.string()
                 .required(this.getTranslation("validation.password.required"))
+                .trim()
         });
     }
 
