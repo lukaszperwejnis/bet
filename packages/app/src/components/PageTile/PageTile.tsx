@@ -1,14 +1,13 @@
-import React, {ReactElement} from 'react';
-import {Header, StyledTile} from './PageTile.styles';
-import {RenderType, WithChildrenProps} from '../../types';
+import { RenderType, WithChildrenProps } from '@structures';
+import { Header, StyledTile } from './PageTile.styles';
 
 interface PageTitleProps extends WithChildrenProps {
-    header?: RenderType;
+  header?: RenderType;
 }
 
-export const PageTile = ({header, children}: PageTitleProps): ReactElement => (
-    <StyledTile>
-        {header && <Header>{header}</Header>}
-        {children}
-    </StyledTile>
+export const PageTile = ({ header, children }: PageTitleProps): JSX.Element => (
+  <StyledTile>
+    <>{header && <Header>{header}</Header>}</>
+    {children}
+  </StyledTile>
 );

@@ -1,4 +1,4 @@
 export declare const enum CreationTypes {
-    MANUAL = 'MANUAL',
-    EXTERNAL = 'EXTERNAL'
+  MANUAL = "MANUAL",
+  EXTERNAL = "EXTERNAL",
 }

@@ -1,20 +1,20 @@
-import styled, {css} from 'styled-components';
-import {stylesConfig} from '../../../../styles/styles-config';
-import {WithChildrenProps} from '../../../../types';
+import styled, { css } from 'styled-components';
+import { WithChildrenProps } from '@structures';
+import { stylesConfig } from '../../../../styles/styles-config';
 
 interface TileProps extends WithChildrenProps {
-    isRound?: boolean;
+  isRound?: boolean;
 }
 
 export const Tile = styled.div<TileProps>`
-    position: relative;
-    overflow: hidden;
-    background-color: ${stylesConfig.color.white};
-    padding: ${stylesConfig.spacing.small};
-    box-shadow: ${stylesConfig.boxShadow};
-    ${(props: TileProps) =>
-        props.isRound &&
-        css`
-            border-radius: 10px;
-        `}
+  position: relative;
+  overflow: hidden;
+  background-color: ${stylesConfig.color.white};
+  padding: ${stylesConfig.spacing.small};
+  box-shadow: ${stylesConfig.boxShadow};
+  ${(props: TileProps) =>
+    props.isRound &&
+    css`
+      border-radius: 10px;
+    `}
 `;

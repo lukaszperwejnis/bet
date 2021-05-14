@@ -1,10 +1,8 @@
 import * as mongoose from "mongoose";
-import options from './config';
+import options from "./config";
 
 export const connectToDatabase = () => {
-  return mongoose.connect(
-      options.dbURl, {
-          useNewUrlParser: true
-      }
-  );
+  return mongoose.connect(options.dbURl, {
+    useNewUrlParser: true,
+  });
 };

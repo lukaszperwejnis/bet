@@ -1,11 +1,12 @@
-import {useIntl} from 'react-intl';
+import { useIntl } from 'react-intl';
 
-type ValuesType = Record<string, unknown> | Record<string, unknown>[];
+type UseTranslationReturnType = (id: string, values?: ValuesType) => string;
 
-export function useTranslation(): [(id: string, values?: Record<string, unknown> | Record<string, unknown>[]) => string] {
-    const intl = useIntl();
+type ValuesType = Record<string, string | number> | Record<string, number>[];
 
-    const translate = (id: string, values?: ValuesType): string => intl.formatMessage({id}, {...values}) as string;
+export function useTranslation(): UseTranslationReturnType {
+  const intl = useIntl();
 
-    return [translate];
+  return (id: string, values?: ValuesType): string =>
+    intl.formatMessage({ id }, { ...values }) as string;
 }

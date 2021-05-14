@@ -1,7 +1,7 @@
 export interface DataStoredInSigninToken {
-    _id: string;
+  _id: string;
 }
 
 export interface DataStoredInUserToken {
-    email: string;
+  email: string;
 }

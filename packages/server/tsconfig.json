@@ -9,14 +9,7 @@
     "baseUrl": "./lib",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
-
   },
-  "include": [
-    "lib/**/*.*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["lib/**/*.*"],
+  "exclude": ["node_modules"]
 }
-
-

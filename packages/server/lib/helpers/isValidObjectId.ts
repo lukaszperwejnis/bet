@@ -1,5 +1,5 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 export function isValidObjectId(id: string) {
-    return mongoose.Types.ObjectId.isValid(id);
+  return mongoose.Types.ObjectId.isValid(id);
 }

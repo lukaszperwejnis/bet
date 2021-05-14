@@ -1,20 +1,23 @@
-import {apiService, REQUEST_TYPES} from './api.service';
-import {URLS} from '../urls';
+import { URLS } from '../urls';
+import { ApiService } from './ApiService/ApiService';
 
-type AvailableBetsResponse = {
-    status: number;
-    data: {
-        availableGames: unknown;
-        availableChampions: unknown;
-    };
-    message: string;
-};
+// type AvailableBetsResponse = {
+//   status: number;
+//   data: {
+//     availableGames: unknown;
+//     availableChampions: unknown;
+//   };
+//   message: string;
+// };
 
-const getAvailableBets = async (): Promise<Response> => {
-    const result = await apiService.authFetch(URLS.BET.BETS, {method: REQUEST_TYPES.GET});
-    return result.json();
-};
+export class BetService extends ApiService {
+  getAvailableBets = async <T>(): Promise<T> =>
+    this.get<T>(URLS.BET.AVAILABLE, { authRequired: true });
 
-export const betService = {
-    getAvailableBets,
-};
+  getUserBets = async () => this.get(URLS.BET.USER, { authRequired: true });
+
+  createBets = async (payload: any) =>
+    this.post(URLS.BET.CREATE, { payload, authRequired: true });
+}
+
+export const betService = new BetService();

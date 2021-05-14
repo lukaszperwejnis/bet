@@ -1,15 +1,37 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "module": "commonjs",
-    "noImplicitAny": true,
-    "outDir": "./build/",
-    "removeComments": true,
-    "sourceMap": true,
-    "target": "es5",
+    "target": "es6",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "@config": ["config/index.ts"],
+      "@constants": ["constants/index.ts"],
+      "@hooks": ["hooks/index.ts"],
+      "@pages": ["pages/index.ts"],
+      "@services": ["services/index.ts"],
+      "@stores/*": ["stores/*"],
+      "@structures": ["structures/index.ts"],
+      "@utils": ["utils/index.ts"],
+      "@bet-structures": ["../../structures"],
+    },
+    "typeRoots": ["node_modules/@types"],
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.js", "**/*.ts", "**/*.tsx"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
 }

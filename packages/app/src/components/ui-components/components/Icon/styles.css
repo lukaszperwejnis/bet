@@ -1,28 +1,27 @@
 .icon.icon--default {
-    color: #3d5170;
+  color: #3d5170;
 }
 
 .icon.icon--primary {
-    color: #007bff;
+  color: #007bff;
 }
 
 .icon.icon--secondary {
-    color: #e4e4e4;
+  color: #e4e4e4;
 }
 
 .icon.icon--error {
-    color: #CD0000;
+  color: #cd0000;
 }
 
 .icon.icon--small {
-    width: 15px;
+  width: 15px;
 }
 
 .icon.icon--normal {
-    width: 30px;
+  width: 30px;
 }
 
 .icon.icon--large {
-    width: 45px;
+  width: 45px;
 }
-

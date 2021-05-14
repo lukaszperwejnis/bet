@@ -1,1 +1,0 @@
-{"version":3,"file":"TeamNotFoundError.js","sourceRoot":"","sources":["../../lib/errors/TeamNotFoundError.ts"],"names":[],"mappings":";;AAAA,2CAAsC;AAEtC,MAAa,iBAAkB,SAAQ,qBAAS;IAC5C,YAAY,EAAU;QAClB,KAAK,CAAC,GAAG,EAAE,gBAAgB,EAAE,YAAY,CAAC,CAAC;IAC/C,CAAC;CACJ;AAJD,8CAIC"}

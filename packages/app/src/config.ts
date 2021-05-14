@@ -1,3 +1,3 @@
 export const CONFIG = {
-    API_URL: 'http://127.0.0.1:3010',
+  API_URL: 'http://127.0.0.1:3010',
 };

@@ -1,12 +1,12 @@
 .c-message__root {
-    position: fixed;
-    box-sizing: border-box;
-    padding: 0;
-    z-index: 1010;
-    top: 15px;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    left: 0;
-    right: 0;
+  position: fixed;
+  box-sizing: border-box;
+  padding: 0;
+  z-index: 1010;
+  top: 15px;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  right: 0;
 }

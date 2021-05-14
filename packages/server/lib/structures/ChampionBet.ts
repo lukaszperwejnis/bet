@@ -1,7 +1,7 @@
-import {Team} from "./Team";
-import {Bet} from "./Bet";
+import { Team } from "./Team";
+import { Bet } from "./Bet";
 
 export declare class ChampionBet extends Bet {
-    readonly bet: Team;
-    readonly hasChampionCorrect: boolean;
+  readonly bet: Team;
+  readonly hasChampionCorrect: boolean;
 }

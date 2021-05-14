@@ -1,26 +1,29 @@
-import {userService} from '../services';
+import { userService } from '../services';
 
 export class AuthProvider {
-    private static instance: AuthProvider;
-    private observers: Array<(isLogged: boolean) => void> = [];
+  private static instance: AuthProvider;
 
-    static getInstance(): AuthProvider {
-        if (!AuthProvider.instance) {
-            AuthProvider.instance = new AuthProvider();
-        }
+  private observers: Array<(isLogged: boolean) => void> = [];
 
-        return AuthProvider.instance;
+  static getInstance(): AuthProvider {
+    if (!AuthProvider.instance) {
+      AuthProvider.instance = new AuthProvider();
     }
 
-    subscribe = (observer: (isLogged: boolean) => void): void => {
-        this.observers.push(observer);
-    };
+    return AuthProvider.instance;
+  }
 
-    unsubscribe = (observer: (isLogged: boolean) => void): void => {
-        this.observers = this.observers.filter((_observer) => _observer !== observer);
-    };
+  subscribe = (observer: (isLogged: boolean) => void): void => {
+    this.observers.push(observer);
+  };
 
-    notify = (): void => {
-        this.observers.forEach((observer) => observer(userService.isLoggedIn()));
-    };
+  unsubscribe = (observer: (isLogged: boolean) => void): void => {
+    this.observers = this.observers.filter(
+      (_observer) => _observer !== observer,
+    );
+  };
+
+  notify = (): void => {
+    this.observers.forEach((observer) => observer(userService.isLoggedIn()));
+  };
 }

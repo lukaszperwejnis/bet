@@ -1,7 +1,7 @@
-import {HttpError} from "./HttpError";
+import { HttpError } from "./HttpError";
 
 export class BetAlredyExistError extends HttpError {
-    constructor(gameId: string) {
-        super(409, `Bet for that gameId ${gameId} already exist`);
-    }
+  constructor(gameId: string) {
+    super(409, `Bet for that gameId ${gameId} already exist`);
+  }
 }
