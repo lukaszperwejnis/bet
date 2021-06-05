@@ -1,5 +1,5 @@
 import { StorageKeys } from '@constants';
-import { AuthProvider } from '../providers/AuthProvider';
+import { ApiError, ErrorApiResponse } from '@structures';
 import { localStorageService } from './localStorage.service';
 
 type Tokens = {
@@ -11,24 +11,24 @@ class TokenService {
   setTokens({ accessToken, refreshToken }: Tokens): void {
     localStorageService.set(StorageKeys.AccessToken, accessToken);
     localStorageService.set(StorageKeys.RefreshToken, refreshToken);
-
-    AuthProvider.getInstance().notify();
   }
 
   clearTokens(): void {
-    localStorage.removeItem(StorageKeys.AccessToken);
-    localStorage.removeItem(StorageKeys.RefreshToken);
-
-    AuthProvider.getInstance().notify();
+    localStorageService.remove(StorageKeys.AccessToken);
+    localStorageService.remove(StorageKeys.RefreshToken);
   }
 
   getAccessToken(): string | null {
     return localStorageService.get(StorageKeys.AccessToken);
   }
 
-  private static getExpirationDate(jwtToken: string): number | null {
-    const jwt = JSON.parse(atob(jwtToken.split('.')[1]));
-    return (jwt && jwt.exp && jwt.exp * 1000) || null;
+  private static getExpirationDate(jwtToken: string): number {
+    try {
+      const jwt = JSON.parse(atob(jwtToken.split('.')[1]));
+      return (jwt && jwt.exp && jwt.exp * 1000) || -1;
+    } catch (error) {
+      return -1;
+    }
   }
 
   private static isExpired(exp: number | null): boolean {
@@ -37,6 +37,11 @@ class TokenService {
 
   isTokenInvalid = (jwtToken: string): boolean => {
     return TokenService.isExpired(TokenService.getExpirationDate(jwtToken));
+  };
+
+  isInvalidTokenError = (error: ErrorApiResponse): boolean => {
+    console.log({ error });
+    return error.status === 500 && error.message === 'jwt malformed';
   };
 }
 

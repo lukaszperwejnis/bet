@@ -1,12 +1,19 @@
 import styled from 'styled-components';
-import { stylesConfig } from '../../styles/styles-config';
 import { Link } from 'react-router-dom';
+import { config } from '@styles';
+import { FormComponents } from '@bet/ui-components';
 
 export const PasswordRestLink = styled(Link)`
-  margin-top: ${stylesConfig.spacing.normal};
-  text-align: left;
+  display: block;
+  margin-top: ${config.spacing.large};
   text-decoration: none;
-  font-family: ${stylesConfig.fontFamily.primary};
-  color: ${stylesConfig.color.textColor};
-  font-size: ${stylesConfig.fontSize.small};
+  font-family: ${config.fontFamily.primary};
+  color: ${config.color.textColor};
+  font-size: ${config.fontSize.normal};
+`;
+
+export const Error = styled(FormComponents.Error)`
+  display: block;
+  margin-top: ${config.spacing.large};
+  font-size: ${config.fontSize.normal};
 `;

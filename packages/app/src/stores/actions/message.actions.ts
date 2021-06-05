@@ -1,6 +1,6 @@
-import { useDispatch } from 'react-redux';
 import { MessageActionType } from '@stores/types';
 import { Message } from '@structures';
+import { rootStore } from '@stores/index';
 
 interface Action<T> {
   type: MessageActionType;
@@ -32,9 +32,8 @@ export type MessageActions =
   | ReturnType<typeof unmountMessage>;
 
 function message(type: Message.Type, text: string, duration = 3) {
-  const dispatch = useDispatch();
   const key = new Date().getTime();
-  dispatch(
+  rootStore.dispatch(
     mountMessage({
       key,
       type,
@@ -43,7 +42,7 @@ function message(type: Message.Type, text: string, duration = 3) {
     }),
   );
   setTimeout(() => {
-    dispatch(
+    rootStore.dispatch(
       unmountMessage({
         key,
       }),

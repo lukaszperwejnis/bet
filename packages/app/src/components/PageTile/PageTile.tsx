@@ -1,13 +1,20 @@
 import { RenderType, WithChildrenProps } from '@structures';
-import { Header, StyledTile } from './PageTile.styles';
+import { Loader } from '@bet/ui-components';
+import { Description, Header, StyledTile } from './styles';
 
 interface PageTitleProps extends WithChildrenProps {
   header?: RenderType;
+  isLoading?: boolean;
 }
 
-export const PageTile = ({ header, children }: PageTitleProps): JSX.Element => (
-  <StyledTile>
+export const PageTile = ({
+  header,
+  children,
+  isLoading,
+}: PageTitleProps): JSX.Element => (
+  <StyledTile isLoading={isLoading}>
     <>{header && <Header>{header}</Header>}</>
-    {children}
+    <Description>{children}</Description>
+    <>{isLoading && <Loader />}</>
   </StyledTile>
 );

@@ -17,7 +17,7 @@ const config = {
     API_KEY: "key-934fc1822136a8f05869dc8343f8b06f",
     domain: "sandboxf5c28a28100246ba9811abffb3ae2632.mailgun.org",
   },
-  clientURL: "http://localhost:8080",
+  clientURL: "http://localhost:4200",
 };
 
 export default config;

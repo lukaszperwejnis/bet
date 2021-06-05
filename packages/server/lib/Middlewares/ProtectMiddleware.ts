@@ -12,18 +12,22 @@ export class ProtectMiddleware {
     this.protect = this.protect.bind(this);
   }
 
-  public async protect(
+  async protect(
     req: IGetUserAuthInfoRequest,
     res: Response,
     next: NextFunction
-  ) {
+  ): Promise<void> {
     if (!req.headers.authorization) {
       next(new UnauthorizedError());
+      return;
     }
+
+    console.log(req.headers.authorization);
 
     const token = req.headers.authorization.split("Bearer ")[1];
     if (!token) {
       next(new UnauthorizedError());
+      return;
     }
 
     try {
@@ -32,6 +36,7 @@ export class ProtectMiddleware {
 
       if (!user) {
         next(new UnauthorizedError());
+        return;
       }
 
       req.user = user;

@@ -1,7 +1,7 @@
 export { Dashboard } from './Dashboard/Dashboard';
 export { ErrorBoundary } from './ErrorBoundary/ErrorBoundary';
 export { Login } from './Login/Login';
-export { MailInvitationSignup } from './MailInvitationSignup/MailInvitationSignup';
-export { ResetPassword } from './ResetPassword/ResetPassword';
-export { SetPassword } from './SetPassword/SetPassword';
+export { Signup } from './Signup';
+export { StartResetPassword } from './StartResetPassword';
+export { ResetPassword } from './ResetPassword';
 export { MessageTracker } from './MessageTracker';

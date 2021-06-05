@@ -1,38 +1,33 @@
-import { ReactElement } from 'react';
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import { Router, Redirect, Route, Switch } from 'react-router-dom';
 import {
   ErrorBoundary,
   Dashboard,
   Login,
-  MailInvitationSignup,
+  Signup,
+  StartResetPassword,
   ResetPassword,
-  SetPassword,
 } from '@pages';
 import { AppUrls } from '@config';
 import { useAuth } from '@hooks';
-import { Layout } from '../components';
+import { history } from '@utils';
+import { Layout } from '@components';
 
-const PublicRoutes = (): ReactElement => (
+const PublicRoutes = (): JSX.Element => (
   <ErrorBoundary>
     <Switch>
       <Route path={AppUrls.LOGIN.pattern} component={Login} />
+      <Route path={AppUrls.MAIL_INVITATION_SIGNUP.pattern} component={Signup} />
       <Route
-        path={AppUrls.MAIL_INVITATION_SIGNUP.pattern}
-        component={MailInvitationSignup}
+        path={AppUrls.RESET_PASSWORD.pattern}
+        component={StartResetPassword}
       />
-      <Route path={AppUrls.RESET_PASSWORD.pattern} component={ResetPassword} />
-      <Route path={AppUrls.SET_PASSWORD.pattern} component={SetPassword} />
+      <Route path={AppUrls.SET_PASSWORD.pattern} component={ResetPassword} />
       <Redirect to={AppUrls.LOGIN()} />
     </Switch>
   </ErrorBoundary>
 );
 
-const PrivateRoutes = (): ReactElement => (
+const PrivateRoutes = (): JSX.Element => (
   <ErrorBoundary>
     {/* <SidebarMenu/> */}
     <Layout>
@@ -45,8 +40,11 @@ const PrivateRoutes = (): ReactElement => (
   </ErrorBoundary>
 );
 
-export const Routes = (): ReactElement => {
+export const Routes = (): JSX.Element => {
   const [logged] = useAuth();
-  console.log({ logged });
-  return <Router>{logged ? <PrivateRoutes /> : <PublicRoutes />}</Router>;
+  return (
+    <Router history={history}>
+      {logged ? <PrivateRoutes /> : <PublicRoutes />}
+    </Router>
+  );
 };

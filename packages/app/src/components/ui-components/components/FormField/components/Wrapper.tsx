@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { stylesConfig } from '../../../../../styles/styles-config';
 import { WithChildrenProps } from '@structures';
+import { config } from '@styles';
 
 export const Wrapper = styled.div<WithChildrenProps>`
   display: flex;
@@ -8,6 +8,6 @@ export const Wrapper = styled.div<WithChildrenProps>`
   width: 100%;
   min-width: 0;
   & + & {
-    margin-top: ${stylesConfig.spacing.normal};
+    margin-top: ${config.spacing.normal};
   }
 `;

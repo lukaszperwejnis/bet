@@ -146,11 +146,6 @@ export class GameBetService {
       availableGame._id.toString()
     );
 
-    console.log({
-      gameIds,
-      availableGamesIds,
-    });
-
     return gameIds.every((gameId) => availableGamesIds.includes(gameId));
   }
 }

@@ -14,5 +14,6 @@ export function errorMiddleware(
     status,
     message,
     errors: error.errors,
+    code: error.code,
   });
 }

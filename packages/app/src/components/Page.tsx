@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { RenderType } from '@structures';
-import { stylesConfig } from '../styles/styles-config';
+import { config } from '@styles';
 
 interface PageProps {
   children: RenderType;
@@ -9,7 +9,7 @@ interface PageProps {
 
 export const Page = styled.div<PageProps>`
   height: 100vh;
-  background-color: ${stylesConfig.color.wildSand};
+  background-color: ${config.color.wildSand};
   ${(props: PageProps) =>
     props.centered &&
     css`

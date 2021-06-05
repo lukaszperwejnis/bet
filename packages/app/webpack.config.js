@@ -118,14 +118,6 @@ module.exports = (env, args) => {
         filename: '[name].[hash].css',
         chunkFilename: '[id].css',
       }),
-      // new CopyWebpackPlugin({
-      //   patterns: [
-      //     {
-      //       from: 'public',
-      //       globOptions: { ignore: ['index.html'], noErrorOnMissing: true },
-      //     },
-      //   ],
-      // }),
       new CopyWebpackPlugin([
         {
           from: 'public',

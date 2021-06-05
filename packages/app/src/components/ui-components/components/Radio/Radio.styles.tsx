@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { WithChildrenProps, WithExcludedChildrenProps } from '@structures';
-import { stylesConfig } from '../../../../styles/styles-config';
+import { config } from '../../../../styles/config';
 
 export const RadioInput = styled.input<WithExcludedChildrenProps>`
   position: absolute;
@@ -30,7 +30,7 @@ export const Wrapper = styled.label<WrapperProps>`
   ${(props: WrapperProps) =>
     props.disabled &&
     css`
-      opacity: ${stylesConfig.opacity.disabled};
+      opacity: ${config.opacity.disabled};
       cursor: not-allowed;
       ${RadioInput} {
         cursor: not-allowed;
@@ -40,7 +40,7 @@ export const Wrapper = styled.label<WrapperProps>`
 
 export const Radio = styled.span<WithChildrenProps>`
   position: relative;
-  font-size: ${stylesConfig.fontSize.normal};
+  font-size: ${config.fontSize.normal};
 `;
 
 interface InnerProps extends WithExcludedChildrenProps {
@@ -55,8 +55,8 @@ export const Inner = styled.span<InnerProps>`
   width: 18px;
   height: 18px;
   border-radius: 100%;
-  background: ${stylesConfig.color.white};
-  border: 1px solid ${stylesConfig.color.secondary};
+  background: ${config.color.white};
+  border: 1px solid ${config.color.secondary};
 
   ${(props: InnerProps) =>
     props.checked &&
@@ -66,7 +66,7 @@ export const Inner = styled.span<InnerProps>`
         content: '';
         width: 100%;
         height: 100%;
-        background-color: ${stylesConfig.color.primary};
+        background-color: ${config.color.primary};
         border-radius: 50%;
       }
 
@@ -79,7 +79,7 @@ export const Inner = styled.span<InnerProps>`
         border-radius: 100%;
         display: table;
         content: '';
-        background-color: ${stylesConfig.color.white};
+        background-color: ${config.color.white};
       }
     `}
 `;
@@ -89,8 +89,8 @@ interface LabelProps extends WithChildrenProps {
 }
 
 export const Label = styled.span<LabelProps>`
-  font-family: ${stylesConfig.fontFamily.primary};
-  color: ${stylesConfig.color.textColor};
-  margin-left: ${stylesConfig.spacing.small};
-  font-size: ${stylesConfig.fontSize.small};
+  font-family: ${config.fontFamily.primary};
+  color: ${config.color.textColor};
+  margin-left: ${config.spacing.small};
+  font-size: ${config.fontSize.small};
 `;

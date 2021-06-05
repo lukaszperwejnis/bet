@@ -13,3 +13,15 @@ export type RenderType =
   | number
   | boolean
   | null;
+
+export interface WithError {
+  error: string;
+}
+
+export interface WithLoading {
+  isLoading: boolean;
+}
+
+export interface WithTokenValidation {
+  hasInvalidToken: boolean;
+}

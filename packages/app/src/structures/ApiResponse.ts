@@ -2,8 +2,8 @@ interface ApiResponse {
   status: number;
 }
 
-export interface SuccessApiResponse extends ApiResponse {
-  data: unknown;
+export interface SuccessApiResponse<T> extends ApiResponse {
+  data: T;
 }
 
 export interface ErrorApiResponse extends ApiResponse {

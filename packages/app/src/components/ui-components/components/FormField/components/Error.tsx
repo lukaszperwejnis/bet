@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { stylesConfig } from '../../../../../styles/styles-config';
 import { WithChildrenProps } from '@structures';
+import { config } from '@styles';
 
 export const Error = styled.span<WithChildrenProps>`
-  margin-top: ${stylesConfig.spacing.extraSmall};
-  font-size: ${stylesConfig.fontSize.small};
-  color: ${stylesConfig.color.guardsmanRed};
-  font-family: ${stylesConfig.fontFamily.primary};
+  margin-top: ${config.spacing.extraSmall};
+  font-size: ${config.fontSize.small};
+  color: ${config.color.guardsmanRed};
+  font-family: ${config.fontFamily.primary};
   letter-spacing: 0.2px;
+  text-align: left;
 `;

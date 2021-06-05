@@ -1,4 +1,5 @@
 import { AuthActionType } from '@stores/types';
+import { ApiError } from '@structures';
 
 interface Action<T> {
   type: AuthActionType;
@@ -17,13 +18,41 @@ export const successLogin = <T>(payload: T): Action<T> =>
     payload,
   } as const);
 
-export const failedLogin = <T>(payload: T): Action<T> =>
+export const failedLogin = (payload: ApiError): Action<ApiError> =>
   ({
     type: AuthActionType.FailedLogin,
     payload,
   } as const);
 
+export const signup = <T>(payload: T): Action<T> =>
+  ({
+    type: AuthActionType.Signup,
+    payload,
+  } as const);
+
+export const successSignup = (): Action<null> =>
+  ({
+    type: AuthActionType.SuccessSignup,
+    payload: null,
+  } as const);
+
+export const failedSignup = (payload: ApiError): Action<ApiError> =>
+  ({
+    type: AuthActionType.FailedSignup,
+    payload,
+  } as const);
+
+export const invalidTokenSignup = (): Action<boolean> =>
+  ({
+    type: AuthActionType.InvalidTokenSignup,
+    payload: true,
+  } as const);
+
 export type AuthActions =
   | ReturnType<typeof login>
   | ReturnType<typeof successLogin>
-  | ReturnType<typeof failedLogin>;
+  | ReturnType<typeof failedLogin>
+  | ReturnType<typeof signup>
+  | ReturnType<typeof successSignup>
+  | ReturnType<typeof failedSignup>
+  | ReturnType<typeof invalidTokenSignup>;

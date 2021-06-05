@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { WithChildrenProps, WithExcludedChildrenProps } from '@structures';
-import { stylesConfig } from '../../../../styles/styles-config';
+import { config } from '../../../../styles/config';
 
 export const CheckboxInput = styled.input<WithExcludedChildrenProps>`
   position: absolute;
@@ -24,8 +24,8 @@ export const Inner = styled.label<InnerProps>`
     display: block;
     width: 35px;
     height: 16px;
-    background: ${stylesConfig.color.white};
-    border: 1px solid ${stylesConfig.color.secondary};
+    background: ${config.color.white};
+    border: 1px solid ${config.color.secondary};
     border-radius: 100px;
     will-change: background-color, border-color;
     transition-property: background-color, border-color;
@@ -35,7 +35,7 @@ export const Inner = styled.label<InnerProps>`
   &:after {
     content: '';
     position: absolute;
-    background: ${stylesConfig.color.secondary};
+    background: ${config.color.secondary};
     border-radius: 100px;
     top: 3px;
     left: 4px;
@@ -50,14 +50,14 @@ export const Inner = styled.label<InnerProps>`
     disabled &&
     css`
       cursor: not-allowed;
-      opacity: ${stylesConfig.opacity.disabled};
+      opacity: ${config.opacity.disabled};
     `};
 `;
 
 export const Label = styled.span<WithChildrenProps>`
-  font-size: ${stylesConfig.fontSize.normal};
-  font-family: ${stylesConfig.fontFamily.primary};
-  color: ${stylesConfig.color.textColor};
+  font-size: ${config.fontSize.normal};
+  font-family: ${config.fontFamily.primary};
+  color: ${config.color.textColor};
   padding-left: 45px;
   cursor: pointer;
 `;
@@ -67,12 +67,12 @@ export const Root = styled.label<WithChildrenProps>`
   display: flex;
 
   ${CheckboxInput}:checked ~ ${Inner}:before {
-    background-color: ${stylesConfig.color.primary};
-    border-color: ${stylesConfig.color.primary};
+    background-color: ${config.color.primary};
+    border-color: ${config.color.primary};
   }
 
   ${CheckboxInput}:checked ~ ${Inner}:after {
-    background-color: ${stylesConfig.color.white};
+    background-color: ${config.color.white};
     transform: translateX(100%);
     left: 10px;
   }

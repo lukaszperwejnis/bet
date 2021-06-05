@@ -1,25 +1,28 @@
-import {
-  FieldValidationError,
-  UnauthorizedError,
-  UserAlreadyExistError,
-  UserByEmailNotFoundError,
-} from "../errors";
+import * as bcrypt from "bcrypt";
 import { mapSchemaValidationErrors } from "../helpers/mapSchemaValidationErrors";
-import { User } from "../structures/User";
 import * as Joi from "@hapi/joi";
 import { VALIDATION_SCHEMA_KEYS } from "../constants/validationSchemaKeys";
 import { UserRepository } from "../Repository/UserRepository";
 import { UserNotFoundError } from "../errors/UserNotFoundError";
 import { PasswordMatchPreviousError } from "../errors/PasswordMatchPreviousError";
 import { TokenService } from "./TokenService";
-import * as bcrypt from "bcrypt";
-import { LoggedUser } from "../interfaces/LoggedUser";
+import {Password, Signin, User} from "../structuresToMove/user";
+import {Signup} from "../structuresToMove/user/Signup";
+import {
+  FieldValidationError,
+  UnauthorizedError,
+  UserAlreadyExistError,
+  UserByEmailNotFoundError,
+} from "../errors";
+
+// TODO structures package
+
 
 export class UserService {
   private userRepository = new UserRepository();
   private tokenService = new TokenService();
 
-  async mailInvitationSignup(input: any): Promise<LoggedUser> {
+  async mailInvitationSignup(input: Signup.Payload): Promise<Signup.Success> {
     const schema = Joi.object({
       token: Joi.string().required(),
       password: VALIDATION_SCHEMA_KEYS.PASSWORD,
@@ -34,26 +37,25 @@ export class UserService {
       input.token
     );
 
-    const registeredEmail = await this.userRepository.findOne({
+    console.log({tokenPayload});
+
+    const isUserAlreadyExists = await this.userRepository.findOne({
       email: tokenPayload.email,
     });
-    if (registeredEmail) {
+
+    if (isUserAlreadyExists) {
       throw new UserAlreadyExistError(tokenPayload.email);
     }
 
-    const { password, ...user } = await this.userRepository.createOne({
+    const result = await this.userRepository.createOne({
       ...input,
       email: tokenPayload.email,
     });
 
-    return {
-      accessToken: this.tokenService.createAccessToken(user._id),
-      refreshToken: this.tokenService.createRefreshToken(user._id),
-      user,
-    };
+    return Boolean(result);
   }
 
-  async signin(input: any): Promise<LoggedUser> {
+  async signin(input: Signin.Payload): Promise<Signin.Success> {
     const schema = Joi.object({
       email: VALIDATION_SCHEMA_KEYS.EMAIL,
       password: Joi.string().required(),
@@ -64,7 +66,7 @@ export class UserService {
       throw new FieldValidationError(mapSchemaValidationErrors(error.details));
     }
 
-    const { password, ...user }: User = await this.userRepository.findOne(
+    const { password, ...user }: User.User = await this.userRepository.findOne(
       { email: input.email },
       true
     );
@@ -115,7 +117,7 @@ export class UserService {
     return Boolean(result);
   }
 
-  async resetPassword(input: any): Promise<Boolean> {
+  async resetPassword(input: Password.ResetPayload): Promise<Password.ResetSuccess> {
     const schema = Joi.object({
       token: Joi.string().required(),
       password: VALIDATION_SCHEMA_KEYS.PASSWORD,
@@ -154,7 +156,7 @@ export class UserService {
     return Boolean(result);
   }
 
-  async getOneById(id: string): Promise<User> {
+  async getOneById(id: string): Promise<User.User> {
     return await this.userRepository.findById(id);
   }
 

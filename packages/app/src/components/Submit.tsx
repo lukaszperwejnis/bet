@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { Button } from './ui-components/components';
-import { stylesConfig } from '../styles/styles-config';
+import { Button } from '@bet/ui-components';
+import { config } from '@styles';
 
 export const Submit = styled(Button)`
-  margin-top: ${stylesConfig.spacing.huge};
+  margin-top: ${config.spacing.huge};
   width: 100%;
 `;
 

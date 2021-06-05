@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { WithChildrenProps } from '@structures';
-import { device } from '../styles/breakpoints';
+import { breakpoints } from '../styles/breakpoints';
 
 export const Layout = styled.main<WithChildrenProps>`
-  @media ${device.tabletOnly} {
+  @media ${breakpoints.tabletOnly} {
     margin-left: 200px;
   }
 
-  @media ${device.desktopUp} {
+  @media ${breakpoints.desktopUp} {
     margin-left: 275px;
   }
 `;

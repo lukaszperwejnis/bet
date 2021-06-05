@@ -2,25 +2,25 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { WithChildrenProps } from '../../types';
 import { Page } from '../../components';
-import { stylesConfig } from '../../styles/styles-config';
+import { config } from '../../styles/config';
 
 const ErrorPage = styled(Page)`
   flex-direction: column;
 `;
 
 const ErrorCode = styled.h2<WithChildrenProps>`
-  color: ${stylesConfig.color.doveGrey};
-  font-weight: ${stylesConfig.fontWeight.bolder};
+  color: ${config.color.doveGrey};
+  font-weight: ${config.fontWeight.bolder};
   font-size: 60px;
-  margin-bottom: ${stylesConfig.spacing.big};
-  font-family: ${stylesConfig.fontFamily.primary};
+  margin-bottom: ${config.spacing.big};
+  font-family: ${config.fontFamily.primary};
 `;
 
 const Title = styled.h3<WithChildrenProps>`
-  font-weight: ${stylesConfig.fontWeight.bold};
-  margin-bottom: ${stylesConfig.spacing.small};
-  color: ${stylesConfig.color.textColor};
-  font-family: ${stylesConfig.fontFamily.primary};
+  font-weight: ${config.fontWeight.bold};
+  margin-bottom: ${config.spacing.small};
+  color: ${config.color.textColor};
+  font-family: ${config.fontFamily.primary};
 `;
 
 export const ErrorScreen = (): ReactElement => (

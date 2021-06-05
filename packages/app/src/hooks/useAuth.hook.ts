@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { userService } from '../services';
+import { userService } from '@services';
 import { AuthProvider } from '../providers/AuthProvider';
 
 export const useAuth = (): [boolean] => {
@@ -8,7 +8,6 @@ export const useAuth = (): [boolean] => {
 
   useEffect(() => {
     const listener = (newIsLogged: boolean) => {
-      console.log('listener', newIsLogged);
       setIsLogged(newIsLogged);
     };
 

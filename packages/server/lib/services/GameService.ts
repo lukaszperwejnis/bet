@@ -101,17 +101,12 @@ export class GameService {
       createdBy: userId,
     });
 
-    const test = userGameBets.map((el) => el.game._id);
-    console.log(test, "userGameBets");
-
     const games = await this.gameRepository.getMany({
       _id: {
         $nin: userGameBets.map((el) => el.game._id),
       },
       status: GameStatuses.SCHEDULED,
     });
-
-    console.log(games, "GAMES");
 
     const pipeline = [
       {

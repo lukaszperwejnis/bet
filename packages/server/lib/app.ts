@@ -37,8 +37,8 @@ export default class App {
     this.initMiddlewares();
     this.initRoutes();
     this.fillDatabase();
-    //this.mailService.sendInvitationEmail({email: 'perwiperwi@gmail.com'});
-    //this.initCrones();
+    // this.mailService.sendInvitationEmail({email: 'perwiperwi@gmail.com'});
+    // this.initCrones();
   }
 
   private initMiddlewares(): void {
@@ -78,7 +78,5 @@ export default class App {
     await new TeamService().addTeamsToDatabase();
     await new GameService().addScheduledMatchesToDatabase();
     await new BetsValidationService().validateMatchBets();
-    //     const result = await this.mailService.sendInvitationEmail('perwiperwi@gmail.com');
-    //     console.log({result});
   }
 }

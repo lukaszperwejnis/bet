@@ -1,4 +1,4 @@
-export const device = {
+export const breakpoints = {
   mobile: 'screen and (max-width: 44.9375rem)',
   mobileUp: 'screen and (min-width: 44.9375rem)',
   mobileLandscape:

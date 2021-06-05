@@ -2,8 +2,10 @@ import { AuthActionType, AuthStoreType } from '../types';
 import { AuthActions } from '../actions';
 
 const initialState: AuthStoreType = {
+  error: '',
   isLoading: false,
   currentUser: null,
+  hasInvalidToken: false,
 };
 
 export const authReducer = (
@@ -15,6 +17,8 @@ export const authReducer = (
       return {
         ...state,
         isLoading: true,
+        hasInvalidToken: false,
+        error: '',
       };
     case AuthActionType.SuccessLogin:
       return {
@@ -24,6 +28,30 @@ export const authReducer = (
     case AuthActionType.FailedLogin:
       return {
         ...state,
+        error: action.payload as string,
+        isLoading: false,
+      };
+    case AuthActionType.Signup:
+      return {
+        ...state,
+        isLoading: true,
+        hasInvalidToken: false,
+        error: '',
+      };
+    case AuthActionType.SuccessSignup:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case AuthActionType.FailedSignup:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case AuthActionType.InvalidTokenSignup:
+      return {
+        ...state,
+        hasInvalidToken: true,
         isLoading: false,
       };
     default:

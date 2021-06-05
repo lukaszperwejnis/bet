@@ -1,44 +1,51 @@
-import { Form, Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { Formik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { FormattedMessage } from 'react-intl';
+import { AppUrls } from '@config';
 import { useTranslation } from '@hooks';
 import { login } from '@stores/actions';
-import { Page, PageTile, Submit } from '../../components';
-import { FormField } from '../../components/ui-components/components';
-import { PasswordRestLink } from './styles';
+import { StoreType } from '@stores/index';
+import { emailSchema, getRequiredStringSchema } from '@schemas';
+import { FormField } from '@bet/ui-components';
+import { Page, PageTile, StyledForm, Submit } from '@components';
+import { PasswordRestLink, Error } from './styles';
 
 type FormValues = {
   email: string;
   password: string;
 };
 
+const formInitialsValues: FormValues = { email: '', password: '' };
+
 export const Login = (): JSX.Element => {
   const dispatch = useDispatch();
   const translate = useTranslation();
-  const formInitialsValues: FormValues = { email: '', password: '' };
+  const { isLoading, error } = useSelector((store: StoreType) => store.auth);
 
   const schema = Yup.object({
-    email: Yup.string()
-      .required(translate('validation.email.required'))
-      .email(translate('validation.email.syntax'))
-      .trim(),
-    password: Yup.string()
-      .required(translate('validation.password.required'))
-      .trim(),
+    email: emailSchema,
+    password: getRequiredStringSchema(
+      translate('validation.password.required'),
+    ),
   });
 
-  const onSubmit = async (values: FormValues) => dispatch(login(values));
+  const onSubmit = async (values: FormValues) => {
+    dispatch(login(values));
+  };
 
   return (
     <Page centered>
-      <PageTile header={<FormattedMessage id="login.header" />}>
+      <PageTile
+        header={<FormattedMessage id="login.header" />}
+        isLoading={isLoading}
+      >
         <Formik
           validationSchema={schema}
           initialValues={formInitialsValues}
           onSubmit={onSubmit}
         >
-          <Form>
+          <StyledForm>
             <FormField.Input
               name="email"
               placeholder={translate('fields.email')}
@@ -48,13 +55,15 @@ export const Login = (): JSX.Element => {
               placeholder={translate('fields.password')}
               type="password"
             />
-            <Submit>
+            <>{error && <Error>{error}</Error>}</>
+            {isLoading}
+            <Submit disabled={isLoading}>
               <FormattedMessage id="login.submit" />
             </Submit>
-          </Form>
+          </StyledForm>
         </Formik>
-        <PasswordRestLink to="/reset-password">
-          <div className="login__password-reset">
+        <PasswordRestLink to={AppUrls.RESET_PASSWORD.pattern}>
+          <div>
             <FormattedMessage id="login.forgotPassword" />
           </div>
         </PasswordRestLink>

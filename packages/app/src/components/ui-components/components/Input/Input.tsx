@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { stylesConfig } from '../../../../styles/styles-config';
+import { config } from '../../../../styles/config';
 import { WithExcludedChildrenProps } from '../../../../types';
 
 type InputType = 'text' | 'password' | 'email' | 'number';
@@ -14,24 +14,24 @@ export interface InputProps extends WithExcludedChildrenProps {
 }
 
 export const Input = styled.input<InputProps>`
-  border: 1px solid ${stylesConfig.color.secondary};
+  border: 1px solid ${config.color.secondary};
   border-radius: 4px;
-  color: ${stylesConfig.color.textColor};
-  font-size: ${stylesConfig.fontSize.normal};
+  color: ${config.color.textColor};
+  font-size: ${config.fontSize.normal};
   padding: 7px 12px;
-  font-family: ${stylesConfig.fontFamily.primary};
+  font-family: ${config.fontFamily.primary};
   outline: none;
   min-width: 0;
   transition: opacity 0.25s ease-in-out;
   ${(props: InputProps) =>
     props.isInvalid &&
     css`
-      border-color: ${stylesConfig.color.guardsmanRed};
+      border-color: ${config.color.guardsmanRed};
     `};
   ${(props: InputProps) =>
     props.disabled &&
     css`
-      opacity: ${stylesConfig.opacity.disabled};
+      opacity: ${config.opacity.disabled};
       background-color: transparent;
     `};
 `;

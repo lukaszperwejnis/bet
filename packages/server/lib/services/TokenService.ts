@@ -16,8 +16,11 @@ export class TokenService {
     return new Promise((resolve, reject) => {
       jwt.verify(token, config.secrets.jwt, (err, payload) => {
         if (err) {
+          console.log(err, "ERROR");
           return reject(err);
         }
+
+        console.log(payload, "PAYLOAD");
         resolve(payload);
       });
     });
@@ -31,7 +34,7 @@ export class TokenService {
     return this.verifyToken(token);
   }
 
-  async refreshAccessTokenByRefreshToken(token: string) {
+  async refreshAccessTokenByRefreshToken(token: string): Promise<{accessToken: string, refreshToken: string}> {
     const payload: any = await this.verifyToken(token);
     if (!payload) {
       new TokenExpiredError();

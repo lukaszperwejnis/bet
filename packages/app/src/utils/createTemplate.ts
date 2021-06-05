@@ -1,12 +1,12 @@
 import { compile } from 'path-to-regexp';
 import qs from 'qs';
 
-type TemplateOptionsType = {
-  params?: Record<string, unknown>;
-  query?: string;
-  hash?: string;
-  fragment?: string;
-};
+type TemplateOptionsType = Partial<{
+  params: Record<string, unknown>;
+  query: string;
+  hash: string;
+  fragment: string;
+}>;
 
 export function createTemplate(pattern: string) {
   const toPath = compile(pattern, { encode: encodeURIComponent });
@@ -16,12 +16,16 @@ export function createTemplate(pattern: string) {
       (options.query
         ? qs.stringify(options.query, { addQueryPrefix: true })
         : '') +
-      (options.hash ? '?' + options.hash : '') +
-      (options.fragment ? '#' + options.fragment : '')
+      (options.hash ? `?${options.hash}` : '') +
+      (options.fragment ? `#${options.fragment}` : '')
     );
   };
 
   template.pattern = pattern;
+
+  console.log({
+    template,
+  });
 
   return template;
 }

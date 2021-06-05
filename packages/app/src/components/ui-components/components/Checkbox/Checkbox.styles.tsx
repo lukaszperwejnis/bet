@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { WithChildrenProps, WithExcludedChildrenProps } from '@structures';
-import { stylesConfig } from '../../../../styles/styles-config';
-import { truncateMixin } from '../../../../styles/mixins';
+import { config } from '../../../../styles/config';
+import { truncate } from '../../../../styles/mixins';
 
 export const CheckboxInput = styled.input<WithExcludedChildrenProps>`
   position: absolute;
@@ -28,8 +28,8 @@ export const Inner = styled.label<InnerProps>`
     left: 0;
     width: 16px;
     height: 16px;
-    background-color: ${stylesConfig.color.white};
-    border: 1px solid ${stylesConfig.color.secondary};
+    background-color: ${config.color.white};
+    border: 1px solid ${config.color.secondary};
     user-select: none;
     border-radius: 2px;
     pointer-events: all;
@@ -41,8 +41,8 @@ export const Inner = styled.label<InnerProps>`
 
   ${CheckboxInput}:checked ~ &:before {
     background-image: none;
-    background-color: ${stylesConfig.color.primary};
-    color: ${stylesConfig.color.white};
+    background-color: ${config.color.primary};
+    color: ${config.color.white};
     border-color: transparent;
     box-shadow: none;
   }
@@ -56,8 +56,8 @@ export const Inner = styled.label<InnerProps>`
     height: 11px;
     opacity: 0;
     transform: rotate(45deg) scale(0);
-    border-right: 2px solid ${stylesConfig.color.white};
-    border-bottom: 2px solid ${stylesConfig.color.white};
+    border-right: 2px solid ${config.color.white};
+    border-bottom: 2px solid ${config.color.white};
     transition: transform 0.25s cubic-bezier(0.27, 0.01, 0.38, 1.06);
     background-size: 50% 50%;
     background-repeat: no-repeat;
@@ -86,7 +86,7 @@ export const Wrapper = styled.label<WrapperProps>`
   ${({ disabled }: WrapperProps) =>
     disabled &&
     css`
-      opacity: ${stylesConfig.opacity.disabled};
+      opacity: ${config.opacity.disabled};
       cursor: not-allowed;
       ${Inner} {
         cursor: not-allowed;
@@ -94,7 +94,7 @@ export const Wrapper = styled.label<WrapperProps>`
     `}
 
   & + & {
-    margin-top: ${stylesConfig.spacing.small};
+    margin-top: ${config.spacing.small};
   }
 `;
 
@@ -103,8 +103,8 @@ interface LabelProps extends WithChildrenProps {
 }
 
 export const Label = styled.span<LabelProps>`
-  font-family: ${stylesConfig.fontFamily.primary};
-  color: ${stylesConfig.color.textColor};
-  font-size: ${stylesConfig.fontSize.normal};
-  ${truncateMixin}
+  font-family: ${config.fontFamily.primary};
+  color: ${config.color.textColor};
+  font-size: ${config.fontSize.normal};
+  ${truncate}
 `;

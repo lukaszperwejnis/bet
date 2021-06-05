@@ -1,9 +1,8 @@
-import { Page } from '../Page';
-import React, { ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Page } from '../Page';
 import { PageTile } from '..';
 
-export const InvalidTokenPage = (): ReactElement => (
+export const InvalidTokenPage = (): JSX.Element => (
   <Page centered>
     <PageTile header={<FormattedMessage id="invalidToken.header" />}>
       <FormattedMessage id="invalidToken.description" />

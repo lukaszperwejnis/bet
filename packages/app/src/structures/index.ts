@@ -5,4 +5,8 @@ export type {
   WithChildrenProps,
   WithExcludedChildrenProps,
   RenderType,
+  WithError,
+  WithLoading,
+  WithTokenValidation,
 } from './common';
+export type { ApiError } from './ApiError';

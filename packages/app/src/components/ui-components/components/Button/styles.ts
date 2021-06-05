@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import { darken, lighten } from 'polished';
 import { WithChildrenProps } from '@structures';
-import { stylesConfig } from '../../../../styles/styles-config';
-import { device } from '../../../../styles/breakpoints';
+import { config, breakpoints } from '@styles';
+
 import { ColorType } from './Button';
 
 interface ButtonProps extends WithChildrenProps {
@@ -20,14 +20,14 @@ interface StyledButtonProps extends ButtonProps {
 export const StyledButton = styled.button<StyledButtonProps>`
   border: none;
   border-radius: 4px;
-  color: ${stylesConfig.color.white};
-  font-size: ${stylesConfig.fontSize.small};
-  padding: ${stylesConfig.spacing.small};
+  color: ${config.color.white};
+  font-size: ${config.fontSize.small};
+  padding: ${config.spacing.small};
   transition-property: background-color, border, color, opacity;
   transition-duration: 0.25s;
   transition-timing-function: cubic-bezier(0.27, 0.01, 0.38, 1.06);
   will-change: background-color, border, color, opacity;
-  font-family: ${stylesConfig.fontFamily.primary};
+  font-family: ${config.fontFamily.primary};
   cursor: pointer;
 
   &:active,
@@ -35,23 +35,23 @@ export const StyledButton = styled.button<StyledButtonProps>`
     outline: none;
   }
 
-  @media ${device.tabletUp} {
-    font-size: ${stylesConfig.fontSize.normal};
+  @media ${breakpoints.tabletUp} {
+    font-size: ${config.fontSize.normal};
   }
 
   ${({ disabled }: StyledButtonProps) =>
     disabled &&
     css`
-      opacity: ${stylesConfig.opacity.disabled};
+      opacity: ${config.opacity.disabled};
       cursor: auto;
     `};
 
   ${({ colorType }: StyledButtonProps) =>
     colorType === 'primary' &&
     css`
-      background-color: ${stylesConfig.color.primary};
+      background-color: ${config.color.primary};
       &:hover {
-        background-color: ${lighten(0.1, stylesConfig.color.primary)};
+        background-color: ${lighten(0.1, config.color.primary)};
       }
     `};
 
@@ -59,19 +59,19 @@ export const StyledButton = styled.button<StyledButtonProps>`
     colorType === 'primary' &&
     isHollow &&
     css`
-      color: ${stylesConfig.color.primary};
-      border-color: ${stylesConfig.color.primary};
+      color: ${config.color.primary};
+      border-color: ${config.color.primary};
       &:hover {
-        background-color: ${stylesConfig.color.primary};
+        background-color: ${config.color.primary};
       }
     `};
   ${({ colorType }: StyledButtonProps) =>
     colorType === 'secondary' &&
     css`
-      color: ${stylesConfig.color.textColor};
-      background-color: ${stylesConfig.color.secondary};
+      color: ${config.color.textColor};
+      background-color: ${config.color.secondary};
       &:hover {
-        background-color: ${darken(0.1, stylesConfig.color.secondary)};
+        background-color: ${darken(0.1, config.color.secondary)};
       }
     `};
 
@@ -79,18 +79,18 @@ export const StyledButton = styled.button<StyledButtonProps>`
     colorType === 'secondary' &&
     isHollow &&
     css`
-      color: ${stylesConfig.color.secondary};
-      border-color: ${stylesConfig.color.secondary};
+      color: ${config.color.secondary};
+      border-color: ${config.color.secondary};
       &:hover {
-        background-color: ${stylesConfig.color.secondary};
+        background-color: ${config.color.secondary};
       }
     `};
   ${({ colorType }: StyledButtonProps) =>
     colorType === 'error' &&
     css`
-      background-color: ${stylesConfig.color.guardsmanRed};
+      background-color: ${config.color.guardsmanRed};
       &:hover {
-        background-color: ${lighten(0.1, stylesConfig.color.guardsmanRed)};
+        background-color: ${lighten(0.1, config.color.guardsmanRed)};
       }
     `};
 
@@ -98,19 +98,19 @@ export const StyledButton = styled.button<StyledButtonProps>`
     colorType === 'error' &&
     isHollow &&
     css`
-      color: ${stylesConfig.color.guardsmanRed};
-      border-color: ${stylesConfig.color.guardsmanRed};
+      color: ${config.color.guardsmanRed};
+      border-color: ${config.color.guardsmanRed};
       &:hover {
-        background-color: ${stylesConfig.color.guardsmanRed};
+        background-color: ${config.color.guardsmanRed};
       }
     `};
 
   ${({ colorType }: StyledButtonProps) =>
     colorType === 'warning' &&
     css`
-      background-color: ${stylesConfig.color.warning};
+      background-color: ${config.color.warning};
       &:hover {
-        background-color: ${lighten(0.1, stylesConfig.color.warning)};
+        background-color: ${lighten(0.1, config.color.warning)};
       }
     `};
 
@@ -118,19 +118,19 @@ export const StyledButton = styled.button<StyledButtonProps>`
     colorType === 'warning' &&
     isHollow &&
     css`
-      color: ${stylesConfig.color.warning};
-      border-color: ${stylesConfig.color.warning};
+      color: ${config.color.warning};
+      border-color: ${config.color.warning};
       &:hover {
-        background-color: ${stylesConfig.color.warning};
+        background-color: ${config.color.warning};
       }
     `};
 
   ${({ colorType }: StyledButtonProps) =>
     colorType === 'success' &&
     css`
-      background-color: ${stylesConfig.color.success};
+      background-color: ${config.color.success};
       &:hover {
-        background-color: ${lighten(0.1, stylesConfig.color.success)};
+        background-color: ${lighten(0.1, config.color.success)};
       }
     `};
 
@@ -138,10 +138,10 @@ export const StyledButton = styled.button<StyledButtonProps>`
     colorType === 'success' &&
     isHollow &&
     css`
-      color: ${stylesConfig.color.success};
-      border-color: ${stylesConfig.color.success};
+      color: ${config.color.success};
+      border-color: ${config.color.success};
       &:hover {
-        background-color: ${stylesConfig.color.success};
+        background-color: ${config.color.success};
       }
     `};
 
@@ -162,10 +162,10 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${({ isHollow }: ButtonProps) =>
     isHollow &&
     css`
-      background-color: ${stylesConfig.color.white};
+      background-color: ${config.color.white};
       border: 1px solid;
       &:hover {
-        color: ${stylesConfig.color.white};
+        color: ${config.color.white};
       }
     `};
 `;

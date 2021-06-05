@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { WithChildrenProps } from '@structures';
-import { stylesConfig } from '../../../../../styles/styles-config';
+import { config } from '@styles';
 
 export const Label = styled.label<WithChildrenProps>`
-  margin-bottom: ${stylesConfig.spacing.small};
-  font-size: ${stylesConfig.fontSize.normal};
-  color: ${stylesConfig.color.textColor};
-  font-weight: ${stylesConfig.fontWeight.bold};
-  font-family: ${stylesConfig.fontFamily.primary};
+  margin-bottom: ${config.spacing.small};
+  font-size: ${config.fontSize.normal};
+  color: ${config.color.textColor};
+  font-weight: ${config.fontWeight.bold};
+  font-family: ${config.fontFamily.primary};
   letter-spacing: 0.2px;
 `;

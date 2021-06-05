@@ -1,18 +1,18 @@
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
-import { IntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 import { rootStore } from '@stores/index';
 import { MessageTracker } from '@pages';
-import { pl } from './locales/pl';
+import { intl } from '@utils';
 import { Routes } from './routes/routes';
 
 const App = (): JSX.Element => (
-  <IntlProvider locale="pl" messages={pl}>
+  <RawIntlProvider value={intl}>
     <Provider store={rootStore}>
       <Routes />
       <MessageTracker />
     </Provider>
-  </IntlProvider>
+  </RawIntlProvider>
 );
 
 ReactDOM.render(<App />, document.getElementById('root'));

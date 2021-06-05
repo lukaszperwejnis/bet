@@ -1,4 +1,4 @@
-import { SchemaValidationError } from "../interfaces/SchemaValidationError";
+import {SchemaValidationError} from "../structuresToMove/common";
 
 export function mapSchemaValidationErrors(
   errors: any[]
