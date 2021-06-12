@@ -7,3 +7,4 @@ export { ToggleSwitch } from './ToggleSwitch/ToggleSwitch';
 export { Select } from './Select/Select';
 export { Checkbox } from './Checkbox/Checkbox';
 export { Message } from './Message/Message';
+export { Loader } from './Loader';

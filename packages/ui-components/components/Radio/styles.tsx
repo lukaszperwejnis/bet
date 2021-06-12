@@ -2,8 +2,24 @@ import styled, { css } from "styled-components";
 import { WithChildrenProps, WithExcludedChildrenProps } from "../../types";
 import { stylesConfig } from "../../styles/styles-config";
 
+export const RadioInput = styled.input<WithExcludedChildrenProps>`
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  cursor: pointer;
+  opacity: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow: visible;
+`;
+
+RadioInput.defaultProps = {
+  type: "radio",
+};
+
 interface WrapperProps extends WithChildrenProps {
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export const Wrapper = styled.label<WrapperProps>`
@@ -27,24 +43,8 @@ export const Radio = styled.span<WithChildrenProps>`
   font-size: ${stylesConfig.fontSize.normal};
 `;
 
-export const RadioInput = styled.input<WithExcludedChildrenProps>`
-  position: absolute;
-  left: 0;
-  z-index: 1;
-  cursor: pointer;
-  opacity: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  overflow: visible;
-`;
-
-RadioInput.defaultProps = {
-  type: "radio",
-};
-
 interface InnerProps extends WithExcludedChildrenProps {
-  checked: boolean;
+  checked?: boolean;
 }
 
 export const Inner = styled.span<InnerProps>`
@@ -85,7 +85,7 @@ export const Inner = styled.span<InnerProps>`
 `;
 
 interface LabelProps extends WithChildrenProps {
-  checked: boolean;
+  checked?: boolean;
 }
 
 export const Label = styled.span<LabelProps>`

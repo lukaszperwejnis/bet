@@ -2,10 +2,7 @@ import styled, { css } from "styled-components";
 import { WithExcludedChildrenProps } from "../../types";
 import { stylesConfig } from "../../styles/styles-config";
 
-type InputType = "text" | "password" | "email" | "number";
-
 export interface InputProps extends WithExcludedChildrenProps {
-  type?: InputType;
   disabled?: boolean;
   isInvalid?: boolean;
   placeholder?: string;

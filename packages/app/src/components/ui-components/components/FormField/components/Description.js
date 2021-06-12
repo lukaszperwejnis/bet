@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { config } from '../../../../../styles/config';
+import { config } from '@styles';
 export const Description = styled.span `
   color: ${config.color.textColor};
   font-size: ${config.fontSize.small};

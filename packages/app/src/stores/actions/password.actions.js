@@ -23,3 +23,7 @@ export const failedReset = (payload) => ({
     type: PasswordActionType.FailedReset,
     payload,
 });
+export const invalidTokenReset = () => ({
+    type: PasswordActionType.InvalidTokenReset,
+    payload: true,
+});

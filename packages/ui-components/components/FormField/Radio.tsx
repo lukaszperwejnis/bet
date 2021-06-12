@@ -1,4 +1,3 @@
-import React, { ReactElement } from "react";
 import { useField } from "formik";
 import { Wrapper, Error, Description } from "./components";
 import { Radio as RadioComponent } from "../Radio/Radio";
@@ -23,7 +22,7 @@ export const Radio = ({
   errorMessage,
   wrapperClassName,
   ...props
-}: FormFieldRadioProps): ReactElement => {
+}: FormFieldRadioProps): JSX.Element => {
   const [field, meta] = useField(props);
   const hasError = errorMessage || (meta.touched && meta.error);
   const error = errorMessage || meta.error;
@@ -33,15 +32,14 @@ export const Radio = ({
       <RadioComponent
         id={field.name}
         label={label}
-        name={field.name}
         value={valueToSet}
         onChange={field.onChange}
         onBlur={field.onBlur}
         checked={valueToSet === field.value}
         {...props}
       />
-      {hasError && <Error>{error}</Error>}
-      {description && <Description>{description}</Description>}
+      <>{hasError && error && <Error>{error}</Error>}</>
+      <>{description && <Description>{description}</Description>}</>
     </Wrapper>
   );
 };

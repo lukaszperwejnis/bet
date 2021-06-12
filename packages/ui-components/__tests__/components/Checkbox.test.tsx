@@ -1,6 +1,5 @@
-import React from "react";
 import { mount } from "enzyme";
-import faker from "faker";
+import * as faker from "faker";
 import { Checkbox } from "../../components";
 import { getPropertyFromComponent } from "../../testsHelpers";
 

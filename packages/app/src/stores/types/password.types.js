@@ -9,4 +9,5 @@ export var PasswordActionType;
     PasswordActionType["UpdatePassword"] = "UPDATE_PASSWORD";
     PasswordActionType["SuccessUpdatePassword"] = "SUCCESS_UPDATE_PASSWORD";
     PasswordActionType["FailedUpdatePassword"] = "FAILED_UPDATE_PASSWORD";
+    PasswordActionType["InvalidTokenReset"] = "INVALID_TOKEN_RESET";
 })(PasswordActionType || (PasswordActionType = {}));

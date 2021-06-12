@@ -1,4 +1,3 @@
-import React, { ReactElement } from "react";
 import { useField } from "formik";
 import { Wrapper, Error, Description } from "./components";
 import { ToggleSwitch as ToggleSwitchComponent } from "../ToggleSwitch/ToggleSwitch";
@@ -23,7 +22,7 @@ export const ToggleSwitch = ({
   errorMessage,
   wrapperClassName,
   ...props
-}: ToggleSwitchProps): ReactElement => {
+}: ToggleSwitchProps): JSX.Element => {
   const [field, meta] = useField(props);
   const hasError = errorMessage || (meta.touched && meta.error);
   const error = errorMessage || meta.error;
@@ -33,15 +32,14 @@ export const ToggleSwitch = ({
       <ToggleSwitchComponent
         id={field.name}
         label={label}
-        name={field.name}
-        value={valueToSet}
+        value={valueToSet as string}
         onChange={field.onChange}
         onBlur={field.onBlur}
         checked={valueToSet === field.value}
         {...props}
       />
-      {hasError && <Error data-error={field.name}>{error}</Error>}
-      {description && <Description>{description}</Description>}
+      <>{hasError && error && <Error data-error={field.name}>{error}</Error>}</>
+      <>{description && <Description>{description}</Description>}</>
     </Wrapper>
   );
 };

@@ -1,16 +1,16 @@
-import React, { ReactElement } from "react";
-import { CheckboxInput, Inner, Label, Root } from "./ToggleSwitch.styles";
+import { FormEvent } from "react";
 import { RenderType } from "../../types";
+import { CheckboxInput, Inner, Label, Root } from "./styles";
 
 type ToggleSwitchProps = {
   id?: string;
   name: string;
   label: RenderType;
   labelClassName?: string;
-  value: string | boolean;
+  value: string;
   checked?: boolean;
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.FormEvent<HTMLInputElement>) => void;
+  onChange: (e: FormEvent<HTMLInputElement>) => void;
+  onBlur: (e: FormEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   className?: string;
 };
@@ -25,18 +25,15 @@ export const ToggleSwitch = ({
   disabled,
   value,
   ...props
-}: ToggleSwitchProps): ReactElement => {
-  return (
-    <Root className={className}>
-      <CheckboxInput
-        name={name}
-        id={id || fieldId}
-        disabled={disabled}
-        value={value as string}
-        {...props}
-      />
-      <Inner id={id || fieldId} disabled={disabled} />
-      <Label className={labelClassName}>{label}</Label>
-    </Root>
-  );
-};
+}: ToggleSwitchProps): JSX.Element => (
+  <Root className={className}>
+    <CheckboxInput
+      id={id || fieldId}
+      disabled={disabled}
+      value={value as string}
+      {...props}
+    />
+    <Inner id={id || fieldId} disabled={disabled} />
+    <Label className={labelClassName}>{label}</Label>
+  </Root>
+);

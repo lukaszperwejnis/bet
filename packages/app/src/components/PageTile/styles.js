@@ -1,18 +1,35 @@
-import styled from 'styled-components';
-import { config } from '../../styles/config';
-import { Tile } from '../ui-components/components';
+import styled, { css } from 'styled-components';
+import { Tile } from '@bet/ui-components';
+import { config } from '@styles';
 export const StyledTile = styled(Tile) `
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 300px;
+  justify-content: center;
+  width: 400px;
   min-height: 300px;
   padding: ${config.spacing.big};
-  justify-content: center;
+  font-family: ${config.fontFamily.primary};
+  color: ${config.color.textColor};
+
+  ${({ isLoading }) => isLoading &&
+    css `
+      &:before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        opacity: 0.8;
+        z-index: 1;
+      }
+    `};
 `;
 export const Header = styled.h3 `
   font-size: ${config.fontSize.large};
-  font-family: ${config.fontFamily.primary};
   margin-top: 0;
-  color: ${config.color.textColor};
+`;
+export const Description = styled.div `
+  width: 100%;
+  text-align: center;
 `;

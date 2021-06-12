@@ -1,7 +1,6 @@
 import { storiesOf } from "@storybook/react";
 import centered from "@storybook/addon-centered/react";
 import { text } from "@storybook/addon-knobs";
-import React from "react";
 import { Message } from "./Message";
 
 storiesOf("Message", module)

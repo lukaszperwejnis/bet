@@ -8,7 +8,6 @@
     "test": "jest",
     "test-coverage": "jest --coverage",
     "lint": "eslint --ext .ts,.tsx",
-    "storybook": "start-storybook -p 9001 -c ui-components/.storybook",
     "compile": "tsc"
   },
   "author": "",
@@ -100,11 +99,10 @@
     "transform": {
       ".(ts|tsx)": "ts-jest"
     },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
-      "js"
     ],
     "setupFiles": [
       "<rootDir>/test-setup.ts"

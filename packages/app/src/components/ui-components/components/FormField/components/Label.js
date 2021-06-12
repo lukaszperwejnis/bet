@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { config } from '../../../../../styles/config';
+import { config } from '@styles';
 export const Label = styled.label `
   margin-bottom: ${config.spacing.small};
   font-size: ${config.fontSize.normal};

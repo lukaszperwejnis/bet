@@ -12,16 +12,20 @@ import { URLS } from '../urls';
 class AuthService extends ApiService {
     constructor() {
         super(...arguments);
-        this.login = (payload) => __awaiter(this, void 0, void 0, function* () { return this.post(URLS.BET.CREATE, { payload }); });
-        this.signup = (token, password) => __awaiter(this, void 0, void 0, function* () { return this.post(URLS.USER.SIGNUP, { payload: { token, password } }); });
-        this.startResetPassword = (email) => __awaiter(this, void 0, void 0, function* () {
-            return this.post(URLS.USER.START_RESET_PASSWORD, {
-                payload: {
-                    email,
-                },
-            });
-        });
-        this.resetPassword = (data) => __awaiter(this, void 0, void 0, function* () { return this.post(URLS.USER.RESET_PASSWORD, { payload: Object.assign({}, data) }); });
+        this.login = (payload) => __awaiter(this, void 0, void 0, function* () { return this.post(URLS.USER.SIGNIN, { payload }); });
+        this.signup = (payload) => __awaiter(this, void 0, void 0, function* () { return this.post(URLS.USER.SIGNUP, { payload }); });
+        // startResetPassword = async <T>(email: string): Promise<T> =>
+        //   this.post(URLS.USER.START_RESET_PASSWORD, {
+        //     payload: {
+        //       email,
+        //     },
+        //   });
+        //
+        // resetPassword = async <T>(data: {
+        //   token: string;
+        //   password: string;
+        // }): Promise<T> =>
+        //   this.post(URLS.USER.RESET_PASSWORD, { payload: { ...data } });
         this.validateInvitationToken = (token) => __awaiter(this, void 0, void 0, function* () { return this.get(URLS.TOKENS.MAIL_INVITATION + token); });
     }
 }

@@ -1,4 +1,4 @@
-import { userService } from '../services';
+import { userService } from '@services';
 export class AuthProvider {
     constructor() {
         this.observers = [];

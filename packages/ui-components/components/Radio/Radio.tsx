@@ -1,24 +1,24 @@
-import React, { ReactElement } from "react";
+import { FormEvent } from "react";
+import { RenderType, WithExcludedChildrenProps } from "../../types";
 import {
   Wrapper,
   Radio as RadioComponent,
   RadioInput,
   Inner,
   Label,
-} from "./Radio.styles";
-import { RenderType, WithExcludedChildrenProps } from "../../types";
+} from "./styles";
 
 export interface RadioProps extends WithExcludedChildrenProps {
+  name: string;
+  label: RenderType;
+  value: string | number;
   id?: string;
   className?: string;
   labelClassName?: string;
-  label: RenderType;
-  value: string | number;
   checked?: boolean;
-  name: string;
   disabled?: boolean;
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FormEvent<HTMLInputElement>) => void;
+  onChange: (e: FormEvent<HTMLInputElement>) => void;
+  onBlur?: (e: FormEvent<HTMLInputElement>) => void;
 }
 
 export const Radio = ({
@@ -28,20 +28,14 @@ export const Radio = ({
   checked,
   disabled,
   ...otherProps
-}: RadioProps): ReactElement => {
-  return (
-    <Wrapper disabled={disabled}>
-      <RadioComponent className={className}>
-        <RadioInput checked={checked} disabled={disabled} {...otherProps} />
-        <Inner checked={checked} />
-      </RadioComponent>
-      <Label
-        data-radio-role="label"
-        className={labelClassName}
-        checked={checked}
-      >
-        {label}
-      </Label>
-    </Wrapper>
-  );
-};
+}: RadioProps): JSX.Element => (
+  <Wrapper disabled={disabled}>
+    <RadioComponent className={className}>
+      <RadioInput checked={checked} disabled={disabled} {...otherProps} />
+      <Inner checked={checked} />
+    </RadioComponent>
+    <Label data-radio-role="label" className={labelClassName} checked={checked}>
+      {label}
+    </Label>
+  </Wrapper>
+);

@@ -1,4 +1,3 @@
-import React from "react";
 import { Form, Formik } from "formik";
 import { storiesOf } from "@storybook/react";
 import centered from "@storybook/addon-centered/react";
@@ -9,9 +8,8 @@ import { ToggleSwitch } from "./ToggleSwitch";
 import { Select } from "./Select";
 import { Checkbox } from "./Checkbox";
 
-// @ts-ignore
-// @ts-ignore
-const FormikFormWrapper = ({ initialValues, children }) => (
+// TODO type
+const FormikFormWrapper = ({ initialValues, children }: any) => (
   <Formik
     initialValues={initialValues}
     onSubmit={(values) => {

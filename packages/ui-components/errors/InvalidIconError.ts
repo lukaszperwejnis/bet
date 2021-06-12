@@ -3,6 +3,6 @@ import { ErrorCodes } from "./errorsCodes";
 
 export class InvalidIconError extends CustomError {
   constructor(icon: string) {
-    super(icon, ErrorCodes.NOT_FOUND);
+    super(icon, ErrorCodes.NotFound);
   }
 }

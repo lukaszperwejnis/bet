@@ -1,5 +1,4 @@
 import { storiesOf } from "@storybook/react";
-import React from "react";
 import centered from "@storybook/addon-centered/react";
 import { select } from "@storybook/addon-knobs";
 import { Icon, IconComponentType } from "./Icon";

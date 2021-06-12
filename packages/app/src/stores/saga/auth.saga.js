@@ -11,33 +11,21 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { all, call, fork, takeLatest, put } from '@redux-saga/core/effects';
-import { redirect, mapErrorToMessage } from '@utils';
+import { redirect, mapErrorToMessage, translate } from '@utils';
 import { AppUrls } from '@config';
 import { authService, tokenService, userService } from '@services';
 import { successLogin, failedLogin } from '@stores/actions';
 import { AuthActionType } from '@stores/types';
 import { messageActions } from '@stores/actions/message.actions';
+import { failedSignup, invalidTokenSignup, successSignup, } from '@stores/actions/auth.actions';
+import { AuthProvider } from '../../providers/AuthProvider';
 function* login(action) {
     try {
-        // yield call(
-        //   messageActions.success,
-        //   intl.formatMessage({ id: 'login.header' }),
-        // );
-        console.log('LOGIN ACTION');
-        const _a = (yield call(authService.login, action.payload)), { data, status } = _a, other = __rest(_a, ["data", "status"]);
-        console.log({
-            data,
-            status,
-            other,
-        }, 'LOGIN');
-        if (status !== 201) {
-            yield put(failedLogin('Unknown error'));
-            return;
-        }
+        const { data } = (yield call(authService.login, action.payload));
         const { user } = data, tokens = __rest(data, ["user"]);
         yield call(tokenService.setTokens, tokens);
         yield call(userService.setUser, user);
-        // TODO User type
+        AuthProvider.getInstance().notify();
         yield put(successLogin(user));
         yield call(redirect, AppUrls.DASHBOARD.pattern);
     }
@@ -47,9 +35,29 @@ function* login(action) {
         yield call(messageActions.error, errorMessage);
     }
 }
+function* signup(action) {
+    try {
+        yield call(authService.signup, action.payload);
+        yield call(messageActions.success, translate('signup.success'));
+        yield put(successSignup());
+        yield call(redirect, AppUrls.LOGIN.pattern);
+    }
+    catch (error) {
+        if (tokenService.isInvalidTokenError(error.response.data)) {
+            yield put(invalidTokenSignup());
+            return;
+        }
+        const errorMessage = mapErrorToMessage(error);
+        yield put(failedSignup(errorMessage));
+        yield call(messageActions.error, errorMessage);
+    }
+}
 function* watchLogin() {
     yield takeLatest(AuthActionType.Login, login);
 }
+function* watchSignup() {
+    yield takeLatest(AuthActionType.Signup, signup);
+}
 export function* authSaga() {
-    yield all([fork(watchLogin)]);
+    yield all([fork(watchLogin), fork(watchSignup)]);
 }

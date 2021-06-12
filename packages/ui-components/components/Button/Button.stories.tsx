@@ -1,12 +1,11 @@
+import styled from "styled-components";
 import { storiesOf } from "@storybook/react";
-import React from "react";
 import centered from "@storybook/addon-centered/react";
 import { boolean, select } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { TrashAlt } from "@styled-icons/boxicons-regular";
-
-import { Button } from "./Button";
-import styled from "styled-components";
+import { Button, ColorType } from "./Button";
 
 const TrashIcon = styled(TrashAlt)`
   color: red;
@@ -19,14 +18,14 @@ storiesOf("Button", module)
       type={select(
         "type",
         {
-          primary: "primary",
-          secondary: "secondary",
-          error: "error",
-          warning: "warning",
-          success: "success",
-          empty: "empty",
+          primary: ColorType.Primary,
+          secondary: ColorType.Secondary,
+          error: ColorType.Error,
+          warning: ColorType.Warning,
+          success: ColorType.Success,
+          empty: ColorType.Empty,
         },
-        "primary"
+        ColorType.Primary
       )}
       disabled={boolean("disabled", false)}
       isHollow={boolean("isHollow", false)}
@@ -37,7 +36,7 @@ storiesOf("Button", module)
   ))
   .add("Empty with icon", () => (
     <Button
-      type="empty"
+      type={ColorType.Empty}
       disabled={boolean("disabled", false)}
       onClick={action("clicked")}
     >

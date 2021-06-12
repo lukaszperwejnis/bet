@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { config } from '../styles/config';
+import { config } from '@styles';
 export const Page = styled.div `
   height: 100vh;
   background-color: ${config.color.wildSand};

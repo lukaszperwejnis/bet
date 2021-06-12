@@ -5,4 +5,3 @@ export const passwordSchema = Yup.string()
     .trim()
     .required(translate('validation.password.required'))
     .matches(/^(?=.*[A-Z])(?=.*\d).*[\s\S]{4,}$/, translate('validation.password.secure'));
-Schema;

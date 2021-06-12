@@ -1,6 +1,6 @@
-import React, { ChangeEvent, ReactElement } from "react";
-import { Select as SelectComponent } from "./Select.styles";
+import { ChangeEvent } from "react";
 import { WithExcludedChildrenProps } from "../../types";
+import { Select as SelectComponent } from "./styles";
 
 interface SelectProps extends WithExcludedChildrenProps {
   id?: string;
@@ -22,19 +22,17 @@ export const Select = ({
   options,
   disabled,
   ...otherProps
-}: SelectProps): ReactElement => {
-  return (
-    <SelectComponent disabled={disabled} {...otherProps}>
-      {placeholder && (
-        <option value="" disabled>
-          {placeholder}
-        </option>
-      )}
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.name}
-        </option>
-      ))}
-    </SelectComponent>
-  );
-};
+}: SelectProps): JSX.Element => (
+  <SelectComponent disabled={disabled} {...otherProps}>
+    {placeholder && (
+      <option value="" disabled>
+        {placeholder}
+      </option>
+    )}
+    {options.map((option) => (
+      <option key={option.value} value={option.value}>
+        {option.name}
+      </option>
+    ))}
+  </SelectComponent>
+);

@@ -1,5 +1,4 @@
 import { storiesOf } from "@storybook/react";
-import React from "react";
 import centered from "@storybook/addon-centered/react";
 import { boolean, text } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";

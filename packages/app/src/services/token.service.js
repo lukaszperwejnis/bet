@@ -1,28 +1,34 @@
 import { StorageKeys } from '@constants';
-import { AuthProvider } from '../providers/AuthProvider';
 import { localStorageService } from './localStorage.service';
 class TokenService {
     constructor() {
         this.isTokenInvalid = (jwtToken) => {
             return TokenService.isExpired(TokenService.getExpirationDate(jwtToken));
         };
+        this.isInvalidTokenError = (error) => {
+            console.log({ error });
+            return error.status === 500 && error.message === 'jwt malformed';
+        };
     }
     setTokens({ accessToken, refreshToken }) {
         localStorageService.set(StorageKeys.AccessToken, accessToken);
         localStorageService.set(StorageKeys.RefreshToken, refreshToken);
-        AuthProvider.getInstance().notify();
     }
     clearTokens() {
-        localStorage.removeItem(StorageKeys.AccessToken);
-        localStorage.removeItem(StorageKeys.RefreshToken);
-        AuthProvider.getInstance().notify();
+        localStorageService.remove(StorageKeys.AccessToken);
+        localStorageService.remove(StorageKeys.RefreshToken);
     }
     getAccessToken() {
         return localStorageService.get(StorageKeys.AccessToken);
     }
     static getExpirationDate(jwtToken) {
-        const jwt = JSON.parse(atob(jwtToken.split('.')[1]));
-        return (jwt && jwt.exp && jwt.exp * 1000) || null;
+        try {
+            const jwt = JSON.parse(atob(jwtToken.split('.')[1]));
+            return (jwt && jwt.exp && jwt.exp * 1000) || -1;
+        }
+        catch (error) {
+            return -1;
+        }
     }
     static isExpired(exp) {
         return exp ? Date.now() > exp : false;

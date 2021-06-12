@@ -1,4 +1,3 @@
-import React, { ReactElement } from "react";
 import { useField } from "formik";
 import { Wrapper } from "./components";
 import { Checkbox as CheckboxComponent } from "../Checkbox/Checkbox";
@@ -18,14 +17,13 @@ export const Checkbox = ({
   checked,
   wrapperClassName,
   ...props
-}: FormFieldCheckboxProps): ReactElement => {
+}: FormFieldCheckboxProps): JSX.Element => {
   const [field] = useField(props);
   return (
     <Wrapper className={wrapperClassName}>
       <CheckboxComponent
         id={field.name}
         label={label}
-        name={field.name}
         value={field.value}
         onChange={field.onChange}
         onBlur={field.onBlur}

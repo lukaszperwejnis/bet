@@ -1,9 +1,8 @@
 import { storiesOf } from "@storybook/react";
-import React from "react";
 import centered from "@storybook/addon-centered/react";
 import { boolean, text } from "@storybook/addon-knobs";
-import { Checkbox } from "./Checkbox";
 import { action } from "@storybook/addon-actions";
+import { Checkbox } from "./Checkbox";
 
 storiesOf("Checkbox", module)
   .addDecorator(centered)

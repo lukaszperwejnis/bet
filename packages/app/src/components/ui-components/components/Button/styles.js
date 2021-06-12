@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { darken, lighten } from 'polished';
-import { config } from '../../../../styles/config';
-import { breakpoints } from '../../../../styles/breakpoints';
+import { config, breakpoints } from '@styles';
 export const StyledButton = styled.button `
   border: none;
   border-radius: 4px;

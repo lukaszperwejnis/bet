@@ -1,16 +1,17 @@
-import { StyledButton } from './styles';
-import {WithChildrenProps} from "../../types";
+import { MouseEvent } from "react";
+import { StyledButton } from "./styles";
+import { WithChildrenProps } from "../../types";
 
 export enum ColorType {
-  Primary = 'primary',
-  Secondary = 'secondary',
-  Error = 'error',
-  Warning = 'warning',
-  Success = 'success',
-  Empty = 'empty',
+  Primary = "primary",
+  Secondary = "secondary",
+  Error = "error",
+  Warning = "warning",
+  Success = "success",
+  Empty = "empty",
 }
 
-type ButtonHtmlType = 'submit' | 'button';
+type ButtonHtmlType = "submit" | "button";
 
 interface ButtonProps extends WithChildrenProps {
   onClick?(event: MouseEvent): void;
@@ -27,7 +28,7 @@ interface ButtonComponentProps extends ButtonProps {
 
 export const Button = ({
   type = ColorType.Primary,
-  htmlType = 'button',
+  htmlType = "button",
   ...otherProps
 }: ButtonComponentProps): JSX.Element => (
   <StyledButton type={htmlType} colorType={type} {...otherProps} />

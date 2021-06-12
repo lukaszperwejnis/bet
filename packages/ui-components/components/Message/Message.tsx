@@ -1,6 +1,6 @@
-import React, { ReactElement } from "react";
-import ReactDOM from "react-dom";
-import { Container, Success, Error, Warning, Info } from "./Message.styles";
+import { useEffect } from "react";
+import { createPortal } from "react-dom";
+import { Container, Success, Error, Warning, Info } from "./styles";
 import "./message.css";
 
 const defaultProps = Object.freeze({
@@ -24,24 +24,6 @@ const Icons = {
   info: <Info icon="infoCircle" />,
 };
 
-export const Message = ({
-  root,
-  ...otherProps
-}: MessageProps): ReactElement => {
-  const rootContainer = document.getElementById(root);
-  const el = document.createElement("div");
-  el.className = "c-message__root";
-
-  React.useEffect(() => {
-    rootContainer.appendChild(el);
-    return () => rootContainer.removeChild(el);
-  }, []);
-
-  return ReactDOM.createPortal(<MessageComponent {...otherProps} />, el);
-};
-
-Message.defaultProps = defaultProps;
-
 const MessageComponent = ({ type, text }: MessageComponentProps) => {
   const icon = Icons[type];
   return (
@@ -51,3 +33,25 @@ const MessageComponent = ({ type, text }: MessageComponentProps) => {
     </Container>
   );
 };
+
+export const Message = ({ root, ...otherProps }: MessageProps): JSX.Element => {
+  const rootContainer = document.getElementById(root);
+  const el = document.createElement("div");
+  el.className = "c-message__root";
+
+  useEffect(() => {
+    if (rootContainer) {
+      rootContainer.appendChild(el);
+    }
+
+    return () => {
+      if (rootContainer) {
+        rootContainer.removeChild(el);
+      }
+    };
+  }, []);
+
+  return createPortal(<MessageComponent {...otherProps} />, el);
+};
+
+Message.defaultProps = defaultProps;

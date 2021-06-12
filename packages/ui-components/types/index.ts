@@ -1,4 +1,4 @@
-export { RenderType } from "./RenderType";
-export { WithChildrenProps } from "./WithChildrenProps";
-export { WithExcludedChildrenProps } from "./WithExcludedChildrenProps";
-export { Message, MessageType } from "./message";
+export type { RenderType } from "./RenderType";
+export type { WithChildrenProps } from "./WithChildrenProps";
+export type { WithExcludedChildrenProps } from "./WithExcludedChildrenProps";
+export type { Message, MessageType } from "./message";
