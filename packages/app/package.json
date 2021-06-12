@@ -102,7 +102,7 @@
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
     "moduleFileExtensions": [
       "ts",
-      "tsx",
+      "tsx"
     ],
     "setupFiles": [
       "<rootDir>/test-setup.ts"
