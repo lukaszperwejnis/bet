@@ -1,0 +1,17 @@
+{
+  "name": "@bet/structures",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rimraf dist *.tsbuildinfo",
+    "lint": "eslint src --ext js,ts",
+    "build": "tsc -b"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.3"
+  }
+}

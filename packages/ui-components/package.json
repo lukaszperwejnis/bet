@@ -4,6 +4,7 @@
   "description": "UI components for react application",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf dist *.tsbuildinfo",
     "start": "webpack serve",
     "build": "webpack",
     "test": "jest",

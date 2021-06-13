@@ -4,15 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b",
     "dev": "nodemon ./lib/server.ts",
     "start": "nodemon ./dist/server.js",
     "prod": "npm run build && npm run start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist *.tsbuildinfo",
+    "lint": "eslint src --ext js,ts"
   },
   "author": "lukaszperwejnis",
   "license": "ISC",
   "dependencies": {
+    "@bet/structures": "0.0.1",
     "@hapi/joi": "^17.0.0",
     "@types/bcrypt": "^3.0.0",
     "@types/cors": "^2.8.6",

@@ -6,9 +6,8 @@ import { AppUrls } from '@config';
 import { authService, tokenService, userService } from '@services';
 import { successLogin, failedLogin } from '@stores/actions';
 import { AuthActionType } from '@stores/types';
-import { Signin, User } from '@bet/structures/user';
+import { Signin, User, Signup } from '@bet/structures';
 import { messageActions } from '@stores/actions/message.actions';
-import { Signup } from '@bet/structures/user/Signup';
 import {
   failedSignup,
   invalidTokenSignup,

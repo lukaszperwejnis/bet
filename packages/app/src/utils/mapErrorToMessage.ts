@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { SchemaValidationError } from '@bet/structures/common';
+import { ErrorCodes, SchemaValidationError } from '@bet/structures';
 import { translate } from './intl';
 
 const availableFieldsTranslations = [
@@ -32,13 +32,13 @@ export const mapErrorToMessage = (error: AxiosError): string => {
   switch (true) {
     case status === 401 && data.message === 'Unauthorized':
       return translate('error.unauthorized');
-    case data.code === 1000:
+    case data.code === ErrorCodes.UserNotFound:
       return translate('error.userNotFound');
-    case data.code === 1001:
+    case data.code === ErrorCodes.PasswordIsEqualAsCurrent:
       return translate('error.passwordIsEqualAsCurrent');
-    case data.code === 1002:
+    case data.code === ErrorCodes.UserWithGivenEmailAlreadyExists:
       return translate('error.userWithGivenMailAlreadyExists');
-    case data.code === 1003:
+    case data.code === ErrorCodes.ValidationError:
       return translate('error.fieldsValidation', {
         fields: mappedFieldsFromError(data.errors),
       });

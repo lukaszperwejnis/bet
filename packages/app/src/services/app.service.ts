@@ -1,5 +1,5 @@
 import { StorageKeys } from '@constants';
-import { User } from '@bet/structures/user';
+import { User } from '@bet/structures';
 import { tokenService } from './token.service';
 import { URLS } from '../urls';
 import { localStorageService } from './localStorage.service';

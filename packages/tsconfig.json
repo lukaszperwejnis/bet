@@ -1,10 +1,14 @@
 {
+  "files": [],
   "references": [
     {
       "path": "app"
     },
     {
       "path": "ui-components"
+    },
+    {
+      "path": "structures"
     }
   ]
 }

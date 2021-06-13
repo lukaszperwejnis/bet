@@ -11,7 +11,7 @@ import {
   successReset,
 } from '@stores/actions';
 import { PasswordActionType } from '@stores/types';
-import { Password } from '@bet/structures/user';
+import { Password } from '@bet/structures';
 import { messageActions } from '@stores/actions/message.actions';
 import { invalidTokenReset } from '@stores/actions/password.actions';
 

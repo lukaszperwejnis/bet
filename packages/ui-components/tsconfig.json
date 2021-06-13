@@ -2,9 +2,13 @@
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
     "composite": true,
+    "outDir": "dist",
+    "rootDir": "src",
     "jsx": "react-jsx",
     "typeRoots": ["node_modules/@types"],
   },
-  "include": ["components/**/*"],
+  "include": [
+    "src/components/**/*"
+  ],
   "exclude": ["node_modules", "dist", "**/*.spec.ts"]
 }

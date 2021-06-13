@@ -17,7 +17,6 @@
       "@structures": ["structures/index.ts"],
       "@styles": ["styles/index.ts"],
       "@utils": ["utils/index.ts"],
-      "@bet/structures/*": ["../../server/lib/structuresToMove/*"],
     },
     "typeRoots": ["node_modules/@types"],
   },
