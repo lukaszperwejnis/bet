@@ -1,5 +1,3 @@
-/// <reference types="react" />
-/// <reference types="@emotion/core" />
 import { InputProps } from "../Input/Input";
 import { RenderType, WithExcludedChildrenProps } from "../../types/index";
 interface FormFieldInputProps extends WithExcludedChildrenProps {

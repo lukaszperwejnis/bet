@@ -1,5 +1,3 @@
-/// <reference types="react" />
-/// <reference types="@emotion/core" />
 import { RenderType, WithExcludedChildrenProps } from "../../types/index";
 interface ToggleSwitchProps extends WithExcludedChildrenProps {
     name: string;

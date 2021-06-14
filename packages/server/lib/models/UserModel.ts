@@ -37,12 +37,14 @@ userSchema.pre("save", function (next) {
     return next();
   }
 
-  bcrypt.hash(this.password, 10, (err, hash) => {
+  // @ts-ignore
+    bcrypt.hash(this.password, 10, (err, hash) => {
     if (err) {
       return next(err);
     }
 
-    this.password = hash;
+    // @ts-ignore
+        this.password = hash;
     next();
   });
 });

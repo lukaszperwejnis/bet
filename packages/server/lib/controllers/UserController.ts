@@ -2,7 +2,7 @@ import { Controller } from "./Controller";
 import { NextFunction, Request, Response } from "express";
 import { UserService } from "../services/UserService";
 import { MailService } from "../services/MailService";
-import {Password} from "../structuresToMove/user";
+import {Password} from "@bet/structures";
 
 export class UserController extends Controller {
   private userService = new UserService();

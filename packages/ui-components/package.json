@@ -1,5 +1,5 @@
 {
-  "name": "ui-components",
+  "name": "@bet/ui-components",
   "version": "1.0.0",
   "description": "UI components for react application",
   "main": "index.js",

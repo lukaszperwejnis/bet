@@ -1,5 +1,3 @@
-/// <reference types="react" />
-/// <reference types="@emotion/core" />
 import { WithExcludedChildrenProps } from "../../types/index";
 import "./styles.css";
 declare const Icons: {

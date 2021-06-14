@@ -23,20 +23,20 @@ import { BetRoutes } from "./routes/betRoutes";
 import { CronService } from "./services/CronService";
 import { MailService } from "./services/MailService";
 
-export default class App {
+export class App {
   app: express.Application;
   port: number;
   private cronService = new CronService();
   private mailService = new MailService();
 
-  constructor(port) {
+  constructor(port: number) {
     this.app = express();
     this.port = port;
 
     connectToDatabase();
     this.initMiddlewares();
     this.initRoutes();
-    this.fillDatabase();
+    App.fillDatabase();
     // this.mailService.sendInvitationEmail({email: 'perwiperwi@gmail.com'});
     // this.initCrones();
   }
@@ -50,11 +50,14 @@ export default class App {
   }
 
   private initRoutes(): void {
+    //public routes
     this.app.use("/invitations", InvitationRoutes);
     this.app.use("/verify", VerifyRoutes);
     this.app.use("/signup", SignupRoutes);
     this.app.use("/signin", SigninRoutes);
     this.app.use("/reset-password", ResetPasswordRoutes);
+
+    // protected routes with /api prefix
     this.app.use("/api/bets", BetRoutes);
     this.app.use("/api/bets/games", GameBetRoutes);
     this.app.use("/api/bets/champions", ChampionBetRoutes);
@@ -74,7 +77,7 @@ export default class App {
     validationCron.start();
   }
 
-  private async fillDatabase() {
+  private static async fillDatabase() {
     await new TeamService().addTeamsToDatabase();
     await new GameService().addScheduledMatchesToDatabase();
     await new BetsValidationService().validateMatchBets();

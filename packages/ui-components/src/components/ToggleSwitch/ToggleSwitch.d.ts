@@ -1,4 +1,3 @@
-/// <reference types="@emotion/core" />
 import { FormEvent } from "react";
 import { RenderType } from "../../types/index";
 declare type ToggleSwitchProps = {

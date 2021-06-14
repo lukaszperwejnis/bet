@@ -1,6 +1,5 @@
 import { HttpError } from "./HttpError";
-import {ErrorCodes} from "../structuresToMove/common/ErrorCodes";
-import {SchemaValidationError} from "../structuresToMove/common";
+import {ErrorCodes, SchemaValidationError} from "@bet/structures";
 
 export class FieldValidationError extends HttpError {
   constructor(validationErrors: SchemaValidationError[]) {

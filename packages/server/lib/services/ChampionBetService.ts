@@ -81,7 +81,7 @@ export class ChampionBetService {
     );
 
     for (let championBet of championBets) {
-      const betTeam: Team = await this.teamRepository.findById(championBet.bet);
+      const betTeam: Team = await this.teamRepository.findById(championBet.bet._id);
       const bet: ChampionBet = await this.championBetRepository.findOneAndUpdate(
         { _id: championBet._id },
         {

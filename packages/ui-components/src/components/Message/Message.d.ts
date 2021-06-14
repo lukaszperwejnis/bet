@@ -1,5 +1,3 @@
-/// <reference types="react" />
-/// <reference types="@emotion/core" />
 import "./message.css";
 declare const defaultProps: Readonly<{
     root: string;

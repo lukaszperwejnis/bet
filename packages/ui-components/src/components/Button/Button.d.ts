@@ -1,4 +1,3 @@
-/// <reference types="@emotion/core" />
 import { MouseEvent } from "react";
 import { WithChildrenProps } from "../../types/index";
 export declare enum ColorType {

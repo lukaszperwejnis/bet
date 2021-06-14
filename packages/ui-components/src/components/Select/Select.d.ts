@@ -1,4 +1,3 @@
-/// <reference types="@emotion/core" />
 import { ChangeEvent } from "react";
 import { WithExcludedChildrenProps } from "../../types/index";
 interface SelectProps extends WithExcludedChildrenProps {

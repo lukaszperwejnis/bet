@@ -1,5 +1,3 @@
-/// <reference types="react" />
-/// <reference types="@emotion/core" />
 import { RenderType, WithExcludedChildrenProps } from "../../types/index";
 interface FormFieldSelectProps extends WithExcludedChildrenProps {
     name: string;

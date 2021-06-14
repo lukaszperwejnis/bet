@@ -1,4 +1,3 @@
-/// <reference types="@emotion/core" />
 import { FormEvent } from "react";
 import { RenderType, WithExcludedChildrenProps } from "../../types/index";
 interface CheckboxProps extends WithExcludedChildrenProps {

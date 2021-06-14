@@ -1,4 +1,4 @@
-import {SchemaValidationError} from "../structuresToMove/common";
+import {SchemaValidationError} from "@bet/structures";
 
 export function mapSchemaValidationErrors(
   errors: any[]

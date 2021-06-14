@@ -6,8 +6,7 @@ import { UserRepository } from "../Repository/UserRepository";
 import { UserNotFoundError } from "../errors/UserNotFoundError";
 import { PasswordMatchPreviousError } from "../errors/PasswordMatchPreviousError";
 import { TokenService } from "./TokenService";
-import {Password, Signin, User} from "../structuresToMove/user";
-import {Signup} from "../structuresToMove/user/Signup";
+import {Password, Signin, User, Signup} from "@bet/structures";
 import {
   FieldValidationError,
   UnauthorizedError,

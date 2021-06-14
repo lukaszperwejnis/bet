@@ -1,17 +1,15 @@
-import * as mongoose from "mongoose";
-
 export abstract class Repository<T> {
   protected constructor(private model: any) {}
 
-  async findById(id: mongoose.Types.ObjectId, projection?: object): Promise<T> {
+  async findById(id: string, projection?: object): Promise<T> {
     return await this.model.findById(id, projection).lean();
   }
 
-  async findByIds(ids: mongoose.Types.ObjectId[]): Promise<T[]> {
+  async findByIds(ids: string[]): Promise<T[]> {
     return await this.model.find({ _id: { $in: ids } }).lean();
   }
 
-  async create(input: object): Promise<T> {
+  async create<T>(input: T): Promise<T> {
     return await this.model.create({ ...input });
   }
 
@@ -44,13 +42,13 @@ export abstract class Repository<T> {
     return await this.model.updateMany(query, data);
   }
 
-  async removeByIds(ids: mongoose.Types.ObjectId[]): Promise<void> {
+  async removeByIds(ids: string[]): Promise<void> {
     await this.model.deleteMany({
       _id: { $in: ids },
     });
   }
 
-  async removeById(id: mongoose.Types.ObjectId): Promise<void> {
+  async removeById(id: string): Promise<void> {
     await this.model.deleteOne({ _id: id });
   }
 
