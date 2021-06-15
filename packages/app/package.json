@@ -2,14 +2,16 @@
   "name": "@bet/app",
   "version": "1.0.0",
   "description": "",
+  "scripty": {
+    "path": "../../scripts/packages"
+  },
   "scripts": {
     "clean": "rimraf dist *.tsbuildinfo",
-    "start": "webpack serve --mode development",
+    "test": "scripty",
+    "lint": "scripty",
     "build": "webpack",
-    "test": "jest",
-    "test-coverage": "jest --coverage",
-    "lint": "eslint --ext .ts,.tsx",
-    "compile": "tsc"
+    "test-coverage": "scripty",
+    "start": "webpack serve --mode development"
   },
   "author": "",
   "license": "ISC",

@@ -6,10 +6,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripty": {
+    "path": "../../scripts/packages"
+  },
   "scripts": {
     "clean": "rimraf dist *.tsbuildinfo",
-    "lint": "eslint src --ext js,ts",
-    "build": "tsc -b"
+    "lint": "scripty",
+    "build": "scripty"
   },
   "devDependencies": {
     "typescript": "^4.0.3"

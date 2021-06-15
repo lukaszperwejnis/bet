@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "scripty": {
+    "path": "../../scripts/packages"
+  },
   "scripts": {
-    "build": "tsc -b",
+    "clean": "rimraf dist *.tsbuildinfo",
+    "build": "scripty",
     "dev": "nodemon ./lib/server.ts",
     "start": "nodemon ./dist/server.js",
-    "prod": "npm run build && npm run start",
-    "clean": "rimraf dist *.tsbuildinfo",
-    "lint": "eslint src --ext js,ts"
+    "prod": "npm run build && npm run start"
   },
   "author": "lukaszperwejnis",
   "license": "ISC",

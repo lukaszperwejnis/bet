@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "UI components for react application",
   "main": "index.js",
+  "scripty": {
+    "path": "../../scripts/packages"
+  },
   "scripts": {
     "clean": "rimraf dist *.tsbuildinfo",
-    "start": "webpack serve",
+    "test": "scripty",
+    "lint": "scripty",
     "build": "webpack",
-    "test": "jest",
-    "test-coverage": "jest --coverage",
-    "lint": "eslint --ext .ts,.tsx",
+    "test-coverage": "scripty",
+    "start": "webpack serve",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
