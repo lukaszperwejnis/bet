@@ -53,7 +53,6 @@ export class MailService {
       subject: "Bet - rejestracja",
       text: `Klikaj i obstawiaj Sportowy Świrze! ${config.clientURL}/mail-invitation-signup?token=${token}&email=${input.email}`,
     });
-
     
     return Boolean(result);
   }
