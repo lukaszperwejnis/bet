@@ -14,7 +14,8 @@
     "test": "scripty",
     "lint": "scripty",
     "build": "scripty",
-    "test-coverage": "scripty"
+    "test-coverage": "scripty",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
