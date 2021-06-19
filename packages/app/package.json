@@ -80,6 +80,7 @@
   },
   "dependencies": {
     "@bet/structures": "0.0.1",
+    "@bet/ui-components": "1.0.0",
     "axios": "^0.21.1",
     "formik": "^2.2.1",
     "history": "^4.10.1",

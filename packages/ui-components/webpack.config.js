@@ -1,14 +1,23 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/components/index.ts",
+  entry: "./src/components",
   target: "web",
   mode: "development",
+  // output: {
+    // path: path.resolve(__dirname, "dist"),
+    // libraryTarget: "commonjs2"
+
+    // filename: "bundle.js",
+    // publicPath: "/",
+  // },
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-    publicPath: "/",
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist'),
+    library: '',
+    libraryTarget: 'commonjs'
   },
+
   devServer: {
     historyApiFallback: true,
   },
