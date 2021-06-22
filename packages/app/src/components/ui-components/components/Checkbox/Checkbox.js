@@ -1,3 +1,4 @@
+"use strict";
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -9,11 +10,14 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Wrapper, CheckboxInput, Inner, Label } from './Checkbox.styles';
-export function Checkbox(_a) {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Checkbox = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const Checkbox_styles_1 = require("./Checkbox.styles");
+function Checkbox(_a) {
     var { label, disabled, checked, title } = _a, props = __rest(_a, ["label", "disabled", "checked", "title"]);
-    return (_jsxs(Wrapper, Object.assign({ disabled: disabled }, { children: [_jsx(CheckboxInput, Object.assign({ disabled: disabled, checked: checked }, props), void 0),
-            _jsx(Inner, {}, void 0),
-            _jsx(Label, Object.assign({ title: title }, { children: label }), void 0)] }), void 0));
+    return (jsx_runtime_1.jsxs(Checkbox_styles_1.Wrapper, Object.assign({ disabled: disabled }, { children: [jsx_runtime_1.jsx(Checkbox_styles_1.CheckboxInput, Object.assign({ disabled: disabled, checked: checked }, props), void 0),
+            jsx_runtime_1.jsx(Checkbox_styles_1.Inner, {}, void 0),
+            jsx_runtime_1.jsx(Checkbox_styles_1.Label, Object.assign({ title: title }, { children: label }), void 0)] }), void 0));
 }
+exports.Checkbox = Checkbox;

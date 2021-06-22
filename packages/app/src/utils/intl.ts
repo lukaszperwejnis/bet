@@ -13,4 +13,4 @@ export const intl = createIntl(
 export const translate = (
   id: string,
   values?: Record<string, RenderType>,
-): string => intl.formatMessage({ id }, { ...values });
+): string => intl.formatMessage({ id }, { ...values }) as string;

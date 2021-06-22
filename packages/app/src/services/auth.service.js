@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,13 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { ApiService } from './ApiService/ApiService';
-import { URLS } from '../urls';
-class AuthService extends ApiService {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.authService = void 0;
+const ApiService_1 = require("./ApiService/ApiService");
+const urls_1 = require("../urls");
+class AuthService extends ApiService_1.ApiService {
     constructor() {
         super(...arguments);
-        this.login = (payload) => __awaiter(this, void 0, void 0, function* () { return this.post(URLS.USER.SIGNIN, { payload }); });
-        this.signup = (payload) => __awaiter(this, void 0, void 0, function* () { return this.post(URLS.USER.SIGNUP, { payload }); });
+        this.login = (payload) => __awaiter(this, void 0, void 0, function* () { return this.post(urls_1.URLS.USER.SIGNIN, { payload }); });
+        this.signup = (payload) => __awaiter(this, void 0, void 0, function* () { return this.post(urls_1.URLS.USER.SIGNUP, { payload }); });
         // startResetPassword = async <T>(email: string): Promise<T> =>
         //   this.post(URLS.USER.START_RESET_PASSWORD, {
         //     payload: {
@@ -26,7 +29,7 @@ class AuthService extends ApiService {
         //   password: string;
         // }): Promise<T> =>
         //   this.post(URLS.USER.RESET_PASSWORD, { payload: { ...data } });
-        this.validateInvitationToken = (token) => __awaiter(this, void 0, void 0, function* () { return this.get(URLS.TOKENS.MAIL_INVITATION + token); });
+        this.validateInvitationToken = (token) => __awaiter(this, void 0, void 0, function* () { return this.get(urls_1.URLS.TOKENS.MAIL_INVITATION + token); });
     }
 }
-export const authService = new AuthService();
+exports.authService = new AuthService();

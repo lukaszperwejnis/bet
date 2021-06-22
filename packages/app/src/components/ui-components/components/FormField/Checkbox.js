@@ -1,3 +1,4 @@
+"use strict";
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -9,12 +10,15 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { jsx as _jsx } from "react/jsx-runtime";
-import { useField } from 'formik';
-import { Wrapper } from './components';
-import { Checkbox as CheckboxComponent } from '../Checkbox/Checkbox';
-export const Checkbox = (_a) => {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Checkbox = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const formik_1 = require("formik");
+const components_1 = require("./components");
+const Checkbox_1 = require("../Checkbox/Checkbox");
+const Checkbox = (_a) => {
     var { label, checked, wrapperClassName, name } = _a, props = __rest(_a, ["label", "checked", "wrapperClassName", "name"]);
-    const [field] = useField(Object.assign({ name }, props));
-    return (_jsx(Wrapper, Object.assign({ className: wrapperClassName }, { children: _jsx(CheckboxComponent, Object.assign({ id: field.name, label: label, name: field.name, value: field.value, onChange: field.onChange, onBlur: field.onBlur, checked: checked }, props), void 0) }), void 0));
+    const [field] = formik_1.useField(Object.assign({ name }, props));
+    return (jsx_runtime_1.jsx(components_1.Wrapper, Object.assign({ className: wrapperClassName }, { children: jsx_runtime_1.jsx(Checkbox_1.Checkbox, Object.assign({ id: field.name, label: label, name: field.name, value: field.value, onChange: field.onChange, onBlur: field.onBlur, checked: checked }, props), void 0) }), void 0));
 };
+exports.Checkbox = Checkbox;

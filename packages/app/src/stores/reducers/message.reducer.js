@@ -1,12 +1,16 @@
-import { MessageActionType } from '../types';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.messageReducer = void 0;
+const types_1 = require("../types");
 const initialState = [];
-export function messageReducer(state = initialState, { type, payload }) {
+function messageReducer(state = initialState, { type, payload }) {
     switch (type) {
-        case MessageActionType.MountMessage:
+        case types_1.MessageActionType.MountMessage:
             return [...state, payload];
-        case MessageActionType.UnmountMessage:
+        case types_1.MessageActionType.UnmountMessage:
             return state.filter((message) => message.key !== payload.key);
         default:
             return state;
     }
 }
+exports.messageReducer = messageReducer;

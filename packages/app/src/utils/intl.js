@@ -1,7 +1,11 @@
-import { createIntl, createIntlCache } from 'react-intl';
-import { pl as messages } from '../locales/pl';
-export const intl = createIntl({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.translate = exports.intl = void 0;
+const react_intl_1 = require("react-intl");
+const pl_1 = require("../locales/pl");
+exports.intl = react_intl_1.createIntl({
     locale: 'pl',
-    messages,
-}, createIntlCache());
-export const translate = (id, values) => intl.formatMessage({ id }, Object.assign({}, values));
+    messages: pl_1.pl,
+}, react_intl_1.createIntlCache());
+const translate = (id, values) => exports.intl.formatMessage({ id }, Object.assign({}, values));
+exports.translate = translate;

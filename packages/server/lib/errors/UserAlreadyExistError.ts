@@ -1,5 +1,5 @@
 import { HttpError } from "./HttpError";
-import {ErrorCodes} from "../structuresToMove/common/ErrorCodes";
+import {ErrorCodes} from "@bet/structures";
 
 export class UserAlreadyExistError extends HttpError {
   constructor(email: string) {

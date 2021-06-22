@@ -1,4 +1,7 @@
-export const login = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.login = void 0;
+exports.login = {
     'login.header': 'Logowanie',
     'login.submit': 'Zaloguj się',
     'login.forgotPassword': 'Zapomniałeś hasła?',

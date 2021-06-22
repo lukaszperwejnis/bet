@@ -1,4 +1,4 @@
-import { CreationType } from './CreationType';
+import { CreationType } from '@bet/structures';
 
 export interface Team {
   readonly _id: string;

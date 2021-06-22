@@ -1,8 +1,11 @@
-import { CONFIG } from './config';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.URLS = void 0;
+const config_1 = require("./config");
 function getUrl(url) {
-    return CONFIG.API_URL + url;
+    return config_1.CONFIG.API_URL + url;
 }
-export const URLS = {
+exports.URLS = {
     USER: {
         SIGNIN: getUrl('/signin'),
         SIGNUP: getUrl('/signup/mail-invitation'),

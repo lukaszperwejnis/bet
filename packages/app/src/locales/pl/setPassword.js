@@ -1,4 +1,7 @@
-export const setPassword = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.setPassword = void 0;
+exports.setPassword = {
     'resetPassword.header': 'Ustaw nowe hasło',
     'resetPassword.token.expired': 'Link wygasł lub jest nieprawidłowy',
     'resetPassword.success': 'Twoje hasło zostało zaaktualizowane',

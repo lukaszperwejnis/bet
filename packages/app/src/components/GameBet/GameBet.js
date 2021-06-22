@@ -1,9 +1,12 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { useState } from 'react';
-import { TeamWrapper, Wrapper } from './styles';
-export const GameBet = ({ gameId, homeTeamName, awayTeamName, onChange, }) => {
-    const [homeTeamScore, setHomeTeamScore] = useState(0);
-    const [awayTeamScore, setAwayTeamScore] = useState(0);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GameBet = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("react");
+const styles_1 = require("./styles");
+const GameBet = ({ gameId, homeTeamName, awayTeamName, onChange, }) => {
+    const [homeTeamScore, setHomeTeamScore] = react_1.useState(0);
+    const [awayTeamScore, setAwayTeamScore] = react_1.useState(0);
     const onHomeTeamScoreChange = (event) => {
         event.persist();
         setHomeTeamScore(event.target.value);
@@ -19,8 +22,9 @@ export const GameBet = ({ gameId, homeTeamName, awayTeamName, onChange, }) => {
             gameId,
         });
     };
-    return (_jsxs(Wrapper, { children: [_jsx(Team, { name: homeTeamName, onChange: onHomeTeamScoreChange }, void 0),
-            _jsx(Team, { name: awayTeamName, onChange: onAwayTeamScoreChange }, void 0),
-            _jsx("button", Object.assign({ type: "button", onClick: onAddBet }, { children: "Postaw zak\u0142ad" }), void 0)] }, void 0));
+    return (jsx_runtime_1.jsxs(styles_1.Wrapper, { children: [jsx_runtime_1.jsx(Team, { name: homeTeamName, onChange: onHomeTeamScoreChange }, void 0),
+            jsx_runtime_1.jsx(Team, { name: awayTeamName, onChange: onAwayTeamScoreChange }, void 0),
+            jsx_runtime_1.jsx("button", Object.assign({ type: "button", onClick: onAddBet }, { children: "Postaw zak\u0142ad" }), void 0)] }, void 0));
 };
-const Team = ({ name, onChange }) => (_jsxs(TeamWrapper, { children: [name, " ", _jsx("input", { onChange: onChange, type: "number" }, void 0)] }, void 0));
+exports.GameBet = GameBet;
+const Team = ({ name, onChange }) => (jsx_runtime_1.jsxs(styles_1.TeamWrapper, { children: [name, " ", jsx_runtime_1.jsx("input", { onChange: onChange, type: "number" }, void 0)] }, void 0));

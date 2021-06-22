@@ -1,14 +1,17 @@
 {
   "name": "@bet/app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
+  "scripty": {
+    "path": "../../scripts/packages"
+  },
   "scripts": {
-    "start": "webpack serve --mode development",
+    "clean": "rimraf dist *.tsbuildinfo",
+    "test": "scripty",
+    "lint": "scripty",
     "build": "webpack",
-    "test": "jest",
-    "test-coverage": "jest --coverage",
-    "lint": "eslint --ext .ts,.tsx",
-    "compile": "tsc"
+    "test-coverage": "scripty",
+    "start": "webpack serve --mode development"
   },
   "author": "",
   "license": "ISC",
@@ -34,12 +37,12 @@
     "@types/yup": "^0.29.9",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
     "autoprefixer": "^10.2.5",
     "copy-webpack-plugin": "5.0.4",
     "css-loader": "^5.0.0",
     "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5",
     "eslint": "^7.23.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-prettier": "^6.15.0",
@@ -76,6 +79,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@bet/structures": "^0.0.2",
+    "@bet/ui-components": "^1.0.1",
     "axios": "^0.21.1",
     "formik": "^2.2.1",
     "history": "^4.10.1",
@@ -102,7 +107,7 @@
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
     "moduleFileExtensions": [
       "ts",
-      "tsx",
+      "tsx"
     ],
     "setupFiles": [
       "<rootDir>/test-setup.ts"

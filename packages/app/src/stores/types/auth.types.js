@@ -1,4 +1,7 @@
-export var AuthActionType;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthActionType = void 0;
+var AuthActionType;
 (function (AuthActionType) {
     AuthActionType["Login"] = "LOGIN";
     AuthActionType["SuccessLogin"] = "SUCCESS_LOGIN";
@@ -7,4 +10,4 @@ export var AuthActionType;
     AuthActionType["SuccessSignup"] = "SUCCESS_SIGNUP";
     AuthActionType["FailedSignup"] = "FAILED_SIGNUP";
     AuthActionType["InvalidTokenSignup"] = "INVALID_TOKEN_SIGNUP";
-})(AuthActionType || (AuthActionType = {}));
+})(AuthActionType = exports.AuthActionType || (exports.AuthActionType = {}));

@@ -1,3 +1,4 @@
+"use strict";
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -9,13 +10,16 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { jsx as _jsx, Fragment as _Fragment } from "react/jsx-runtime";
-import { useSelector } from 'react-redux';
-import { Message as MessageComponent } from '@bet/ui-components';
-export const MessageTracker = () => {
-    const messages = useSelector((store) => store.messages);
-    return (_jsx(_Fragment, { children: messages.map((_a) => {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MessageTracker = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_redux_1 = require("react-redux");
+const ui_components_1 = require("@bet/ui-components");
+const MessageTracker = () => {
+    const messages = react_redux_1.useSelector((store) => store.messages);
+    return (jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: messages.map((_a) => {
             var { key } = _a, otherProps = __rest(_a, ["key"]);
-            return (_jsx(MessageComponent, Object.assign({ root: "messages-root" }, otherProps), key));
+            return (jsx_runtime_1.jsx(ui_components_1.Message, Object.assign({ root: "messages-root" }, otherProps), key));
         }) }, void 0));
 };
+exports.MessageTracker = MessageTracker;

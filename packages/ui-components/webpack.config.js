@@ -1,13 +1,12 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./components/index.ts",
+  entry: "./src/components",
   target: "web",
   mode: "development",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-    publicPath: "/",
+    publicPath: "/components",
   },
   devServer: {
     historyApiFallback: true,
@@ -21,9 +20,20 @@ module.exports = {
   },
   module: {
     rules: [
+      // {
+      //   test: /\.(ts|tsx)$/,
+      //   loader: "ts-loader",
+      // },
       {
         test: /\.(ts|tsx)$/,
-        loader: "ts-loader",
+        use: [
+          {
+            loader: require.resolve('babel-loader'),
+            options: {
+              presets: [['@babel/preset-react', {flow: false, typescript: true, runtime: 'automatic'}], '@babel/preset-typescript'],
+            },
+          },
+        ],
       },
       {
         test: /\.css$/i,

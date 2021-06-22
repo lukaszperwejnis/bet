@@ -11,7 +11,7 @@ import { mapSchemaValidationErrors } from "../helpers/mapSchemaValidationErrors"
 import { VALIDATION_SCHEMA_KEYS } from "../constants/validationSchemaKeys";
 import { TokenService } from "./TokenService";
 import { UserRepository } from "../Repository/UserRepository";
-import {Password, Signup} from "../structuresToMove/user";
+import { Password, Signup } from "@bet/structures";
 
 const auth = {
   auth: {

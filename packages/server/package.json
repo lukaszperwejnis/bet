@@ -1,18 +1,22 @@
 {
   "name": "@bet/server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
+  "scripty": {
+    "path": "../../scripts/packages"
+  },
   "scripts": {
-    "build": "tsc",
+    "clean": "rimraf dist *.tsbuildinfo",
+    "build": "scripty",
     "dev": "nodemon ./lib/server.ts",
     "start": "nodemon ./dist/server.js",
-    "prod": "npm run build && npm run start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prod": "npm run build && npm run start"
   },
   "author": "lukaszperwejnis",
   "license": "ISC",
   "dependencies": {
+    "@bet/structures": "^0.0.2",
     "@hapi/joi": "^17.0.0",
     "@types/bcrypt": "^3.0.0",
     "@types/cors": "^2.8.6",

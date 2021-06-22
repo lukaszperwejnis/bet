@@ -1,5 +1,5 @@
 import { WithError, WithLoading, WithTokenValidation } from '@structures';
-import { User } from '@bet/structures/user';
+import { User } from '@bet/structures';
 
 export interface AuthStoreType
   extends WithError,

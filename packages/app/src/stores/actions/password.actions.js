@@ -1,29 +1,39 @@
-import { PasswordActionType } from '@stores/types';
-export const startReset = (payload) => ({
-    type: PasswordActionType.StartReset,
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.invalidTokenReset = exports.failedReset = exports.successReset = exports.reset = exports.failedStartReset = exports.successStartReset = exports.startReset = void 0;
+const types_1 = require("@stores/types");
+const startReset = (payload) => ({
+    type: types_1.PasswordActionType.StartReset,
     payload,
 });
-export const successStartReset = () => ({
-    type: PasswordActionType.SuccessStartReset,
+exports.startReset = startReset;
+const successStartReset = () => ({
+    type: types_1.PasswordActionType.SuccessStartReset,
     payload: null,
 });
-export const failedStartReset = (payload) => ({
-    type: PasswordActionType.FailedStartReset,
+exports.successStartReset = successStartReset;
+const failedStartReset = (payload) => ({
+    type: types_1.PasswordActionType.FailedStartReset,
     payload,
 });
-export const reset = (payload) => ({
-    type: PasswordActionType.Reset,
+exports.failedStartReset = failedStartReset;
+const reset = (payload) => ({
+    type: types_1.PasswordActionType.Reset,
     payload,
 });
-export const successReset = () => ({
-    type: PasswordActionType.SuccessReset,
+exports.reset = reset;
+const successReset = () => ({
+    type: types_1.PasswordActionType.SuccessReset,
     payload: null,
 });
-export const failedReset = (payload) => ({
-    type: PasswordActionType.FailedReset,
+exports.successReset = successReset;
+const failedReset = (payload) => ({
+    type: types_1.PasswordActionType.FailedReset,
     payload,
 });
-export const invalidTokenReset = () => ({
-    type: PasswordActionType.InvalidTokenReset,
+exports.failedReset = failedReset;
+const invalidTokenReset = () => ({
+    type: types_1.PasswordActionType.InvalidTokenReset,
     payload: true,
 });
+exports.invalidTokenReset = invalidTokenReset;

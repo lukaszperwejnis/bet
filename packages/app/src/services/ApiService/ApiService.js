@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -18,19 +19,24 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import axios from 'axios';
-import { getMappedRequestOptions, } from './helpers';
-import { CONFIG } from '../../config';
-const baseURL = CONFIG.API_URL;
-export class ApiService {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ApiService = void 0;
+const axios_1 = __importDefault(require("axios"));
+const helpers_1 = require("./helpers");
+const config_1 = require("../../config");
+const baseURL = config_1.CONFIG.API_URL;
+class ApiService {
     constructor() {
-        this.request = axios.create({ baseURL });
+        this.request = axios_1.default.create({ baseURL });
     }
     get(url, config) {
         if (!config) {
             return this.request.get(url);
         }
-        return this.request.get(url, getMappedRequestOptions(config));
+        return this.request.get(url, helpers_1.getMappedRequestOptions(config));
     }
     post(url, config) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -38,7 +44,7 @@ export class ApiService {
                 return this.request.post(url);
             }
             const { payload } = config, options = __rest(config, ["payload"]);
-            const result = yield getMappedRequestOptions(options);
+            const result = yield helpers_1.getMappedRequestOptions(options);
             console.log(result);
             return this.request.post(url, payload, result);
         });
@@ -48,20 +54,21 @@ export class ApiService {
             return this.request.put(url);
         }
         const { payload } = config, options = __rest(config, ["payload"]);
-        return this.request.put(url, payload, getMappedRequestOptions(options));
+        return this.request.put(url, payload, helpers_1.getMappedRequestOptions(options));
     }
     patch(url, config) {
         if (!config) {
             return this.request.patch(url);
         }
         const { payload } = config, options = __rest(config, ["payload"]);
-        return this.request.patch(url, payload, getMappedRequestOptions(options));
+        return this.request.patch(url, payload, helpers_1.getMappedRequestOptions(options));
     }
     delete(url, config) {
         if (!config) {
             return this.request.delete(url);
         }
         const { payload } = config, options = __rest(config, ["payload"]);
-        return this.request.delete(url, getMappedRequestOptions(options));
+        return this.request.delete(url, helpers_1.getMappedRequestOptions(options));
     }
 }
+exports.ApiService = ApiService;

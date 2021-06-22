@@ -1,15 +1,37 @@
-import styled, { css } from 'styled-components';
-import { config } from '../../../../styles/config';
-import { truncate } from '../../../../styles/mixins';
-export const CheckboxInput = styled.input `
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Label = exports.Wrapper = exports.Inner = exports.CheckboxInput = void 0;
+const styled_components_1 = __importStar(require("styled-components"));
+const config_1 = require("../../../../styles/config");
+const mixins_1 = require("../../../../styles/mixins");
+exports.CheckboxInput = styled_components_1.default.input `
   position: absolute;
   z-index: -1;
   opacity: 0;
 `;
-CheckboxInput.defaultProps = {
+exports.CheckboxInput.defaultProps = {
     type: 'checkbox',
 };
-export const Inner = styled.label `
+exports.Inner = styled_components_1.default.label `
   position: relative;
   padding-left: 30px;
   cursor: pointer;
@@ -20,8 +42,8 @@ export const Inner = styled.label `
     left: 0;
     width: 16px;
     height: 16px;
-    background-color: ${config.color.white};
-    border: 1px solid ${config.color.secondary};
+    background-color: ${config_1.config.color.white};
+    border: 1px solid ${config_1.config.color.secondary};
     user-select: none;
     border-radius: 2px;
     pointer-events: all;
@@ -31,10 +53,10 @@ export const Inner = styled.label `
     transition-timing-function: cubic-bezier(0.27, 0.01, 0.38, 1.06);
   }
 
-  ${CheckboxInput}:checked ~ &:before {
+  ${exports.CheckboxInput}:checked ~ &:before {
     background-image: none;
-    background-color: ${config.color.primary};
-    color: ${config.color.white};
+    background-color: ${config_1.config.color.primary};
+    color: ${config_1.config.color.white};
     border-color: transparent;
     box-shadow: none;
   }
@@ -48,22 +70,22 @@ export const Inner = styled.label `
     height: 11px;
     opacity: 0;
     transform: rotate(45deg) scale(0);
-    border-right: 2px solid ${config.color.white};
-    border-bottom: 2px solid ${config.color.white};
+    border-right: 2px solid ${config_1.config.color.white};
+    border-bottom: 2px solid ${config_1.config.color.white};
     transition: transform 0.25s cubic-bezier(0.27, 0.01, 0.38, 1.06);
     background-size: 50% 50%;
     background-repeat: no-repeat;
     background-position: 50%;
   }
 
-  ${CheckboxInput}:checked ~ &:after {
+  ${exports.CheckboxInput}:checked ~ &:after {
     opacity: 1;
     -webkit-transform: rotate(45deg) scale(1);
     transform: rotate(45deg) scale(1);
     background-image: none;
   }
 `;
-export const Wrapper = styled.label `
+exports.Wrapper = styled_components_1.default.label `
   position: relative;
   display: flex;
   height: 18px;
@@ -71,21 +93,21 @@ export const Wrapper = styled.label `
   cursor: pointer;
 
   ${({ disabled }) => disabled &&
-    css `
-      opacity: ${config.opacity.disabled};
+    styled_components_1.css `
+      opacity: ${config_1.config.opacity.disabled};
       cursor: not-allowed;
-      ${Inner} {
+      ${exports.Inner} {
         cursor: not-allowed;
       }
     `}
 
   & + & {
-    margin-top: ${config.spacing.small};
+    margin-top: ${config_1.config.spacing.small};
   }
 `;
-export const Label = styled.span `
-  font-family: ${config.fontFamily.primary};
-  color: ${config.color.textColor};
-  font-size: ${config.fontSize.normal};
-  ${truncate}
+exports.Label = styled_components_1.default.span `
+  font-family: ${config_1.config.fontFamily.primary};
+  color: ${config_1.config.color.textColor};
+  font-size: ${config_1.config.fontSize.normal};
+  ${mixins_1.truncate}
 `;

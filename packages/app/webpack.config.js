@@ -1,7 +1,5 @@
 const path = require('path');
-const fs = require('fs');
 const webpack = require('webpack');
-const dotenv = require('dotenv');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -11,27 +9,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const inAnalyze = process.env.ANALYZE === 'true';
 const getPath = (file) => path.resolve(__dirname, file);
-const currentPath = path.join(__dirname);
-
-const processEnvFiles = (mode) => {
-  const modeFile = mode === 'none' ? 'local' : mode;
-
-  const baseEnvPath = `${currentPath}/.env`;
-  const envPath = `${baseEnvPath}.${modeFile}`;
-  const finalPath = fs.existsSync(envPath) ? envPath : baseEnvPath;
-  const fileEnv = dotenv.config({
-    path: finalPath,
-  }).parsed;
-
-  const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
-    const prevCopy = JSON.parse(JSON.stringify(prev));
-
-    prevCopy[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
-    return prevCopy;
-  }, {});
-
-  return envKeys;
-};
 
 module.exports = (env, args) => {
   const isProduction = args.mode === 'production';
@@ -93,7 +70,6 @@ module.exports = (env, args) => {
       : {},
     devtool: !isProduction ? 'source-map' : 'none',
     plugins: [
-      new webpack.DefinePlugin(processEnvFiles(args.mode)),
       new HtmlWebpackPlugin({
         template: './public/index.html',
         inject: true,

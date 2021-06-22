@@ -32,7 +32,7 @@ export class UserRepository extends Repository<User> {
       },
       password: input.password,
     };
-    return super.create(user);
+    return super.create<User>(user);
   }
 
   public async getMany(query: object): Promise<User[]> {

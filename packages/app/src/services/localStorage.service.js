@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.localStorageService = void 0;
 const PREFIX = 'bet';
 class LocalStorageService {
     get(key) {
@@ -20,4 +23,4 @@ class LocalStorageService {
         localStorage.removeItem(`${PREFIX}-${key}`);
     }
 }
-export const localStorageService = new LocalStorageService();
+exports.localStorageService = new LocalStorageService();
