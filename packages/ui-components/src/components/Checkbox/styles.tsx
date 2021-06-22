@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { config, truncate } from "../../styles/index";
-import { WithChildrenProps, WithExcludedChildrenProps } from "../../types/index";
+import { config, truncate } from "../../styles";
+import { WithChildrenProps, WithExcludedChildrenProps } from "../../types";
 
 export const CheckboxInput = styled.input<WithExcludedChildrenProps>`
   position: absolute;

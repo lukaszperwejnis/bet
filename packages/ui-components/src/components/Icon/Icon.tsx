@@ -29,9 +29,9 @@ import { Tick as tick } from "@styled-icons/typicons";
 import { EditOutline as edit } from "@styled-icons/evaicons-outline";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ArrowsAltH as arrows } from "@styled-icons/fa-solid";
-import { WithExcludedChildrenProps } from "../../types/index";
-import { InvalidIconError } from "../../errors/index";
-import "./styles.css";
+import { WithExcludedChildrenProps } from "../../types";
+import { InvalidIconError } from "../../errors";
+// import "./styles.css";
 
 const Icons = {
   dashboard,
@@ -58,7 +58,7 @@ export type IconComponentType = keyof typeof Icons;
 type IconSize = "small" | "normal" | "large" | "huge";
 export type IconType = "default" | "primary" | "secondary" | "error";
 
-interface IconProps extends WithExcludedChildrenProps {
+export interface IconProps extends WithExcludedChildrenProps {
   className?: string;
   icon: IconComponentType;
   type?: IconType;

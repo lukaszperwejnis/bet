@@ -1,7 +1,7 @@
 import { useField } from "formik";
-import { Description, Error, Label, Wrapper } from "./components/index";
+import { Description, Error, Label, Wrapper } from "./components";
 import { Select as SelectComponent } from "../Select/Select";
-import { RenderType, WithExcludedChildrenProps } from "../../types/index";
+import { RenderType, WithExcludedChildrenProps } from "../../types";
 
 interface FormFieldSelectProps extends WithExcludedChildrenProps {
   name: string;

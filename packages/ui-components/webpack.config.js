@@ -4,20 +4,10 @@ module.exports = {
   entry: "./src/components",
   target: "web",
   mode: "development",
-  // output: {
-    // path: path.resolve(__dirname, "dist"),
-    // libraryTarget: "commonjs2"
-
-    // filename: "bundle.js",
-    // publicPath: "/",
-  // },
   output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'dist'),
-    library: '',
-    libraryTarget: 'commonjs'
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/components",
   },
-
   devServer: {
     historyApiFallback: true,
   },
@@ -30,9 +20,20 @@ module.exports = {
   },
   module: {
     rules: [
+      // {
+      //   test: /\.(ts|tsx)$/,
+      //   loader: "ts-loader",
+      // },
       {
         test: /\.(ts|tsx)$/,
-        loader: "ts-loader",
+        use: [
+          {
+            loader: require.resolve('babel-loader'),
+            options: {
+              presets: [['@babel/preset-react', {flow: false, typescript: true, runtime: 'automatic'}], '@babel/preset-typescript'],
+            },
+          },
+        ],
       },
       {
         test: /\.css$/i,

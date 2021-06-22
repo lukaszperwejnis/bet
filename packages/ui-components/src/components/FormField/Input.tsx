@@ -1,7 +1,7 @@
 import { useField } from "formik";
-import { Label, Wrapper, Error, Description } from "./components/index";
+import { Label, Wrapper, Error, Description } from "./components";
 import { Input as InputComponent, InputProps } from "../Input/Input";
-import { RenderType, WithExcludedChildrenProps } from "../../types/index";
+import { RenderType, WithExcludedChildrenProps } from "../../types";
 
 interface FormFieldInputProps extends WithExcludedChildrenProps {
   name: string;

@@ -1,5 +1,8 @@
-import { StorageKeys } from '@constants';
-import { localStorageService } from './localStorage.service';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.tokenService = void 0;
+const _constants_1 = require("@constants");
+const localStorage_service_1 = require("./localStorage.service");
 class TokenService {
     constructor() {
         this.isTokenInvalid = (jwtToken) => {
@@ -11,15 +14,15 @@ class TokenService {
         };
     }
     setTokens({ accessToken, refreshToken }) {
-        localStorageService.set(StorageKeys.AccessToken, accessToken);
-        localStorageService.set(StorageKeys.RefreshToken, refreshToken);
+        localStorage_service_1.localStorageService.set(_constants_1.StorageKeys.AccessToken, accessToken);
+        localStorage_service_1.localStorageService.set(_constants_1.StorageKeys.RefreshToken, refreshToken);
     }
     clearTokens() {
-        localStorageService.remove(StorageKeys.AccessToken);
-        localStorageService.remove(StorageKeys.RefreshToken);
+        localStorage_service_1.localStorageService.remove(_constants_1.StorageKeys.AccessToken);
+        localStorage_service_1.localStorageService.remove(_constants_1.StorageKeys.RefreshToken);
     }
     getAccessToken() {
-        return localStorageService.get(StorageKeys.AccessToken);
+        return localStorage_service_1.localStorageService.get(_constants_1.StorageKeys.AccessToken);
     }
     static getExpirationDate(jwtToken) {
         try {
@@ -102,4 +105,4 @@ class TokenService {
 //
 //   return result.data;
 // };
-export const tokenService = new TokenService();
+exports.tokenService = new TokenService();

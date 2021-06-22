@@ -1,4 +1,7 @@
-export var PasswordActionType;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PasswordActionType = void 0;
+var PasswordActionType;
 (function (PasswordActionType) {
     PasswordActionType["StartReset"] = "START_RESET_PASSWORD";
     PasswordActionType["SuccessStartReset"] = "SUCCESS_START_RESET_PASSWORD";
@@ -10,4 +13,4 @@ export var PasswordActionType;
     PasswordActionType["SuccessUpdatePassword"] = "SUCCESS_UPDATE_PASSWORD";
     PasswordActionType["FailedUpdatePassword"] = "FAILED_UPDATE_PASSWORD";
     PasswordActionType["InvalidTokenReset"] = "INVALID_TOKEN_RESET";
-})(PasswordActionType || (PasswordActionType = {}));
+})(PasswordActionType = exports.PasswordActionType || (exports.PasswordActionType = {}));

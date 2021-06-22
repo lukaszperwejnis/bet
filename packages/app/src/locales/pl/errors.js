@@ -1,4 +1,7 @@
-export const errors = Object.freeze({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.errors = void 0;
+exports.errors = Object.freeze({
     'error.unknown': 'Ups, coś poszło nie tak',
     'error.unauthorized': 'Nieprawidłowy login lub hasło',
     'error.userNotFound': 'Użytkownik z takim mailem nie istnieje.',

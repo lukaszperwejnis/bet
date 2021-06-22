@@ -1,4 +1,7 @@
-export const signup = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.signup = void 0;
+exports.signup = {
     'signup.header': 'Założ konto',
     'signup.submit': 'Założ konto',
     'signup.error.invalidToken': 'Token do rejestracji jest nieprawidłowy',

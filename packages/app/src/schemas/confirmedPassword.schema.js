@@ -1,10 +1,32 @@
-import * as Yup from 'yup';
-import { translate } from '@utils';
-export const confirmedPasswordSchema = Yup.string()
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.confirmedPasswordSchema = void 0;
+const Yup = __importStar(require("yup"));
+const _utils_1 = require("@utils");
+exports.confirmedPasswordSchema = Yup.string()
     .ensure()
     .trim()
-    .required(translate('validation.confirmedPassword.required'))
-    .test('is-equal-to-password', translate('validation.passwordAreNotEqual'), function yupConfirmedPasswordCustomValidation() {
+    .required(_utils_1.translate('validation.confirmedPassword.required'))
+    .test('is-equal-to-password', _utils_1.translate('validation.passwordAreNotEqual'), function yupConfirmedPasswordCustomValidation() {
     if (!this.parent.password.length) {
         return true;
     }

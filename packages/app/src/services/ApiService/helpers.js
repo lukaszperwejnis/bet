@@ -1,11 +1,14 @@
-import { tokenService } from '../token.service';
-import { CONFIG } from '../../config';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getMappedRequestOptions = void 0;
+const token_service_1 = require("../token.service");
+const config_1 = require("../../config");
 // import { ErrorCodes } from '@constants';
 // import { cookieAuthService } from '@services';
 // import { MissingAuthTokenError } from '@errors';
 const baseHeaders = {
     'Content-Type': 'application/json',
-    Origin: CONFIG.API_URL,
+    Origin: config_1.CONFIG.API_URL,
     'Access-Control-Allow-Origin': '*',
 };
 // type ErrorsValidationReturnType = {
@@ -36,7 +39,7 @@ const baseHeaders = {
 //             !error.config.url.includes('login'),
 //     };
 // }
-export function getMappedRequestOptions(options) {
+function getMappedRequestOptions(options) {
     const { authRequired, requestConfig } = options;
     if (!authRequired && !requestConfig) {
         return {
@@ -46,10 +49,11 @@ export function getMappedRequestOptions(options) {
     if (!authRequired && requestConfig) {
         return Object.assign({ headers: Object.assign({}, baseHeaders) }, requestConfig);
     }
-    const token = tokenService.getAccessToken();
+    const token = token_service_1.tokenService.getAccessToken();
     console.log(token);
     if (!token) {
         throw new Error('Missing access token');
     }
     return Object.assign({ headers: Object.assign(Object.assign({}, baseHeaders), { Authorization: `Bearer ${token}` }) }, options.requestConfig);
 }
+exports.getMappedRequestOptions = getMappedRequestOptions;

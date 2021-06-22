@@ -1,3 +1,4 @@
+"use strict";
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -9,46 +10,49 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { jsx as _jsx } from "react/jsx-runtime";
-import { Dashboard as dashboard, LeftArrowAlt as leftArrow, DownArrow as downArrow, InfoCircle as infoCircle, PhoneIncoming as phoneIncoming, } from '@styled-icons/boxicons-solid';
-import { PlusCircle as plusCircle, LogOut as logout, Search as search, Menu as menu, TrashAlt as trash, } from '@styled-icons/boxicons-regular';
-import { Organization as organization } from '@styled-icons/octicons';
-import { Users as users, CircleWithCross as circleWithCross, Warning as warning, Image as image, } from '@styled-icons/entypo';
-import { Tick as tick } from '@styled-icons/typicons';
-import { EditOutline as edit } from '@styled-icons/evaicons-outline';
-import { ArrowsAltH as arrows } from '@styled-icons/fa-solid';
-import './styles.css';
-import { InvalidIconError } from '../../../../errors';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Icon = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const boxicons_solid_1 = require("@styled-icons/boxicons-solid");
+const boxicons_regular_1 = require("@styled-icons/boxicons-regular");
+const octicons_1 = require("@styled-icons/octicons");
+const entypo_1 = require("@styled-icons/entypo");
+const typicons_1 = require("@styled-icons/typicons");
+const evaicons_outline_1 = require("@styled-icons/evaicons-outline");
+const fa_solid_1 = require("@styled-icons/fa-solid");
+require("./styles.css");
+const errors_1 = require("../../../../errors");
 const Icons = {
-    dashboard,
-    leftArrow,
-    plusCircle,
-    organization,
-    menu,
-    users,
-    trash,
-    downArrow,
-    logout,
-    infoCircle,
-    circleWithCross,
-    warning,
-    tick,
-    search,
-    edit,
-    arrows,
-    image,
-    phoneIncoming,
+    dashboard: boxicons_solid_1.Dashboard,
+    leftArrow: boxicons_solid_1.LeftArrowAlt,
+    plusCircle: boxicons_regular_1.PlusCircle,
+    organization: octicons_1.Organization,
+    menu: boxicons_regular_1.Menu,
+    users: entypo_1.Users,
+    trash: boxicons_regular_1.TrashAlt,
+    downArrow: boxicons_solid_1.DownArrow,
+    logout: boxicons_regular_1.LogOut,
+    infoCircle: boxicons_solid_1.InfoCircle,
+    circleWithCross: entypo_1.CircleWithCross,
+    warning: entypo_1.Warning,
+    tick: typicons_1.Tick,
+    search: boxicons_regular_1.Search,
+    edit: evaicons_outline_1.EditOutline,
+    arrows: fa_solid_1.ArrowsAltH,
+    image: entypo_1.Image,
+    phoneIncoming: boxicons_solid_1.PhoneIncoming,
 };
-export const Icon = (_a) => {
+const Icon = (_a) => {
     var { className, icon, type, size } = _a, otherProps = __rest(_a, ["className", "icon", "type", "size"]);
     const IconComponent = Icons[icon];
     if (!IconComponent) {
-        throw new InvalidIconError(icon);
+        throw new errors_1.InvalidIconError(icon);
     }
     const classNames = ['icon', `icon--${type}`, `icon--${size}`, className].join(' ');
-    return _jsx(IconComponent, Object.assign({ className: classNames }, otherProps), void 0);
+    return jsx_runtime_1.jsx(IconComponent, Object.assign({ className: classNames }, otherProps), void 0);
 };
-Icon.defaultProps = {
+exports.Icon = Icon;
+exports.Icon.defaultProps = {
     type: 'default',
     size: 'normal',
 };

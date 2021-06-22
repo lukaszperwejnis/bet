@@ -1,6 +1,6 @@
 {
   "name": "@bet/server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripty": {
@@ -16,7 +16,7 @@
   "author": "lukaszperwejnis",
   "license": "ISC",
   "dependencies": {
-    "@bet/structures": "0.0.1",
+    "@bet/structures": "^0.0.2",
     "@hapi/joi": "^17.0.0",
     "@types/bcrypt": "^3.0.0",
     "@types/cors": "^2.8.6",

@@ -1,4 +1,4 @@
-import { Description, Error, Label, Wrapper } from "./components/index";
+import { Description, Error, Label, Wrapper } from "./components";
 import { Input } from "./Input";
 import { Radio } from "./Radio";
 import { ToggleSwitch } from "./ToggleSwitch";
@@ -12,7 +12,15 @@ export const FormComponents = {
   Wrapper,
 };
 
-export const FormField = {
+type FormFieldType = {
+  Input: any;
+  Radio: any;
+  ToggleSwitch: any;
+  Select: any;
+  Checkbox: any;
+};
+
+export const FormField: FormFieldType = {
   Input,
   Radio,
   ToggleSwitch,

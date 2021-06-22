@@ -8,7 +8,6 @@
       "@config": ["config/index.ts"],
       "@constants": ["constants/index.ts"],
       "@components": ["components/index.ts"],
-//      "@bet/ui-components": ["components/ui-components/components/index.ts"],
       "@hooks": ["hooks/index.ts"],
       "@pages": ["pages/index.ts"],
       "@schemas": ["schemas/index.ts"],

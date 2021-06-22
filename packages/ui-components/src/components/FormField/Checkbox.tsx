@@ -1,7 +1,7 @@
 import { useField } from "formik";
-import { Wrapper } from "./components/index";
+import { Wrapper } from "./components";
 import { Checkbox as CheckboxComponent } from "../Checkbox/Checkbox";
-import { RenderType, WithExcludedChildrenProps } from "../../types/index";
+import { RenderType, WithExcludedChildrenProps } from "../../types";
 
 interface FormFieldCheckboxProps extends WithExcludedChildrenProps {
   name: string;

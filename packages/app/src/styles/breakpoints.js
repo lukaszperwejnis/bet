@@ -1,4 +1,7 @@
-export const breakpoints = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.breakpoints = void 0;
+exports.breakpoints = {
     mobile: 'screen and (max-width: 44.9375rem)',
     mobileUp: 'screen and (min-width: 44.9375rem)',
     mobileLandscape: 'screen and (max-width: 44.9375rem) and (min-aspect-ratio: 121/80)',

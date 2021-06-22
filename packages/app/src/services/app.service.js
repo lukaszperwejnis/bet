@@ -1,29 +1,32 @@
-import { StorageKeys } from '@constants';
-import { tokenService } from './token.service';
-import { URLS } from '../urls';
-import { localStorageService } from './localStorage.service';
-import { ApiService } from './ApiService/ApiService';
-import { AuthProvider } from '../providers/AuthProvider';
-class AppService extends ApiService {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.userService = void 0;
+const _constants_1 = require("@constants");
+const token_service_1 = require("./token.service");
+const urls_1 = require("../urls");
+const localStorage_service_1 = require("./localStorage.service");
+const ApiService_1 = require("./ApiService/ApiService");
+const AuthProvider_1 = require("../providers/AuthProvider");
+class AppService extends ApiService_1.ApiService {
     constructor() {
         super(...arguments);
         this.setUser = (user) => {
-            localStorageService.set(StorageKeys.User, user);
+            localStorage_service_1.localStorageService.set(_constants_1.StorageKeys.User, user);
         };
-        this.getUser = () => localStorageService.get(StorageKeys.User);
-        this.validateInvitationToken = (token) => this.get(URLS.TOKENS.MAIL_INVITATION + token);
+        this.getUser = () => localStorage_service_1.localStorageService.get(_constants_1.StorageKeys.User);
+        this.validateInvitationToken = (token) => this.get(urls_1.URLS.TOKENS.MAIL_INVITATION + token);
         this.logout = () => {
-            tokenService.clearTokens();
-            localStorageService.remove(StorageKeys.User);
-            AuthProvider.getInstance().notify();
+            token_service_1.tokenService.clearTokens();
+            localStorage_service_1.localStorageService.remove(_constants_1.StorageKeys.User);
+            AuthProvider_1.AuthProvider.getInstance().notify();
         };
         this.isLoggedIn = () => {
             return [
-                StorageKeys.AccessToken,
-                StorageKeys.RefreshToken,
-                StorageKeys.User,
-            ].every((storageKey) => Boolean(localStorageService.get(storageKey)));
+                _constants_1.StorageKeys.AccessToken,
+                _constants_1.StorageKeys.RefreshToken,
+                _constants_1.StorageKeys.User,
+            ].every((storageKey) => Boolean(localStorage_service_1.localStorageService.get(storageKey)));
         };
     }
 }
-export const userService = new AppService();
+exports.userService = new AppService();

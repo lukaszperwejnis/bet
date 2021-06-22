@@ -7,7 +7,7 @@ import { useTranslation } from '@hooks';
 import { login } from '@stores/actions';
 import { StoreType } from '@stores/index';
 import { emailSchema, getRequiredStringSchema } from '@schemas';
-import { FormField } from '@bet/ui-components/src/components';
+import { FormField } from '@bet/ui-components';
 import { Page, PageTile, StyledForm, Submit } from '@components';
 import { PasswordRestLink, Error } from './styles';
 

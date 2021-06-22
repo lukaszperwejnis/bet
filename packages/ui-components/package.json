@@ -1,8 +1,12 @@
 {
   "name": "@bet/ui-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "UI components for react application",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripty": {
     "path": "../../scripts/packages"
   },
@@ -10,21 +14,13 @@
     "clean": "rimraf dist *.tsbuildinfo",
     "test": "scripty",
     "lint": "scripty",
-    "build": "webpack",
+    "build": "tsc --b",
     "test-coverage": "scripty",
     "start": "webpack serve",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lukaszperwejnis/ui-components.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lukaszperwejnis/ui-components/issues"
-  },
-  "homepage": "https://github.com/lukaszperwejnis/ui-components#readme",
   "dependencies": {
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-centered": "^5.3.19",
@@ -43,14 +39,14 @@
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.7",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/faker": "^5.5.6",
-    "@types/jest": "^26.0.14",
+    "@types/jest": "^26.0.23",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.13",
     "@types/styled-components": "^5.1.4",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
     "css-loader": "^5.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
@@ -67,7 +63,7 @@
     "eslint-plugin-react-hooks": "^4.1.2",
     "faker": "^5.1.0",
     "html-webpack-plugin": "^4.3.0",
-    "jest": "^26.6.3",
+    "jest": "^27.0.4",
     "jest-styled-components": "^7.0.3",
     "prettier": "^2.1.2",
     "source-map-loader": "^1.1.1",

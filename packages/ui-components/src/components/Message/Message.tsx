@@ -1,27 +1,25 @@
-import { useEffect } from "react";
-import { createPortal } from "react-dom";
+import { ReactElement, useEffect } from "react";
+import ReactDOM from "react-dom";
+import { Message as MessageStructure } from "../../types";
 import { Container, Success, Error, Warning, Info } from "./styles";
-import "./message.css";
 
 const defaultProps = Object.freeze({
   root: "message-root",
   duration: 3,
 });
 
-export type MessageType = "success" | "error" | "warning" | "info";
-
 type MessageComponentProps = {
-  type: MessageType;
+  type: MessageStructure.Type;
   text: string;
 };
 
 type MessageProps = typeof defaultProps & MessageComponentProps;
 
 const Icons = {
-  success: <Success icon="tick" />,
-  error: <Error icon="circleWithCross" />,
-  warning: <Warning icon="warning" />,
-  info: <Info icon="infoCircle" />,
+  [MessageStructure.Type.Success]: <Success icon="tick" />,
+  [MessageStructure.Type.Error]: <Error icon="circleWithCross" />,
+  [MessageStructure.Type.Warning]: <Warning icon="warning" />,
+  [MessageStructure.Type.Info]: <Info icon="infoCircle" />,
 };
 
 const MessageComponent = ({ type, text }: MessageComponentProps) => {
@@ -34,10 +32,24 @@ const MessageComponent = ({ type, text }: MessageComponentProps) => {
   );
 };
 
-export const Message = ({ root, ...otherProps }: MessageProps): JSX.Element => {
+export const Message = ({
+  root,
+  ...otherProps
+}: MessageProps): ReactElement => {
   const rootContainer = document.getElementById(root);
   const el = document.createElement("div");
   el.className = "c-message__root";
+  el.style.cssText =
+    "  position: fixed;\n" +
+    "  box-sizing: border-box;\n" +
+    "  padding: 0;\n" +
+    "  z-index: 1010;\n" +
+    "  top: 15px;\n" +
+    "  pointer-events: none;\n" +
+    "  display: flex;\n" +
+    "  justify-content: center;\n" +
+    "  left: 0;\n" +
+    "  right: 0;";
 
   useEffect(() => {
     if (rootContainer) {
@@ -51,7 +63,7 @@ export const Message = ({ root, ...otherProps }: MessageProps): JSX.Element => {
     };
   }, []);
 
-  return createPortal(<MessageComponent {...otherProps} />, el);
+  return ReactDOM.createPortal(<MessageComponent {...otherProps} />, el);
 };
 
 Message.defaultProps = defaultProps;

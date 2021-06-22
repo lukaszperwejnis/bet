@@ -1,29 +1,39 @@
-import { AuthActionType } from '@stores/types';
-export const login = (payload) => ({
-    type: AuthActionType.Login,
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.invalidTokenSignup = exports.failedSignup = exports.successSignup = exports.signup = exports.failedLogin = exports.successLogin = exports.login = void 0;
+const types_1 = require("@stores/types");
+const login = (payload) => ({
+    type: types_1.AuthActionType.Login,
     payload,
 });
-export const successLogin = (payload) => ({
-    type: AuthActionType.SuccessLogin,
+exports.login = login;
+const successLogin = (payload) => ({
+    type: types_1.AuthActionType.SuccessLogin,
     payload,
 });
-export const failedLogin = (payload) => ({
-    type: AuthActionType.FailedLogin,
+exports.successLogin = successLogin;
+const failedLogin = (payload) => ({
+    type: types_1.AuthActionType.FailedLogin,
     payload,
 });
-export const signup = (payload) => ({
-    type: AuthActionType.Signup,
+exports.failedLogin = failedLogin;
+const signup = (payload) => ({
+    type: types_1.AuthActionType.Signup,
     payload,
 });
-export const successSignup = () => ({
-    type: AuthActionType.SuccessSignup,
+exports.signup = signup;
+const successSignup = () => ({
+    type: types_1.AuthActionType.SuccessSignup,
     payload: null,
 });
-export const failedSignup = (payload) => ({
-    type: AuthActionType.FailedSignup,
+exports.successSignup = successSignup;
+const failedSignup = (payload) => ({
+    type: types_1.AuthActionType.FailedSignup,
     payload,
 });
-export const invalidTokenSignup = () => ({
-    type: AuthActionType.InvalidTokenSignup,
+exports.failedSignup = failedSignup;
+const invalidTokenSignup = () => ({
+    type: types_1.AuthActionType.InvalidTokenSignup,
     payload: true,
 });
+exports.invalidTokenSignup = invalidTokenSignup;

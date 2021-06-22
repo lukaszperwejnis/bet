@@ -1,3 +1,4 @@
+"use strict";
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -9,9 +10,11 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { jsx as _jsx } from "react/jsx-runtime";
-import { StyledButton } from './styles';
-export var ColorType;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Button = exports.ColorType = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const styles_1 = require("./styles");
+var ColorType;
 (function (ColorType) {
     ColorType["Primary"] = "primary";
     ColorType["Secondary"] = "secondary";
@@ -19,8 +22,9 @@ export var ColorType;
     ColorType["Warning"] = "warning";
     ColorType["Success"] = "success";
     ColorType["Empty"] = "empty";
-})(ColorType || (ColorType = {}));
-export const Button = (_a) => {
+})(ColorType = exports.ColorType || (exports.ColorType = {}));
+const Button = (_a) => {
     var { type = ColorType.Primary, htmlType = 'button' } = _a, otherProps = __rest(_a, ["type", "htmlType"]);
-    return (_jsx(StyledButton, Object.assign({ type: htmlType, colorType: type }, otherProps), void 0));
+    return (jsx_runtime_1.jsx(styles_1.StyledButton, Object.assign({ type: htmlType, colorType: type }, otherProps), void 0));
 };
+exports.Button = Button;

@@ -1,6 +1,6 @@
 {
   "name": "@bet/app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "scripty": {
     "path": "../../scripts/packages"
@@ -79,8 +79,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@bet/structures": "0.0.1",
-    "@bet/ui-components": "1.0.0",
+    "@bet/structures": "^0.0.2",
+    "@bet/ui-components": "^1.0.1",
     "axios": "^0.21.1",
     "formik": "^2.2.1",
     "history": "^4.10.1",

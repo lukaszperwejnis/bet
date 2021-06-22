@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { WithExcludedChildrenProps } from "../../types/index";
+import { WithExcludedChildrenProps } from "../../types";
 import { stylesConfig } from "../../styles/styles-config";
 
 export interface InputProps extends WithExcludedChildrenProps {
