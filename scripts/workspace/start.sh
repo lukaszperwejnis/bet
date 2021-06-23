@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-echo "┏━━━ 🚀️ START: server, app ━━━━━━━"
+echo "┏━━━ 🚀️ START: @bet/server and @bet/app ━━━━━━━"
 lerna run start --scope '{@bet/server,@bet/app}' --stream

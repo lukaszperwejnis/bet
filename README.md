@@ -8,7 +8,7 @@ REST API server (typescript, express.js, mongodb, mongoose)
 ###2) `@bet/structures` 
 package for shared structures in project (typescript)
 ###3) `@bet/app`
-client webapp (typescript, React, styled-components, redux, redux-saga)
+client webapp (typescript, react, styled-components, redux, redux-saga)
 ###4) `@bet/ui-components` 
 reusable components for client webapp (typescript, storybook, react, styled-components)
 
@@ -16,7 +16,8 @@ reusable components for client webapp (typescript, storybook, react, styled-comp
 1) You must have installed globally lerna `npm i -g lerna`
 2) Install all required dependencies by command `yarn` (scripty needs to be installed before you ran the app)
 3) Give access to your scripts files by command in root directory to be executable: `chmod -R +x scripts`
-4) To start server (port: 3010) and app (port: 4200) use `yarn start`
+4) Build all packages by `lerna run build`
+4) To start `@bet/server` (port: 3010) and `@bet/app` (port: 4200) use `yarn start`
 5) To start storybook from `@bet/ui-components` (port: 9001)  use `yarn storybook`
 
 ##Available workspace monorepo commands:
