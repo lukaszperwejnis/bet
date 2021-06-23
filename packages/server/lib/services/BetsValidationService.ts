@@ -1,13 +1,13 @@
+import { GameStage, GameStatus } from "@bet/structures";
 import { GameRepository } from "../Repository/GameRepository";
-import { GameStatuses } from "../enums/gameStatuses";
 import { Game } from "../structures/Game";
 import { GameBet } from "../structures/GameBet";
 import { RecalculateService } from "./RecalculateService";
 import { ChampionBet } from "../structures/ChampionBet";
-import { GameStages } from "../enums/gameStages";
 import { GameBetService } from "./GameBetService";
 import { ChampionBetService } from "./ChampionBetService";
 import { GameService } from "./GameService";
+import {Bet} from "../structures/Bet";
 
 export class BetsValidationService {
   private gameRepository = new GameRepository();
@@ -16,9 +16,9 @@ export class BetsValidationService {
   private championBetService = new ChampionBetService();
   private recalculateService = new RecalculateService();
 
-  public async validateMatchBets() {
+  async validateMatchBets() {
     const gameStagesToValidate: string[] = await this.getGameStagesToValidate();
-    let updatedBets = [];
+    let updatedBets: Bet[] = [];
 
     if (!gameStagesToValidate.length) {
       return;
@@ -35,9 +35,10 @@ export class BetsValidationService {
     const updatedGameBets: GameBet[] = await this.gameBetService.updateBetsByGames(
       updatedGames
     );
+
     updatedBets = [...updatedGameBets];
 
-    if (gameStagesToValidate.includes(GameStages.FINAL)) {
+    if (gameStagesToValidate.includes(GameStage.Final)) {
       const updatedChampionBets: ChampionBet[] = await this.championBetService.updateBets();
       updatedBets = [...updatedBets, ...updatedChampionBets];
     }
@@ -46,15 +47,15 @@ export class BetsValidationService {
       return;
     }
 
-    const updatedUsers = await this.recalculateService.recalculateUsersScores(
-      updatedBets.map(({ createdBy }) => createdBy._id)
+    await this.recalculateService.recalculateUsersScores(
+      updatedBets.map(({createdBy}) => createdBy._id)
     );
   }
 
   private async getGameStagesToValidate(): Promise<string[]> {
     const stages = await this.gameRepository
       .getMany({
-        status: GameStatuses.SCHEDULED,
+        status: GameStatus.Scheduled,
       })
       .then((data) => data.map((game) => game.stage));
 

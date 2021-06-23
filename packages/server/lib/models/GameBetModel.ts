@@ -1,6 +1,6 @@
-import * as mongoose from "mongoose";
-import { WinnerTypes } from "../enums/winnerTypes";
-import { BetStatuses } from "../enums/betStatuses";
+import mongoose from "mongoose";
+import { BetStatus } from "@bet/structures";
+import { WinnerType } from "../enums";
 
 const gameBetSchema = new mongoose.Schema(
   {
@@ -17,7 +17,7 @@ const gameBetSchema = new mongoose.Schema(
     bet: {
       required: true,
       type: String,
-      enum: [WinnerTypes.HOME_TEAM, WinnerTypes.DRAW, WinnerTypes.AWAY_TEAM],
+      enum: [WinnerType.HomeTeam, WinnerType.Draw, WinnerType.AwayTeam],
     },
     homeScore: {
       required: true,
@@ -29,8 +29,8 @@ const gameBetSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: [BetStatuses.SCHEDULED, BetStatuses.FINISHED],
-      default: BetStatuses.SCHEDULED,
+      enum: [BetStatus.Scheduled, BetStatus.Finished],
+      default: BetStatus.Scheduled,
     },
     hasWinner: {
       type: Boolean,

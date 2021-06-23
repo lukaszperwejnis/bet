@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { Controller } from "./Controller";
-import { IGetUserAuthInfoRequest } from "../interfaces/GetUserAuthInfoRequest";
+import { GetUserAuthInfoRequest } from "../interfaces/GetUserAuthInfoRequest";
 import { GameBetService } from "../services/GameBetService";
 
 export class GameBetController extends Controller {
@@ -15,7 +15,7 @@ export class GameBetController extends Controller {
   }
 
   async createOne(
-    req: IGetUserAuthInfoRequest,
+    req: GetUserAuthInfoRequest,
     res: Response,
     next: NextFunction
   ) {
@@ -37,7 +37,7 @@ export class GameBetController extends Controller {
   }
 
   async getMany(
-    req: IGetUserAuthInfoRequest,
+    req: GetUserAuthInfoRequest,
     res: Response,
     next: NextFunction
   ) {

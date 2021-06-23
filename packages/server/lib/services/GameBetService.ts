@@ -1,9 +1,9 @@
+import {BetStatus} from "@bet/structures";
+import * as Joi from "@hapi/joi";
 import { Game } from "../structures/Game";
 import { GameBet } from "../structures/GameBet";
-import { BetStatuses } from "../enums/betStatuses";
 import { GameBetRepository } from "../Repository/GameBetRepository";
 import { GameRepository } from "../Repository/GameRepository";
-import * as Joi from "@hapi/joi";
 import { VALIDATION_SCHEMA_KEYS } from "../constants/validationSchemaKeys";
 import {
   BetAlredyExistError,
@@ -122,7 +122,7 @@ export class GameBetService {
           hasTeamsScores:
             bet.gameRecord.homeScore === bet.homeScore &&
             bet.gameRecord.awayScore === bet.awayScore,
-          status: BetStatuses.FINISHED,
+          status: BetStatus.Finished,
         }
       );
 
@@ -143,7 +143,7 @@ export class GameBetService {
 
     const gameIds = gameBets.map((gameBets) => gameBets.gameId);
     const availableGamesIds = availableGames.map((availableGame) =>
-      availableGame._id.toString()
+        (availableGame._id as any).toString()
     );
 
     return gameIds.every((gameId) => availableGamesIds.includes(gameId));

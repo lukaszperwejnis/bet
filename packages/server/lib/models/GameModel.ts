@@ -1,8 +1,7 @@
 import * as mongoose from "mongoose";
-import { GameStatuses } from "../enums/gameStatuses";
-import { CreationTypes } from "../enums/creationTypes";
-import { WinnerTypes } from "../enums/winnerTypes";
-import { Competitions } from "../enums/competitions";
+import {Competition, GameStatus} from "@bet/structures";
+import {CreationType, WinnerType} from "../enums";
+import {Game} from "../structures/Game";
 
 const gameSchema = new mongoose.Schema(
   {
@@ -14,8 +13,8 @@ const gameSchema = new mongoose.Schema(
     externalId: {
       type: Number,
       required: [
-        function () {
-          return this.creationType !== CreationTypes.EXTERNAL;
+        function (this: Game) {
+          return this.creationType !== CreationType.External;
         },
       ],
     },
@@ -23,13 +22,13 @@ const gameSchema = new mongoose.Schema(
       type: String,
       enum: [
         null,
-        WinnerTypes.HOME_TEAM,
-        WinnerTypes.DRAW,
-        WinnerTypes.AWAY_TEAM,
+        WinnerType.HomeTeam,
+        WinnerType.Draw,
+        WinnerType.AwayTeam,
       ],
       required: [
-        function () {
-          return this.status === GameStatuses.FINISHED;
+        function (this: Game) {
+          return this.status === GameStatus.Finished;
         },
       ],
     },
@@ -39,8 +38,8 @@ const gameSchema = new mongoose.Schema(
     },
     competition: {
       type: String,
-      enum: [Competitions.UEFA_CHAMPIONS_LEAGUE],
-      default: Competitions.UEFA_CHAMPIONS_LEAGUE,
+      enum: [Competition.UefaChampionsLeague],
+      default: Competition.UefaChampionsLeague,
     },
     homeTeam: {
       required: true,
@@ -60,13 +59,13 @@ const gameSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: [GameStatuses.SCHEDULED, GameStatuses.FINISHED],
-      default: GameStatuses.SCHEDULED,
+      enum: [GameStatus.Scheduled, GameStatus.Finished],
+      default: GameStatus.Scheduled,
     },
     creationType: {
       type: String,
-      enum: [CreationTypes.MANUAL, CreationTypes.EXTERNAL],
-      default: CreationTypes.EXTERNAL,
+      enum: [CreationType.Manual, CreationType.External],
+      default: CreationType.External,
     },
     scheduledDate: {
       type: Date,

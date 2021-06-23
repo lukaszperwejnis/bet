@@ -1,11 +1,9 @@
+import {Competition, GameStatus} from "@bet/structures";
 import { TeamRepository } from "../Repository/TeamRepository";
-import { CreationTypes } from "../enums/creationTypes";
-import { GameStatuses } from "../enums/gameStatuses";
+import { CreationType, WinnerType } from "../enums";
 import { GameRepository } from "../Repository/GameRepository";
-import { WinnerTypes } from "../enums/winnerTypes";
 import { Team } from "../structures/Team";
 import { Game } from "../structures/Game";
-import { Competitions } from "../enums/competitions";
 import { ExternalGamesService } from "./ExternalGamesService";
 import {
   FieldValidationError,
@@ -19,15 +17,15 @@ import { VALIDATION_SCHEMA_KEYS } from "../constants/validationSchemaKeys";
 import { mapSchemaValidationErrors } from "../helpers/mapSchemaValidationErrors";
 
 export class TeamService {
-  private readonly competition: Competitions;
+  private readonly competition: Competition;
   private teamRepository = new TeamRepository();
   private gameRepository = new GameRepository();
   private externalGameService = new ExternalGamesService();
 
-  constructor(competition?: Competitions) {
+  constructor(competition?: Competition) {
     this.competition = competition
       ? competition
-      : Competitions.UEFA_CHAMPIONS_LEAGUE;
+      : Competition.UefaChampionsLeague;
   }
 
   async getOneById(id: string): Promise<Team> {
@@ -66,30 +64,29 @@ export class TeamService {
 
   async addTeamsToDatabase() {
     const teams: Team[] = await this.getTeamsFromExternalAPI();
-    const createdTeams = await this.insertTeamsToDatabase(teams);
-    // if (createdTeams.length) {
-    //     console.log({createdTeams});
-    // }
+    await this.insertTeamsToDatabase(teams);
   }
 
   private getTeamsFromExternalAPI(): Promise<Team[]> {
     return this.externalGameService.getScheduledGames().then((data) => {
-      return data.reduce((accu, { homeTeam, awayTeam }) => {
-        accu.push(
-          {
-            name: homeTeam.name,
-            externalId: homeTeam.externalId,
-            creationType: CreationTypes.EXTERNAL,
-          },
-          {
-            name: awayTeam.name,
-            externalId: awayTeam.externalId,
-            creationType: CreationTypes.EXTERNAL,
-          }
-        );
-
-        return accu;
-      }, []);
+      console.log(data);
+      return [];
+      // return data.reduce((accu, { homeTeam, awayTeam }) => {
+      //   accu.push(
+      //     {
+      //       name: homeTeam.name,
+      //       externalId: homeTeam.externalId,
+      //       creationType: CreationType.External,
+      //     },
+      //     {
+      //       name: awayTeam.name,
+      //       externalId: awayTeam.externalId,
+      //       creationType: CreationType.External,
+      //     }
+      //   );
+      //
+      //   return accu;
+      // }, []);
     });
   }
 
@@ -108,11 +105,11 @@ export class TeamService {
     return addedTeams;
   }
 
-  public async getCompetitionWinner(): Promise<Team> {
+  async getCompetitionWinner(): Promise<Team | null> {
     const finalGame: Game = await this.gameRepository.getOne({
       competition: this.competition,
       stage: "FINAL",
-      status: GameStatuses.FINISHED,
+      status: GameStatus.Finished,
     });
 
     if (!finalGame) {
@@ -120,7 +117,7 @@ export class TeamService {
     }
 
     const winnerTeamId =
-      finalGame.winner === WinnerTypes.HOME_TEAM
+      finalGame.winner === WinnerType.HomeTeam
         ? finalGame.homeTeam
         : finalGame.awayTeam;
     return await this.teamRepository.getOne({

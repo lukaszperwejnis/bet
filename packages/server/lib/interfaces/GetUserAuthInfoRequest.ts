@@ -1,5 +1,6 @@
 import { Request } from "express";
-import { User } from "../structures/User";
-export interface IGetUserAuthInfoRequest extends Request {
-  user: User;
+import { User } from "@bet/structures";
+
+export interface GetUserAuthInfoRequest extends Request {
+  user: User.User;
 }

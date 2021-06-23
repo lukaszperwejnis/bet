@@ -1,7 +1,6 @@
+import {GameStatus} from "@bet/structures";
 import { Team } from "./Team";
-import { GameStatuses } from "../enums/gameStatuses";
-import { WinnerTypes } from "../enums/winnerTypes";
-import { CreationTypes } from "../enums/creationTypes";
+import { WinnerType, CreationType} from "../enums";
 
 export declare class Game {
   readonly _id?: string;
@@ -10,9 +9,9 @@ export declare class Game {
   readonly awayTeam: Team;
   readonly homeScore?: number;
   readonly awayScore?: number;
-  readonly status: GameStatuses;
+  readonly status: GameStatus;
   readonly stage: string;
   readonly scheduledDate: Date;
-  readonly winner?: WinnerTypes;
-  readonly creationType: CreationTypes;
+  readonly winner?: WinnerType;
+  readonly creationType: CreationType;
 }

@@ -1,6 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import { Controller } from "./Controller";
-import { IGetUserAuthInfoRequest } from "../interfaces/GetUserAuthInfoRequest";
+import { GetUserAuthInfoRequest } from "../interfaces/GetUserAuthInfoRequest";
 import { ChampionBetService } from "../services/ChampionBetService";
 
 export class ChampionBetController extends Controller {
@@ -13,7 +13,7 @@ export class ChampionBetController extends Controller {
     this.createOne = this.createOne.bind(this);
   }
 
-  public async getOne(req: Request, res: Response, next: NextFunction) {
+  async getOne(req: Request, res: Response, next: NextFunction) {
     try {
       const doc = await this.championBetService.getOneById(req.params.id);
       return this.ok(res, doc);
@@ -22,8 +22,8 @@ export class ChampionBetController extends Controller {
     }
   }
 
-  public async createOne(
-    req: IGetUserAuthInfoRequest,
+  async createOne(
+    req: GetUserAuthInfoRequest,
     res: Response,
     next: NextFunction
   ) {

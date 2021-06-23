@@ -1,7 +1,7 @@
-import * as express from "express";
+import express from "express";
 import * as bodyParser from "body-parser";
-import * as morgan from "morgan";
-import * as cors from "cors";
+import morgan from "morgan";
+import cors from "cors";
 import { connectToDatabase } from "./db";
 import { ProtectMiddleware } from "./Middlewares/ProtectMiddleware";
 import {
@@ -45,8 +45,8 @@ export class App {
     this.app.use(bodyParser.json());
     this.app.use(morgan("dev"));
     this.app.use(cors());
-    this.app.options("*", cors());
-    this.app.use("/api", new ProtectMiddleware().protect);
+    this.app.options("*", cors() as any);
+    this.app.use("/api", new ProtectMiddleware().protect as any);
   }
 
   private initRoutes(): void {

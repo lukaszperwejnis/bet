@@ -1,7 +1,8 @@
+import * as Joi from "@hapi/joi";
+import { BetStatus } from "@bet/structures";
 import { ChampionBet } from "../structures/ChampionBet";
 import { TeamService } from "./TeamService";
 import { ChampionBetRepository } from "../Repository/ChampionBetRepository";
-import { BetStatuses } from "../enums/betStatuses";
 import { Team } from "../structures/Team";
 import { TeamRepository } from "../Repository/TeamRepository";
 import { compareObjectsIds } from "../helpers/compareObjectIds";
@@ -15,7 +16,6 @@ import {
   TeamNotFoundError,
 } from "../errors";
 import { isValidObjectId } from "../helpers/isValidObjectId";
-import * as Joi from "@hapi/joi";
 import { VALIDATION_SCHEMA_KEYS } from "../constants/validationSchemaKeys";
 import { mapSchemaValidationErrors } from "../helpers/mapSchemaValidationErrors";
 
@@ -38,16 +38,19 @@ export class ChampionBetService {
     });
 
     const { error } = schema.validate(input);
+
     if (error) {
       throw new FieldValidationError(mapSchemaValidationErrors(error.details));
     }
 
     const bet = await this.championBetRepository.getOne({ createdBy: userId });
+
     if (bet) {
       throw new BetAlredyExistError(input.teamId);
     }
 
     const team = await this.teamRepository.findById(input.teamId);
+
     if (!team) {
       throw new TeamNotFoundError(input.teamId);
     }
@@ -73,15 +76,20 @@ export class ChampionBetService {
 
   async updateBets(): Promise<ChampionBet[]> {
     const updatedBets: ChampionBet[] = [];
-    const competitionWinner: Team = await this.teamService.getCompetitionWinner();
+    const competitionWinner = await this.teamService.getCompetitionWinner();
+
+    if (!competitionWinner) {
+      return [];
+    }
+
     const championBets: ChampionBet[] = await this.championBetRepository.getMany(
       {
-        status: BetStatuses.SCHEDULED,
+        status: BetStatus.Scheduled,
       }
     );
 
     for (let championBet of championBets) {
-      const betTeam: Team = await this.teamRepository.findById(championBet.bet._id);
+      const betTeam = await this.teamRepository.findById(championBet.bet._id);
       const bet: ChampionBet = await this.championBetRepository.findOneAndUpdate(
         { _id: championBet._id },
         {
@@ -89,7 +97,7 @@ export class ChampionBetService {
             betTeam._id,
             competitionWinner._id
           ),
-          status: BetStatuses.FINISHED,
+          status: BetStatus.Finished,
         }
       );
 
@@ -103,16 +111,20 @@ export class ChampionBetService {
     const championBet: ChampionBet = await this.championBetRepository.getOne({
       createdBy: userId,
     });
+
     if (championBet) {
       return [];
     }
 
     const scheduledGames: Game[] = await this.gameRepository.getMany({
-      status: BetStatuses.SCHEDULED,
+      status: BetStatus.Scheduled,
     });
-    const teamIds = scheduledGames.reduce((acc, { homeTeam, awayTeam }) => {
-      acc.push(homeTeam, awayTeam);
-      return acc;
+    const teamIds = scheduledGames.reduce((acc: Team[], { homeTeam, awayTeam }) => {
+      return [
+          ...acc,
+          homeTeam,
+          awayTeam
+      ];
     }, []);
 
     return await this.teamRepository.getMany({ _id: { $in: teamIds } });
@@ -136,7 +148,7 @@ export class ChampionBetService {
   getOneByUserId(userId: string): Promise<ChampionBet> {
     return this.championBetRepository.getOne({
       createdBy: userId,
-      status: BetStatuses.SCHEDULED,
+      status: BetStatus.Scheduled,
     });
   }
 }

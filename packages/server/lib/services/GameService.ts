@@ -1,13 +1,12 @@
+import { BetStatus, GameStatus } from "@bet/structures";
 import { TeamRepository } from "../Repository/TeamRepository";
-import { CreationTypes } from "../enums/creationTypes";
+import { CreationType } from "../enums";
 import { GameRepository } from "../Repository/GameRepository";
 import { Game } from "../structures/Game";
 import { ExternalGame } from "../interfaces/ExternalGame";
 import { ExternalGamesService } from "./ExternalGamesService";
-import { GameStatuses } from "../enums/gameStatuses";
 import { GameBet } from "../structures/GameBet";
 import { GameBetRepository } from "../Repository/GameBetRepository";
-import { BetStatuses } from "../enums/betStatuses";
 
 export class GameService {
   private gameRepository = new GameRepository();
@@ -18,12 +17,7 @@ export class GameService {
   async addScheduledMatchesToDatabase() {
     const scheduledGames: ExternalGame[] = await this.externalGamesService.getScheduledGames();
     const gamesToAdd: Game[] = await this.mapToGames(scheduledGames);
-    const createdMatches: Game[] = await this.createGames(gamesToAdd);
-    if (createdMatches.length) {
-      // console.log({
-      //     createdMatches
-      // });
-    }
+    await this.createGames(gamesToAdd);
   }
 
   private mapToGames(matches: ExternalGame[]): Promise<Game[]> {
@@ -37,7 +31,7 @@ export class GameService {
         });
         return {
           ...values,
-          creationType: CreationTypes.EXTERNAL,
+          creationType: CreationType.External,
           homeTeam: homeTeamDoc,
           awayTeam: awayTeamDoc,
           winner: score.winner,
@@ -67,7 +61,7 @@ export class GameService {
     const finishedGames = await this.externalGamesService
       .getGamesByStages(stages.join(","))
       .then((data) =>
-        data.filter((game) => game.status === GameStatuses.FINISHED)
+        data.filter((game) => game.status === GameStatus.Finished)
       );
 
     if (!finishedGames.length) {
@@ -79,7 +73,7 @@ export class GameService {
       const updatedGame: Game = await this.gameRepository.findOneAndUpdate(
         {
           externalId: finishedGame.externalId,
-          status: GameStatuses.SCHEDULED,
+          status: GameStatus.Scheduled,
         },
         {
           homeScore: finishedGame.score.fullTime.homeTeam,
@@ -97,7 +91,7 @@ export class GameService {
 
   async getAvailableByUserId(userId: string): Promise<Game[]> {
     const userGameBets: GameBet[] = await this.gameBetRepository.getMany({
-      status: BetStatuses.SCHEDULED,
+      status: BetStatus.Scheduled,
       createdBy: userId,
     });
 
@@ -105,7 +99,7 @@ export class GameService {
       _id: {
         $nin: userGameBets.map((el) => el.game._id),
       },
-      status: GameStatuses.SCHEDULED,
+      status: GameStatus.Scheduled,
     });
 
     const pipeline = [
@@ -132,7 +126,7 @@ export class GameService {
           _id: {
             $nin: userGameBets.map((el) => el.game._id),
           },
-          status: GameStatuses.SCHEDULED,
+          status: GameStatus.Scheduled,
           "homeTeam._id": { $in: games.map((el) => el.homeTeam) },
           "awayTeam._id": { $in: games.map((el) => el.awayTeam) },
         },

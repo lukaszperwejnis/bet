@@ -1,16 +1,16 @@
+import {Competition} from "@bet/structures";
 import { ExternalGame } from "../interfaces/ExternalGame";
-import { Competitions } from "../enums/competitions";
 import config from "../config";
 
 const fetch = require("node-fetch");
 
 export class ExternalGamesService {
-  private readonly competition: Competitions;
+  private readonly competition: Competition;
 
-  constructor(competition?: Competitions) {
+  constructor(competition?: Competition) {
     this.competition = competition
       ? competition
-      : Competitions.UEFA_CHAMPIONS_LEAGUE;
+      : Competition.UefaChampionsLeague;
   }
 
   private getGames(filters?: string) {
@@ -21,18 +21,20 @@ export class ExternalGamesService {
         headers: { "x-auth-token": config.externalAPIAuthToken },
       }
     )
-      .then((res) => res.json())
-      .then((json) => mapDataToExternalGames(json));
+      .then((res: any) => res.json())
+      .then((json: any) => mapDataToExternalGames(json));
   }
 
-  public async getGamesByStages(stage: string): Promise<ExternalGame[]> {
+  async getGamesByStages(stage: string): Promise<ExternalGame[]> {
     //todo
     const filterQuery = `stage=${stage}`;
     //const filterQuery = `season=2018&stage=${stage}`;
-    return this.getGames(filterQuery);
+    const games = this.getGames(filterQuery);
+    console.log(games);
+    return games;
   }
 
-  public async getScheduledGames(): Promise<ExternalGame[]> {
+  async getScheduledGames(): Promise<ExternalGame[]> {
     //todo
     const filterQuery = `status=SCHEDULED`;
     // const filterQuery = `season=2018`;
@@ -41,8 +43,7 @@ export class ExternalGamesService {
 }
 
 function mapDataToExternalGames(data: any = []): ExternalGame[] {
-  return data.matches.map((match) => {
-    return {
+  return data.matches.map((match: any) => ({
       externalId: match.id,
       scheduledDate: match.utcDate,
       stage: match.stage,
@@ -57,6 +58,5 @@ function mapDataToExternalGames(data: any = []): ExternalGame[] {
       },
       competition: data.competition.code,
       score: match.score,
-    };
-  });
+    }));
 }

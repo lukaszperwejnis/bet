@@ -1,13 +1,12 @@
+import { BetStatus } from "@bet/structures";
 import { UserRepository } from "../Repository/UserRepository";
 import { User } from "../structures/User";
 import { GameBet } from "../structures/GameBet";
 import { GameBetRepository } from "../Repository/GameBetRepository";
-import { BetStatuses } from "../enums/betStatuses";
 import { ChampionBetRepository } from "../Repository/ChampionBetRepository";
 import { ChampionBet } from "../structures/ChampionBet";
-import { ScoreValues } from "../enums/scoreValues";
 import { TeamService } from "./TeamService";
-import { Team } from "../structures/Team";
+import {ScoreValue} from "../enums";
 
 export class RecalculateService {
   private userRepository = new UserRepository();
@@ -15,21 +14,21 @@ export class RecalculateService {
   private championBetRepository = new ChampionBetRepository();
   private teamService = new TeamService();
 
-  public async recalculateUsersScores(usersIds: string[]): Promise<User[]> {
+  async recalculateUsersScores(usersIds: string[]): Promise<User[]> {
     const updatedUsers: User[] = [];
     for (let userId of usersIds) {
       let score = 0;
       const betsQuery = {
-        status: BetStatuses.FINISHED,
+        status: BetStatus.Finished,
         createdBy: userId,
       };
 
-      const gameBets: GameBet[] = await this.gameBetRepository.getMany(
+      const gameBets = await this.gameBetRepository.getMany(
         betsQuery
       );
-      const competitionWinner: Team = await this.teamService.getCompetitionWinner();
+      const competitionWinner = await this.teamService.getCompetitionWinner();
 
-      score = this.countScoreFromGameBets(gameBets);
+      score = RecalculateService.countScoreFromGameBets(gameBets);
 
       if (competitionWinner) {
         const championBet: ChampionBet = await this.championBetRepository.getOne(
@@ -37,7 +36,7 @@ export class RecalculateService {
         );
         score =
           championBet && championBet.hasChampionCorrect
-            ? score + ScoreValues.HAS_CHAMPION_SCORE
+            ? score + ScoreValue.HasChampionScore
             : score;
       }
 
@@ -51,15 +50,15 @@ export class RecalculateService {
     return updatedUsers;
   }
 
-  private countScoreFromGameBets(gameBets: GameBet[]): number {
+  private static countScoreFromGameBets(gameBets: GameBet[]): number {
     let score = 0;
     for (let { hasWinner, hasTeamsScores } of gameBets) {
       if (hasWinner) {
-        score += ScoreValues.HAS_WINNER;
+        score += ScoreValue.HasWinner;
       }
 
       if (hasTeamsScores) {
-        score += ScoreValues.HAS_TEAMS_SCORES;
+        score += ScoreValue.HasTeamScores;
       }
     }
 

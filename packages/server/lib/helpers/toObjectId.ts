@@ -1,9 +1,5 @@
-import * as mongoose from "mongoose";
+import mongoose from "mongoose";
 
-export function toObjectId(id): mongoose.Types.ObjectId {
-  if (!id) {
-    return null;
-  }
-
+export function toObjectId(id: string): mongoose.Types.ObjectId {
   return mongoose.Types.ObjectId(id);
 }

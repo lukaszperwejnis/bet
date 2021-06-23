@@ -1,15 +1,15 @@
-import { WinnerTypes } from "../enums/winnerTypes";
+import { WinnerType } from "../enums";
 
 export function gameWinnerTypeByScores(
   homeScore: number,
   awayScore: number
-): WinnerTypes {
+): WinnerType {
   switch (true) {
     case homeScore > awayScore:
-      return WinnerTypes.HOME_TEAM;
+      return WinnerType.HomeTeam;
     case awayScore > homeScore:
-      return WinnerTypes.AWAY_TEAM;
+      return WinnerType.AwayTeam;
     default:
-      return WinnerTypes.DRAW;
+      return WinnerType.Draw;
   }
 }

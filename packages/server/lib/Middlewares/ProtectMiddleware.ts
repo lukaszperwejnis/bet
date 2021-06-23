@@ -1,5 +1,5 @@
 import { Response, NextFunction } from "express";
-import { IGetUserAuthInfoRequest } from "../interfaces/GetUserAuthInfoRequest";
+import { GetUserAuthInfoRequest } from "../interfaces/GetUserAuthInfoRequest";
 import { UnauthorizedError } from "../errors";
 import { UserService } from "../services/UserService";
 import { TokenService } from "../services/TokenService";
@@ -13,7 +13,7 @@ export class ProtectMiddleware {
   }
 
   async protect(
-    req: IGetUserAuthInfoRequest,
+    req: GetUserAuthInfoRequest,
     res: Response,
     next: NextFunction
   ): Promise<void> {

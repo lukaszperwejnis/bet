@@ -1,5 +1,5 @@
-import * as nodemailer from "nodemailer";
-import * as nodeMailerMailgun from "nodemailer-mailgun-transport";
+import nodemailer from "nodemailer";
+import nodeMailerMailgun from "nodemailer-mailgun-transport";
 import * as Joi from "@hapi/joi";
 import config from "../config";
 import {

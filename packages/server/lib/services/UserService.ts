@@ -1,3 +1,4 @@
+import {Password, Signin, User, Signup} from "@bet/structures";
 import * as bcrypt from "bcrypt";
 import { mapSchemaValidationErrors } from "../helpers/mapSchemaValidationErrors";
 import * as Joi from "@hapi/joi";
@@ -6,16 +7,12 @@ import { UserRepository } from "../Repository/UserRepository";
 import { UserNotFoundError } from "../errors/UserNotFoundError";
 import { PasswordMatchPreviousError } from "../errors/PasswordMatchPreviousError";
 import { TokenService } from "./TokenService";
-import {Password, Signin, User, Signup} from "@bet/structures";
 import {
   FieldValidationError,
   UnauthorizedError,
   UserAlreadyExistError,
   UserByEmailNotFoundError,
 } from "../errors";
-
-// TODO structures package
-
 
 export class UserService {
   private userRepository = new UserRepository();
@@ -65,7 +62,7 @@ export class UserService {
       throw new FieldValidationError(mapSchemaValidationErrors(error.details));
     }
 
-    const { password, ...user }: User.User = await this.userRepository.findOne(
+    const { password, ...user } = await this.userRepository.findOne(
       { email: input.email },
       true
     );

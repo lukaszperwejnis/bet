@@ -1,8 +1,7 @@
 {
+  "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "esnext",
-    "moduleResolution": "node",
+    "composite": true,
     "pretty": true,
     "sourceMap": true,
     "outDir": "./dist",
@@ -13,3 +12,4 @@
   "include": ["lib/**/*.*"],
   "exclude": ["node_modules"]
 }
+

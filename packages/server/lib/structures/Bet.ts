@@ -1,10 +1,8 @@
-import { Competitions } from "../enums/competitions";
-import { User } from "./User";
-import { BetStatuses } from "../enums/betStatuses";
+import { BetStatus, Competition, User } from "@bet/structures";
 
 export declare class Bet {
   readonly _id?: string;
-  readonly competition: Competitions;
-  readonly status: BetStatuses;
-  readonly createdBy: User;
+  readonly competition: Competition;
+  readonly status: BetStatus;
+  readonly createdBy: User.User;
 }

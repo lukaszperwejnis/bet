@@ -1,5 +1,6 @@
 import * as mongoose from "mongoose";
-import { CreationTypes } from "../enums/creationTypes";
+import { CreationType } from "../enums";
+import {Team} from "../structures/Team";
 
 const teamSchema = new mongoose.Schema(
   {
@@ -11,8 +12,8 @@ const teamSchema = new mongoose.Schema(
     externalId: {
       type: Number,
       required: [
-        function () {
-          return this.creationType !== CreationTypes.EXTERNAL;
+        function (this: Team) {
+          return this.creationType !== CreationType.External;
         },
       ],
     },
@@ -25,8 +26,8 @@ const teamSchema = new mongoose.Schema(
     },
     creationType: {
       type: String,
-      enum: [CreationTypes.MANUAL, CreationTypes.EXTERNAL],
-      default: CreationTypes.EXTERNAL,
+      enum: [CreationType.Manual, CreationType.External],
+      default: CreationType.External,
     },
   },
   {

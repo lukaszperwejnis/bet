@@ -1,9 +1,9 @@
 import { NextFunction, Response } from "express";
 import { Controller } from "./Controller";
-import { IGetUserAuthInfoRequest } from "../interfaces/GetUserAuthInfoRequest";
+import { GetUserAuthInfoRequest } from "../interfaces/GetUserAuthInfoRequest";
 import { BetService } from "../services/BetService";
 
-interface CreateBetsRequest extends IGetUserAuthInfoRequest {
+interface CreateBetsRequest extends GetUserAuthInfoRequest {
   body: Partial<{
     games: {
       gameId: string;
@@ -27,7 +27,7 @@ export class BetController extends Controller {
   }
 
   async getAvailable(
-    req: IGetUserAuthInfoRequest,
+    req: GetUserAuthInfoRequest,
     res: Response,
     next: NextFunction
   ) {
@@ -52,7 +52,7 @@ export class BetController extends Controller {
   }
 
   async getUserBets(
-    req: IGetUserAuthInfoRequest,
+    req: GetUserAuthInfoRequest,
     res: Response,
     next: NextFunction
   ) {

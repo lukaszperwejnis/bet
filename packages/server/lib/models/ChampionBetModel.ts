@@ -1,6 +1,5 @@
-import * as mongoose from "mongoose";
-import { Competitions } from "../enums/competitions";
-import { BetStatuses } from "../enums/betStatuses";
+import mongoose from "mongoose";
+import { BetStatus, Competition } from "@bet/structures";
 
 const championBetSchema = new mongoose.Schema(
   {
@@ -16,13 +15,13 @@ const championBetSchema = new mongoose.Schema(
     },
     competition: {
       type: String,
-      enum: [Competitions.UEFA_CHAMPIONS_LEAGUE],
-      default: Competitions.UEFA_CHAMPIONS_LEAGUE,
+      enum: [Competition.UefaChampionsLeague],
+      default: Competition.UefaChampionsLeague,
     },
     status: {
       type: String,
-      enum: [BetStatuses.SCHEDULED, BetStatuses.FINISHED],
-      default: BetStatuses.SCHEDULED,
+      enum: [BetStatus.Scheduled, BetStatus.Finished],
+      default: BetStatus.Scheduled,
     },
     hasChampionCorrect: {
       type: Boolean,

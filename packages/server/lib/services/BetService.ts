@@ -37,21 +37,22 @@ export class BetService {
   async createBets(userId: string, { games, champion }: CreateBetsInput) {
     let result = {};
 
-    const hasValidGameBets = await this.gameBetService.hasValidBets(
+    const hasValidGameBets = games ? await this.gameBetService.hasValidBets(
       userId,
       games
-    );
-    const hasValidChampionBet = await this.championBetService.isValidBet(
+    ) : false;
+
+    const hasValidChampionBet = champion ? await this.championBetService.isValidBet(
       userId,
       champion
-    );
+    ): false;
 
     console.log({
       hasValidGameBets,
       hasValidChampionBet,
     });
 
-    if (hasValidGameBets) {
+    if (hasValidGameBets && games) {
       const gameBets = await Promise.all(
         games.map((game) => this.gameBetService.createOne(userId, game))
       );
@@ -62,7 +63,7 @@ export class BetService {
       };
     }
 
-    if (hasValidChampionBet) {
+    if (hasValidChampionBet && champion) {
       const championBet = await this.championBetService.createOne(
         userId,
         champion

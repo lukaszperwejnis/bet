@@ -1,10 +1,10 @@
 import { Game } from "./Game";
 import { Bet } from "./Bet";
-import { WinnerTypes } from "../enums/winnerTypes";
+import { WinnerType } from "../enums/winnerType";
 
 export declare class GameBet extends Bet {
   readonly game: Game;
-  readonly bet: WinnerTypes;
+  readonly bet: WinnerType;
   readonly homeScore: number;
   readonly awayScore: number;
   readonly hasWinner: boolean;
