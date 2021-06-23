@@ -5,11 +5,13 @@
     "pretty": true,
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./lib",
+    "baseUrl": "./src",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["lib/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   "exclude": ["node_modules"]
 }
 
