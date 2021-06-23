@@ -1,4 +1,4 @@
-export declare const enum BetStatuses {
-  SCHEDULED = "SCHEDULED",
-  FINISHED = "FINISHED",
+export enum BetStatus {
+  Scheduled = "SCHEDULED",
+  Finished = "FINISHED",
 }

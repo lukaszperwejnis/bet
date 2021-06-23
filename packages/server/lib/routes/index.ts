@@ -1,7 +1,7 @@
 export { SignupRoutes } from "./signupRoutes";
 export { SigninRoutes } from "./signinRoutes";
 export { GamesRoutes } from "./gamesRoutes";
-export { TeamRoutes } from "./TeamRoutes";
+export { TeamRoutes } from "./teamRoutes";
 export { GameBetRoutes } from "./gameBetRoutes";
 export { ChampionBetRoutes } from "./championBetRoutes";
 export { InvitationRoutes } from "./invitationRoutes";

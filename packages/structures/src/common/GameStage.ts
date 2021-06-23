@@ -1,3 +1,3 @@
-export declare const enum GameStages {
-  FINAL = "FINAL",
+export enum GameStage {
+  Final = "FINAL",
 }

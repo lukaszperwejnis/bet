@@ -1,11 +1,11 @@
 export namespace User {
   export interface User {
-    readonly _id?: string;
+    readonly _id: string;
     readonly profile: Profile;
     readonly email: string;
-    readonly password?: string;
-    readonly is_admin?: boolean;
-    readonly score?: number;
+    readonly password: string;
+    readonly is_admin: boolean;
+    readonly score: number;
   }
 
   export interface Profile {
