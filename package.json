@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "scripty",
+    "storybook": "scripty",
     "clean": "scripty",
     "test": "scripty",
     "lint": "scripty",

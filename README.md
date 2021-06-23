@@ -13,10 +13,11 @@ client webapp (typescript, React, styled-components, redux, redux-saga)
 reusable components for client webapp (typescript, storybook, react, styled-components)
 
 ##First steps
-
-1) Install all dependencies by command `yarn` (scripty needs to be installed before you ran the app)
-2) Give access to your scripts files by command in root directory to be executable: `chmod -R +x scripts`
-3) To start server (port: 3010), app (port: 4200), storybook(port: 9001) use `yarn start`
+1) You must have installed globally lerna `npm i -g lerna`
+2) Install all required dependencies by command `yarn` (scripty needs to be installed before you ran the app)
+3) Give access to your scripts files by command in root directory to be executable: `chmod -R +x scripts`
+4) To start server (port: 3010) and app (port: 4200) use `yarn start`
+5) To start storybook from `@bet/ui-components` (port: 9001)  use `yarn storybook`
 
 ##Available workspace monorepo commands:
 
