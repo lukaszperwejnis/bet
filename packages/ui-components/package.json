@@ -16,8 +16,7 @@
     "lint": "scripty",
     "build": "tsc --b",
     "test-coverage": "scripty",
-    "start": "webpack serve",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "start": "start-storybook -p 9001 -c .storybook"
   },
   "author": "",
   "license": "ISC",

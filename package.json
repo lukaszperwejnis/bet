@@ -10,6 +10,7 @@
     "path": "./scripts/workspace"
   },
   "scripts": {
+    "start": "scripty",
     "clean": "scripty",
     "test": "scripty",
     "lint": "scripty",

@@ -6,12 +6,12 @@
     "path": "../../scripts/packages"
   },
   "scripts": {
+    "start": "webpack serve --mode development",
     "clean": "rimraf dist *.tsbuildinfo",
     "test": "scripty",
     "lint": "scripty",
     "build": "webpack",
-    "test-coverage": "scripty",
-    "start": "webpack serve --mode development"
+    "test-coverage": "scripty"
   },
   "author": "",
   "license": "ISC",
