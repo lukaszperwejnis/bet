@@ -4,6 +4,8 @@ import config from "../config";
 
 const fetch = require("node-fetch");
 
+const filterByExistingTeams = ({ homeTeam, awayTeam }: ExternalGame): boolean => Boolean(homeTeam.externalId && awayTeam.externalId);
+
 export class ExternalGamesService {
   private readonly competition: Competition;
 
@@ -29,16 +31,14 @@ export class ExternalGamesService {
     //todo
     const filterQuery = `stage=${stage}`;
     //const filterQuery = `season=2018&stage=${stage}`;
-    const games = this.getGames(filterQuery);
-    console.log(games);
-    return games;
+    const games = await this.getGames(filterQuery);
+    return games.filter(filterByExistingTeams);
   }
 
   async getScheduledGames(): Promise<ExternalGame[]> {
-    //todo
     const filterQuery = `status=SCHEDULED`;
-    // const filterQuery = `season=2018`;
-    return this.getGames(filterQuery);
+    const games = await this.getGames(filterQuery);
+    return games.filter(filterByExistingTeams);
   }
 }
 

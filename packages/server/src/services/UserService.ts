@@ -62,14 +62,16 @@ export class UserService {
       throw new FieldValidationError(mapSchemaValidationErrors(error.details));
     }
 
-    const { password, ...user } = await this.userRepository.findOne(
+    const doc = await this.userRepository.findOne(
       { email: input.email },
       true
     );
 
-    if (!user) {
+    if (!doc) {
       throw new UnauthorizedError();
     }
+
+    const { password, ...user } = doc;
 
     const match = await this.checkPassword(password, input.password);
     if (!match) {
@@ -95,6 +97,7 @@ export class UserService {
 
     const { userId, password } = input;
     const user = await this.userRepository.findById(userId);
+
     if (!user) {
       throw new UserNotFoundError(userId);
     }

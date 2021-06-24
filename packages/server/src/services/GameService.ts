@@ -26,6 +26,7 @@ export class GameService {
         const homeTeamDoc = await this.teamRepository.getOne({
           externalId: homeTeam.externalId,
         });
+
         const awayTeamDoc = await this.teamRepository.getOne({
           externalId: awayTeam.externalId,
         });

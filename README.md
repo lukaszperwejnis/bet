@@ -17,8 +17,9 @@ reusable components for client webapp (typescript, storybook, react, styled-comp
 2) Install all required dependencies by command `yarn` (scripty needs to be installed before you ran the app)
 3) Give access to your scripts files by command in root directory to be executable: `chmod -R +x scripts`
 4) Build all packages by `lerna run build`
-4) To start `@bet/server` (port: 3010) and `@bet/app` (port: 4200) use `yarn start`
-5) To start storybook from `@bet/ui-components` (port: 9001)  use `yarn storybook`
+5) To run server you must have installed and started mongodb (https://docs.mongodb.com/manual/administration/install-community/)
+6) To start `@bet/server` (port: 3010) and `@bet/app` (port: 4200) use `yarn start`
+7) To start storybook from `@bet/ui-components` (port: 9001)  use `yarn storybook`
 
 ##Available workspace monorepo commands:
 

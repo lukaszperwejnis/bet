@@ -67,27 +67,27 @@ export class TeamService {
     await this.insertTeamsToDatabase(teams);
   }
 
-  private getTeamsFromExternalAPI(): Promise<Team[]> {
-    return this.externalGameService.getScheduledGames().then((data) => {
-      console.log(data);
-      return [];
-      // return data.reduce((accu, { homeTeam, awayTeam }) => {
-      //   accu.push(
-      //     {
-      //       name: homeTeam.name,
-      //       externalId: homeTeam.externalId,
-      //       creationType: CreationType.External,
-      //     },
-      //     {
-      //       name: awayTeam.name,
-      //       externalId: awayTeam.externalId,
-      //       creationType: CreationType.External,
-      //     }
-      //   );
-      //
-      //   return accu;
-      // }, []);
-    });
+  private async getTeamsFromExternalAPI(): Promise<Team[]> {
+    const scheduledGames = await this.externalGameService.getScheduledGames();
+    return scheduledGames.reduce((accu:Team[], { homeTeam, awayTeam }) => {
+      if (!homeTeam.externalId || !awayTeam.externalId) {
+        return accu;
+      }
+
+      return [
+        ...accu,
+        {
+          name: homeTeam.name,
+          externalId: homeTeam.externalId,
+          creationType: CreationType.External,
+        } as Team,
+        {
+          name: awayTeam.name,
+          externalId: awayTeam.externalId,
+          creationType: CreationType.External,
+        } as Team
+      ];
+    }, []);
   }
 
   private async insertTeamsToDatabase(teams: Team[]) {
@@ -96,6 +96,7 @@ export class TeamService {
       const team = await this.teamRepository.getOne({
         externalId: el.externalId,
       });
+
       if (!team) {
         const doc = await this.teamRepository.createOne({ ...el });
         addedTeams.push(doc);

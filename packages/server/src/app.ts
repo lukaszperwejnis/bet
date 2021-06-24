@@ -37,7 +37,8 @@ export class App {
     this.initMiddlewares();
     this.initRoutes();
     App.fillDatabase();
-    // this.mailService.sendInvitationEmail({email: 'perwiperwi@gmail.com'});
+    // TODO enter here mail for invitation
+    // this.mailService.sendInvitationEmail({email: 'mail@example.com'});
     // this.initCrones();
   }
 
