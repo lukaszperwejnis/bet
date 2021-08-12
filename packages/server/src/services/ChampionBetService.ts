@@ -1,9 +1,8 @@
 import * as Joi from '@hapi/joi';
-import { BetStatus } from '@bet/structures';
+import { BetStatus, Team } from '@bet/structures';
 import { ChampionBet } from '../structures/ChampionBet';
 import { TeamService } from './TeamService';
 import { ChampionBetRepository } from '../Repository/ChampionBetRepository';
-import { Team } from '../structures/Team';
 import { TeamRepository } from '../Repository/TeamRepository';
 import { compareObjectsIds } from '../helpers/compareObjectIds';
 import { GameRepository } from '../Repository/GameRepository';
@@ -109,7 +108,7 @@ export class ChampionBetService {
     return updatedBets;
   }
 
-  async getAvailableByUserId(userId: string): Promise<Team[]> {
+  async getAvailableByUserId(userId: string): Promise<Team.Team[]> {
     const championBet: ChampionBet = await this.championBetRepository.getOne({
       createdBy: userId,
     });
@@ -122,7 +121,7 @@ export class ChampionBetService {
       status: BetStatus.Scheduled,
     });
     const teamIds = scheduledGames.reduce(
-      (acc: Team[], { homeTeam, awayTeam }) => {
+      (acc: Team.Team[], { homeTeam, awayTeam }) => {
         return [...acc, homeTeam, awayTeam];
       },
       [],
@@ -139,7 +138,9 @@ export class ChampionBetService {
       return false;
     }
 
-    const availableChampions: Team[] = await this.getAvailableByUserId(userId);
+    const availableChampions: Team.Team[] = await this.getAvailableByUserId(
+      userId,
+    );
 
     return availableChampions
       .map((champion) => champion._id.toString())
