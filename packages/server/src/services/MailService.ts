@@ -59,7 +59,7 @@ export class MailService {
 
   async sendResetPasswordEmail({email}: Password.StartResetPayload): Promise<Password.StartResetSuccess> {
     MailService.validateMail({email});
-
+§
     const user = await this.userRepository.findOne({ email });
 
     if (!user) {
