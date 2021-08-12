@@ -15,9 +15,9 @@
       "@stores/*": ["stores/*"],
       "@structures": ["structures/index.ts"],
       "@styles": ["styles/index.ts"],
-      "@utils": ["utils/index.ts"],
+      "@utils": ["utils/index.ts"]
     },
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["node_modules/@types"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*.spec.ts"]

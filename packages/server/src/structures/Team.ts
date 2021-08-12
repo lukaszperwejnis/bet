@@ -1,4 +1,4 @@
-import {CreationType} from '../enums';
+import { CreationType } from '../enums';
 
 export declare class Team {
   readonly _id: string;

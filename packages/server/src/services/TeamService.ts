@@ -1,20 +1,19 @@
-import {Competition, GameStatus} from "@bet/structures";
-import { TeamRepository } from "../Repository/TeamRepository";
-import { CreationType, WinnerType } from "../enums";
-import { GameRepository } from "../Repository/GameRepository";
-import { Team } from "../structures/Team";
-import { Game } from "../structures/Game";
-import { ExternalGamesService } from "./ExternalGamesService";
+import * as Joi from '@hapi/joi';
+import { Competition, GameStatus, Team, CreationType } from '@bet/structures';
+import { TeamRepository } from '../Repository/TeamRepository';
+import { WinnerType } from '../enums';
+import { GameRepository } from '../Repository/GameRepository';
+import { Game } from '../structures/Game';
+import { ExternalGamesService } from './ExternalGamesService';
 import {
   FieldValidationError,
   InvalidIdError,
   TeamNameDuplicatedError,
   TeamNotFoundError,
-} from "../errors";
-import { isValidObjectId } from "../helpers/isValidObjectId";
-import * as Joi from "@hapi/joi";
-import { VALIDATION_SCHEMA_KEYS } from "../constants/validationSchemaKeys";
-import { mapSchemaValidationErrors } from "../helpers/mapSchemaValidationErrors";
+} from '../errors';
+import { isValidObjectId } from '../helpers/isValidObjectId';
+import { VALIDATION_SCHEMA_KEYS } from '../constants/validationSchemaKeys';
+import { mapSchemaValidationErrors } from '../helpers/mapSchemaValidationErrors';
 
 export class TeamService {
   private readonly competition: Competition;
@@ -23,12 +22,10 @@ export class TeamService {
   private externalGameService = new ExternalGamesService();
 
   constructor(competition?: Competition) {
-    this.competition = competition
-      ? competition
-      : Competition.UefaChampionsLeague;
+    this.competition = competition || Competition.UefaChampionsLeague;
   }
 
-  async getOneById(id: string): Promise<Team> {
+  async getOneById(id: string): Promise<Team.Team> {
     if (!isValidObjectId(id)) {
       throw new InvalidIdError(id);
     }
@@ -41,7 +38,7 @@ export class TeamService {
     return doc;
   }
 
-  async createOne(input: any): Promise<Team> {
+  async createOne(input: Team.CreatePayload): Promise<Team.Team> {
     const schema = Joi.object({
       name: VALIDATION_SCHEMA_KEYS.TEAM.NAME,
     });
@@ -59,40 +56,44 @@ export class TeamService {
       throw new TeamNameDuplicatedError(input.name);
     }
 
-    return await this.teamRepository.createOne({ ...input });
+    return this.teamRepository.createOne({ ...input } as any);
   }
 
-  async addTeamsToDatabase() {
-    const teams: Team[] = await this.getTeamsFromExternalAPI();
+  async addTeamsToDatabase(): Promise<void> {
+    const teams: Team.Team[] = await this.getTeamsFromExternalAPI();
     await this.insertTeamsToDatabase(teams);
   }
 
-  private async getTeamsFromExternalAPI(): Promise<Team[]> {
+  private async getTeamsFromExternalAPI(): Promise<Team.Team[]> {
     const scheduledGames = await this.externalGameService.getScheduledGames();
-    return scheduledGames.reduce((accu:Team[], { homeTeam, awayTeam }) => {
-      if (!homeTeam.externalId || !awayTeam.externalId) {
-        return accu;
-      }
+    return scheduledGames.reduce(
+      (accu: Team.Team[], { homeTeam, awayTeam }) => {
+        if (!homeTeam.externalId || !awayTeam.externalId) {
+          return accu;
+        }
 
-      return [
-        ...accu,
-        {
-          name: homeTeam.name,
-          externalId: homeTeam.externalId,
-          creationType: CreationType.External,
-        } as Team,
-        {
-          name: awayTeam.name,
-          externalId: awayTeam.externalId,
-          creationType: CreationType.External,
-        } as Team
-      ];
-    }, []);
+        return [
+          ...accu,
+          {
+            name: homeTeam.name,
+            externalId: homeTeam.externalId,
+            creationType: CreationType.External,
+          } as Team.Team,
+          {
+            name: awayTeam.name,
+            externalId: awayTeam.externalId,
+            creationType: CreationType.External,
+          } as Team.Team,
+        ];
+      },
+      [],
+    );
   }
 
-  private async insertTeamsToDatabase(teams: Team[]) {
+  private async insertTeamsToDatabase(teams: Team.Team[]) {
     const addedTeams = [];
-    for (let el of teams) {
+
+    for (const el of teams) {
       const team = await this.teamRepository.getOne({
         externalId: el.externalId,
       });
@@ -106,10 +107,10 @@ export class TeamService {
     return addedTeams;
   }
 
-  async getCompetitionWinner(): Promise<Team | null> {
+  async getCompetitionWinner(): Promise<Team.Team | null> {
     const finalGame: Game = await this.gameRepository.getOne({
       competition: this.competition,
-      stage: "FINAL",
+      stage: 'FINAL',
       status: GameStatus.Finished,
     });
 
@@ -121,7 +122,7 @@ export class TeamService {
       finalGame.winner === WinnerType.HomeTeam
         ? finalGame.homeTeam
         : finalGame.awayTeam;
-    return await this.teamRepository.getOne({
+    return this.teamRepository.getOne({
       _id: winnerTeamId,
     });
   }

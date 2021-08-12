@@ -13,5 +13,5 @@ export namespace User {
     last_name: string;
   }
 
-  export type DTO = Omit<User, "password">;
+  export type DTO = Omit<User, 'password'>;
 }

@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
-import options from "./config";
+import mongoose, { Mongoose, Promise } from 'mongoose';
+import options from './config';
 
-export const connectToDatabase = () =>  mongoose.connect(options.dbURl, {
+export const connectToDatabase = (): Promise<Mongoose> =>
+  mongoose.connect(options.dbURl, {
     useNewUrlParser: true,
   });

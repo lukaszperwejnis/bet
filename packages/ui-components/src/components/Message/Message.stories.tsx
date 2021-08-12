@@ -1,36 +1,36 @@
-import { storiesOf } from "@storybook/react";
-import centered from "@storybook/addon-centered/react";
-import { text } from "@storybook/addon-knobs";
-import { Message } from "./Message";
-import { Message as MessageStructure } from "../../types";
+import { storiesOf } from '@storybook/react';
+import centered from '@storybook/addon-centered/react';
+import { text } from '@storybook/addon-knobs';
+import { Message } from './Message';
+import { Message as MessageStructure } from '../../types';
 
-storiesOf("Message", module)
+storiesOf('Message', module)
   .addDecorator(centered)
-  .add("success", () => (
+  .add('success', () => (
     <Message
       root="root"
       type={MessageStructure.Type.Success}
-      text={text("text", "Success message")}
+      text={text('text', 'Success message')}
     />
   ))
-  .add("error", () => (
+  .add('error', () => (
     <Message
       root="root"
       type={MessageStructure.Type.Error}
-      text={text("text", "Error message")}
+      text={text('text', 'Error message')}
     />
   ))
-  .add("warning", () => (
+  .add('warning', () => (
     <Message
       root="root"
       type={MessageStructure.Type.Warning}
-      text={text("text", "Warning message")}
+      text={text('text', 'Warning message')}
     />
   ))
-  .add("primary", () => (
+  .add('primary', () => (
     <Message
       root="root"
       type={MessageStructure.Type.Info}
-      text={text("text", "Info message")}
+      text={text('text', 'Info message')}
     />
   ));

@@ -1,7 +1,8 @@
-import { NextFunction, Response, Request } from "express";
-import { Controller } from "./Controller";
-import { GetUserAuthInfoRequest } from "../interfaces/GetUserAuthInfoRequest";
-import { ChampionBetService } from "../services/ChampionBetService";
+import { NextFunction, Response, Request } from 'express';
+import { Controller } from './Controller';
+import { GetUserAuthInfoRequest } from '../interfaces/GetUserAuthInfoRequest';
+import { ChampionBetService } from '../services/ChampionBetService';
+import { ResponseReturnType } from '../structures/ResponseReturnType';
 
 export class ChampionBetController extends Controller {
   private championBetService = new ChampionBetService();
@@ -13,28 +14,32 @@ export class ChampionBetController extends Controller {
     this.createOne = this.createOne.bind(this);
   }
 
-  async getOne(req: Request, res: Response, next: NextFunction) {
+  async getOne(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): ResponseReturnType {
     try {
       const doc = await this.championBetService.getOneById(req.params.id);
       return this.ok(res, doc);
     } catch (error) {
-      next(error);
+      return next(error);
     }
   }
 
   async createOne(
     req: GetUserAuthInfoRequest,
     res: Response,
-    next: NextFunction
-  ) {
+    next: NextFunction,
+  ): ResponseReturnType {
     try {
       const doc = await this.championBetService.createOne(
         req.user._id,
-        req.body
+        req.body,
       );
       return this.created(res, doc);
     } catch (error) {
-      next(error);
+      return next(error);
     }
   }
 }

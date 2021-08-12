@@ -1,29 +1,47 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
+'use strict';
+var __createBinding =
+  (this && this.__createBinding) ||
+  (Object.create
+    ? function (o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        Object.defineProperty(o, k2, {
+          enumerable: true,
+          get: function () {
+            return m[k];
+          },
+        });
+      }
+    : function (o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        o[k2] = m[k];
+      });
+var __setModuleDefault =
+  (this && this.__setModuleDefault) ||
+  (Object.create
+    ? function (o, v) {
+        Object.defineProperty(o, 'default', { enumerable: true, value: v });
+      }
+    : function (o, v) {
+        o['default'] = v;
+      });
+var __importStar =
+  (this && this.__importStar) ||
+  function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null)
+      for (var k in mod)
+        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
+          __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.StyledButton = void 0;
-const styled_components_1 = __importStar(require("styled-components"));
-const polished_1 = require("polished");
-const _styles_1 = require("@styles");
-exports.StyledButton = styled_components_1.default.button `
+const styled_components_1 = __importStar(require('styled-components'));
+const polished_1 = require('polished');
+const _styles_1 = require('@styles');
+exports.StyledButton = styled_components_1.default.button`
   border: none;
   border-radius: 4px;
   color: ${_styles_1.config.color.white};
@@ -45,58 +63,74 @@ exports.StyledButton = styled_components_1.default.button `
     font-size: ${_styles_1.config.fontSize.normal};
   }
 
-  ${({ disabled }) => disabled &&
-    styled_components_1.css `
+  ${({ disabled }) =>
+    disabled &&
+    styled_components_1.css`
       opacity: ${_styles_1.config.opacity.disabled};
       cursor: auto;
     `};
 
-  ${({ colorType }) => colorType === 'primary' &&
-    styled_components_1.css `
+  ${({ colorType }) =>
+    colorType === 'primary' &&
+    styled_components_1.css`
       background-color: ${_styles_1.config.color.primary};
       &:hover {
-        background-color: ${polished_1.lighten(0.1, _styles_1.config.color.primary)};
+        background-color: ${polished_1.lighten(
+          0.1,
+          _styles_1.config.color.primary,
+        )};
       }
     `};
 
-  ${({ colorType, isHollow }) => colorType === 'primary' &&
+  ${({ colorType, isHollow }) =>
+    colorType === 'primary' &&
     isHollow &&
-    styled_components_1.css `
+    styled_components_1.css`
       color: ${_styles_1.config.color.primary};
       border-color: ${_styles_1.config.color.primary};
       &:hover {
         background-color: ${_styles_1.config.color.primary};
       }
     `};
-  ${({ colorType }) => colorType === 'secondary' &&
-    styled_components_1.css `
+  ${({ colorType }) =>
+    colorType === 'secondary' &&
+    styled_components_1.css`
       color: ${_styles_1.config.color.textColor};
       background-color: ${_styles_1.config.color.secondary};
       &:hover {
-        background-color: ${polished_1.darken(0.1, _styles_1.config.color.secondary)};
+        background-color: ${polished_1.darken(
+          0.1,
+          _styles_1.config.color.secondary,
+        )};
       }
     `};
 
-  ${({ colorType, isHollow }) => colorType === 'secondary' &&
+  ${({ colorType, isHollow }) =>
+    colorType === 'secondary' &&
     isHollow &&
-    styled_components_1.css `
+    styled_components_1.css`
       color: ${_styles_1.config.color.secondary};
       border-color: ${_styles_1.config.color.secondary};
       &:hover {
         background-color: ${_styles_1.config.color.secondary};
       }
     `};
-  ${({ colorType }) => colorType === 'error' &&
-    styled_components_1.css `
+  ${({ colorType }) =>
+    colorType === 'error' &&
+    styled_components_1.css`
       background-color: ${_styles_1.config.color.guardsmanRed};
       &:hover {
-        background-color: ${polished_1.lighten(0.1, _styles_1.config.color.guardsmanRed)};
+        background-color: ${polished_1.lighten(
+          0.1,
+          _styles_1.config.color.guardsmanRed,
+        )};
       }
     `};
 
-  ${({ colorType, isHollow }) => colorType === 'error' &&
+  ${({ colorType, isHollow }) =>
+    colorType === 'error' &&
     isHollow &&
-    styled_components_1.css `
+    styled_components_1.css`
       color: ${_styles_1.config.color.guardsmanRed};
       border-color: ${_styles_1.config.color.guardsmanRed};
       &:hover {
@@ -104,17 +138,22 @@ exports.StyledButton = styled_components_1.default.button `
       }
     `};
 
-  ${({ colorType }) => colorType === 'warning' &&
-    styled_components_1.css `
+  ${({ colorType }) =>
+    colorType === 'warning' &&
+    styled_components_1.css`
       background-color: ${_styles_1.config.color.warning};
       &:hover {
-        background-color: ${polished_1.lighten(0.1, _styles_1.config.color.warning)};
+        background-color: ${polished_1.lighten(
+          0.1,
+          _styles_1.config.color.warning,
+        )};
       }
     `};
 
-  ${({ colorType, isHollow }) => colorType === 'warning' &&
+  ${({ colorType, isHollow }) =>
+    colorType === 'warning' &&
     isHollow &&
-    styled_components_1.css `
+    styled_components_1.css`
       color: ${_styles_1.config.color.warning};
       border-color: ${_styles_1.config.color.warning};
       &:hover {
@@ -122,17 +161,22 @@ exports.StyledButton = styled_components_1.default.button `
       }
     `};
 
-  ${({ colorType }) => colorType === 'success' &&
-    styled_components_1.css `
+  ${({ colorType }) =>
+    colorType === 'success' &&
+    styled_components_1.css`
       background-color: ${_styles_1.config.color.success};
       &:hover {
-        background-color: ${polished_1.lighten(0.1, _styles_1.config.color.success)};
+        background-color: ${polished_1.lighten(
+          0.1,
+          _styles_1.config.color.success,
+        )};
       }
     `};
 
-  ${({ colorType, isHollow }) => colorType === 'success' &&
+  ${({ colorType, isHollow }) =>
+    colorType === 'success' &&
     isHollow &&
-    styled_components_1.css `
+    styled_components_1.css`
       color: ${_styles_1.config.color.success};
       border-color: ${_styles_1.config.color.success};
       &:hover {
@@ -140,8 +184,9 @@ exports.StyledButton = styled_components_1.default.button `
       }
     `};
 
-  ${({ colorType }) => colorType === 'empty' &&
-    styled_components_1.css `
+  ${({ colorType }) =>
+    colorType === 'empty' &&
+    styled_components_1.css`
       margin: 0;
       background: none;
       padding: 0;
@@ -153,8 +198,9 @@ exports.StyledButton = styled_components_1.default.button `
       }
     `};
 
-  ${({ isHollow }) => isHollow &&
-    styled_components_1.css `
+  ${({ isHollow }) =>
+    isHollow &&
+    styled_components_1.css`
       background-color: ${_styles_1.config.color.white};
       border: 1px solid;
       &:hover {

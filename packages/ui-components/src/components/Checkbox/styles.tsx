@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
-import { config, truncate } from "../../styles";
-import { WithChildrenProps, WithExcludedChildrenProps } from "../../types";
+import styled, { css } from 'styled-components';
+import { config, truncate } from '../../styles';
+import { WithChildrenProps, WithExcludedChildrenProps } from '../../types';
 
 export const CheckboxInput = styled.input<WithExcludedChildrenProps>`
   position: absolute;
@@ -9,7 +9,7 @@ export const CheckboxInput = styled.input<WithExcludedChildrenProps>`
 `;
 
 CheckboxInput.defaultProps = {
-  type: "checkbox",
+  type: 'checkbox',
 };
 
 interface InnerProps extends WithExcludedChildrenProps {
@@ -21,7 +21,7 @@ export const Inner = styled.label<InnerProps>`
   padding-left: 30px;
   cursor: pointer;
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     display: block;
     left: 0;
@@ -47,7 +47,7 @@ export const Inner = styled.label<InnerProps>`
   }
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     display: block;
     left: 6px;

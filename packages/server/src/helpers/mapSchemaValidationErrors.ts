@@ -1,7 +1,7 @@
-import {SchemaValidationError} from "@bet/structures";
+import { SchemaValidationError } from '@bet/structures';
 
 export function mapSchemaValidationErrors(
-  errors: any[]
+  errors: any[],
 ): SchemaValidationError[] {
   return errors.map(({ path, type, message }) => {
     return {

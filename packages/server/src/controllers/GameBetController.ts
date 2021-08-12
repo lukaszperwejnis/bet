@@ -1,7 +1,8 @@
-import { NextFunction, Request, Response } from "express";
-import { Controller } from "./Controller";
-import { GetUserAuthInfoRequest } from "../interfaces/GetUserAuthInfoRequest";
-import { GameBetService } from "../services/GameBetService";
+import { NextFunction, Request, Response } from 'express';
+import { Controller } from './Controller';
+import { GetUserAuthInfoRequest } from '../interfaces/GetUserAuthInfoRequest';
+import { GameBetService } from '../services/GameBetService';
+import { ResponseReturnType } from '../structures/ResponseReturnType';
 
 export class GameBetController extends Controller {
   private gameBetService = new GameBetService();
@@ -17,35 +18,39 @@ export class GameBetController extends Controller {
   async createOne(
     req: GetUserAuthInfoRequest,
     res: Response,
-    next: NextFunction
-  ) {
+    next: NextFunction,
+  ): ResponseReturnType {
     try {
       const doc = await this.gameBetService.createOne(req.user._id, req.body);
       return this.created(res, doc);
     } catch (error) {
-      next(error);
+      return next(error);
     }
   }
 
-  async getOne(req: Request, res: Response, next: NextFunction) {
+  async getOne(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): ResponseReturnType {
     try {
       const doc = await this.gameBetService.getOneById(req.params.id);
       return this.ok(res, doc);
     } catch (error) {
-      next(error);
+      return next(error);
     }
   }
 
   async getMany(
     req: GetUserAuthInfoRequest,
     res: Response,
-    next: NextFunction
-  ) {
+    next: NextFunction,
+  ): ResponseReturnType {
     try {
       const docs = await this.gameBetService.getManyByUserId(req.user._id);
       return this.ok(res, docs);
     } catch (error) {
-      next(error);
+      return next(error);
     }
   }
 }

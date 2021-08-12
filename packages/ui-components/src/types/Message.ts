@@ -7,9 +7,9 @@ export namespace Message {
   };
 
   export enum Type {
-    Success = "SUCCESS",
-    Error = "ERROR",
-    Warning = "WARNING",
-    Info = "INFO",
+    Success = 'SUCCESS',
+    Error = 'ERROR',
+    Warning = 'WARNING',
+    Info = 'INFO',
   }
 }

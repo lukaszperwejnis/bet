@@ -1,6 +1,7 @@
-import { Repository } from "./Repository";
-import { ChampionBetModel } from "../models/ChampionBetModel";
-import { ChampionBet } from "../structures/ChampionBet";
+import { Repository } from './Repository';
+import { ChampionBetModel } from '../models/ChampionBetModel';
+import { ChampionBet } from '../structures/ChampionBet';
+import { Query } from '../structures/Query';
 
 export class ChampionBetRepository extends Repository<ChampionBet> {
   constructor() {
@@ -11,11 +12,11 @@ export class ChampionBetRepository extends Repository<ChampionBet> {
     return super.findById(id);
   }
 
-  getOne(query: object): Promise<ChampionBet> {
+  getOne(query: Query): Promise<ChampionBet> {
     return super.findOne(query);
   }
 
-  public getMany(query: object): Promise<ChampionBet[]> {
+  public getMany(query: Query): Promise<ChampionBet[]> {
     return super.find(query);
   }
 

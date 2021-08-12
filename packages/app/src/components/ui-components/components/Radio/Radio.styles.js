@@ -1,28 +1,51 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
+'use strict';
+var __createBinding =
+  (this && this.__createBinding) ||
+  (Object.create
+    ? function (o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        Object.defineProperty(o, k2, {
+          enumerable: true,
+          get: function () {
+            return m[k];
+          },
+        });
+      }
+    : function (o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        o[k2] = m[k];
+      });
+var __setModuleDefault =
+  (this && this.__setModuleDefault) ||
+  (Object.create
+    ? function (o, v) {
+        Object.defineProperty(o, 'default', { enumerable: true, value: v });
+      }
+    : function (o, v) {
+        o['default'] = v;
+      });
+var __importStar =
+  (this && this.__importStar) ||
+  function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null)
+      for (var k in mod)
+        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
+          __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Label = exports.Inner = exports.Radio = exports.Wrapper = exports.RadioInput = void 0;
-const styled_components_1 = __importStar(require("styled-components"));
-const config_1 = require("../../../../styles/config");
-exports.RadioInput = styled_components_1.default.input `
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
+exports.Label =
+  exports.Inner =
+  exports.Radio =
+  exports.Wrapper =
+  exports.RadioInput =
+    void 0;
+const styled_components_1 = __importStar(require('styled-components'));
+const config_1 = require('../../../../styles/config');
+exports.RadioInput = styled_components_1.default.input`
   position: absolute;
   left: 0;
   z-index: 1;
@@ -34,15 +57,16 @@ exports.RadioInput = styled_components_1.default.input `
   overflow: visible;
 `;
 exports.RadioInput.defaultProps = {
-    type: 'radio',
+  type: 'radio',
 };
-exports.Wrapper = styled_components_1.default.label `
+exports.Wrapper = styled_components_1.default.label`
   display: flex;
   align-items: center;
   cursor: pointer;
 
-  ${(props) => props.disabled &&
-    styled_components_1.css `
+  ${(props) =>
+    props.disabled &&
+    styled_components_1.css`
       opacity: ${config_1.config.opacity.disabled};
       cursor: not-allowed;
       ${exports.RadioInput} {
@@ -50,11 +74,11 @@ exports.Wrapper = styled_components_1.default.label `
       }
     `}
 `;
-exports.Radio = styled_components_1.default.span `
+exports.Radio = styled_components_1.default.span`
   position: relative;
   font-size: ${config_1.config.fontSize.normal};
 `;
-exports.Inner = styled_components_1.default.span `
+exports.Inner = styled_components_1.default.span`
   position: relative;
   top: 0;
   left: 0;
@@ -65,8 +89,9 @@ exports.Inner = styled_components_1.default.span `
   background: ${config_1.config.color.white};
   border: 1px solid ${config_1.config.color.secondary};
 
-  ${(props) => props.checked &&
-    styled_components_1.css `
+  ${(props) =>
+    props.checked &&
+    styled_components_1.css`
       &:before {
         position: absolute;
         content: '';
@@ -89,7 +114,7 @@ exports.Inner = styled_components_1.default.span `
       }
     `}
 `;
-exports.Label = styled_components_1.default.span `
+exports.Label = styled_components_1.default.span`
   font-family: ${config_1.config.fontFamily.primary};
   color: ${config_1.config.color.textColor};
   margin-left: ${config_1.config.spacing.small};

@@ -1,12 +1,12 @@
-import { ReactWrapper } from "enzyme";
+import { ReactWrapper } from 'enzyme';
 
 type DOMNodeType = {
   [key: string]: string;
 };
 
-export const getPropertyFromComponent = <T>(
+export const getPropertyFromComponent = (
   component: ReactWrapper,
-  property: string
-) => {
-  return ((component.getDOMNode() as unknown) as DOMNodeType)[property];
+  property: string,
+): unknown => {
+  return (component.getDOMNode() as unknown as DOMNodeType)[property];
 };

@@ -1,7 +1,7 @@
-import { ReactWrapper } from "enzyme";
-import { act } from "react-dom/test-utils";
+import { ReactWrapper } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 
-export const actImmediate = (wrapper: ReactWrapper) =>
+export const actImmediate = (wrapper: ReactWrapper): Promise<void> =>
   act(
     () =>
       new Promise<void>((resolve) => {
@@ -9,5 +9,5 @@ export const actImmediate = (wrapper: ReactWrapper) =>
           wrapper.update();
           resolve();
         });
-      })
+      }),
   );

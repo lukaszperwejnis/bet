@@ -1,11 +1,11 @@
-import styled, { css } from "styled-components";
-import { Icon } from "../Icon/Icon";
-import { config } from "../../styles";
+import styled, { css } from 'styled-components';
+import { Icon } from '../Icon/Icon';
+import { config } from '../../styles';
 import {
   Message,
   WithChildrenProps,
   WithExcludedChildrenProps,
-} from "../../types";
+} from '../../types';
 
 const iconMixin = `
     width: 30px;

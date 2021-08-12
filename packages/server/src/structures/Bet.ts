@@ -1,4 +1,4 @@
-import { BetStatus, Competition, User } from "@bet/structures";
+import { BetStatus, Competition, User } from '@bet/structures';
 
 export declare class Bet {
   readonly _id?: string;

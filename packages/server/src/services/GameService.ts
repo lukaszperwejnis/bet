@@ -1,12 +1,11 @@
-import { BetStatus, GameStatus } from "@bet/structures";
-import { TeamRepository } from "../Repository/TeamRepository";
-import { CreationType } from "../enums";
-import { GameRepository } from "../Repository/GameRepository";
-import { Game } from "../structures/Game";
-import { ExternalGame } from "../interfaces/ExternalGame";
-import { ExternalGamesService } from "./ExternalGamesService";
-import { GameBet } from "../structures/GameBet";
-import { GameBetRepository } from "../Repository/GameBetRepository";
+import { BetStatus, CreationType, GameStatus } from '@bet/structures';
+import { TeamRepository } from '../Repository/TeamRepository';
+import { GameRepository } from '../Repository/GameRepository';
+import { Game } from '../structures/Game';
+import { ExternalGame } from '../interfaces/ExternalGame';
+import { ExternalGamesService } from './ExternalGamesService';
+import { GameBet } from '../structures/GameBet';
+import { GameBetRepository } from '../Repository/GameBetRepository';
 
 export class GameService {
   private gameRepository = new GameRepository();
@@ -14,8 +13,9 @@ export class GameService {
   private externalGamesService = new ExternalGamesService();
   private gameBetRepository = new GameBetRepository();
 
-  async addScheduledMatchesToDatabase() {
-    const scheduledGames: ExternalGame[] = await this.externalGamesService.getScheduledGames();
+  async addScheduledMatchesToDatabase(): Promise<void> {
+    const scheduledGames: ExternalGame[] =
+      await this.externalGamesService.getScheduledGames();
     const gamesToAdd: Game[] = await this.mapToGames(scheduledGames);
     await this.createGames(gamesToAdd);
   }
@@ -39,13 +39,14 @@ export class GameService {
           homeScore: score.fullTime.homeTeam,
           awayScore: score.fullTime.awayTeam,
         };
-      })
+      }),
     );
   }
 
   private async createGames(matches: Game[]): Promise<Game[]> {
     const addedMatches = [];
-    for (let betToAdd of matches) {
+
+    for (const betToAdd of matches) {
       const game = await this.gameRepository.getOne({
         externalId: betToAdd.externalId,
       });
@@ -60,9 +61,9 @@ export class GameService {
 
   async getUpdatedGamesByStages(stages: string[]): Promise<Game[]> {
     const finishedGames = await this.externalGamesService
-      .getGamesByStages(stages.join(","))
+      .getGamesByStages(stages.join(','))
       .then((data) =>
-        data.filter((game) => game.status === GameStatus.Finished)
+        data.filter((game) => game.status === GameStatus.Finished),
       );
 
     if (!finishedGames.length) {
@@ -70,7 +71,7 @@ export class GameService {
     }
 
     const updatedGames: Game[] = [];
-    for (let finishedGame of finishedGames) {
+    for (const finishedGame of finishedGames) {
       const updatedGame: Game = await this.gameRepository.findOneAndUpdate(
         {
           externalId: finishedGame.externalId,
@@ -81,10 +82,12 @@ export class GameService {
           awayScore: finishedGame.score.fullTime.awayTeam,
           winner: finishedGame.score.winner,
           status: finishedGame.status,
-        }
+        },
       );
 
-      updatedGame && updatedGames.push(updatedGame);
+      if (updatedGame) {
+        updatedGames.push(updatedGame);
+      }
     }
 
     return updatedGames;
@@ -106,30 +109,30 @@ export class GameService {
     const pipeline = [
       {
         $lookup: {
-          from: "team",
-          localField: "homeTeam",
-          foreignField: "_id",
-          as: "homeTeam",
+          from: 'team',
+          localField: 'homeTeam',
+          foreignField: '_id',
+          as: 'homeTeam',
         },
       },
-      { $unwind: "$homeTeam" },
+      { $unwind: '$homeTeam' },
       {
         $lookup: {
-          from: "team",
-          localField: "awayTeam",
-          foreignField: "_id",
-          as: "awayTeam",
+          from: 'team',
+          localField: 'awayTeam',
+          foreignField: '_id',
+          as: 'awayTeam',
         },
       },
-      { $unwind: "$awayTeam" },
+      { $unwind: '$awayTeam' },
       {
         $match: {
           _id: {
             $nin: userGameBets.map((el) => el.game._id),
           },
           status: GameStatus.Scheduled,
-          "homeTeam._id": { $in: games.map((el) => el.homeTeam) },
-          "awayTeam._id": { $in: games.map((el) => el.awayTeam) },
+          'homeTeam._id': { $in: games.map((el) => el.homeTeam) },
+          'awayTeam._id': { $in: games.map((el) => el.awayTeam) },
         },
       },
     ];

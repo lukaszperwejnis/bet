@@ -1,7 +1,8 @@
-import * as mongoose from "mongoose";
-import * as bcrypt from "bcrypt";
+import * as mongoose from 'mongoose';
+import * as bcrypt from 'bcrypt';
+import { User } from '@bet/structures';
 
-const userSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema<User.User>(
   {
     profile: {
       type: mongoose.Schema.Types.Mixed,
@@ -25,28 +26,28 @@ const userSchema = new mongoose.Schema(
     },
   },
   {
-    collection: "user",
+    collection: 'user',
     timestamps: true,
-  }
+  },
 );
 
 userSchema.index({ email: 1 }, { unique: true });
 
-userSchema.pre("save", function (next) {
-  if (!this.isModified("password")) {
-    return next();
+userSchema.pre('save', function hashPassword(next) {
+  if (!this.isModified('password')) {
+    next();
+    return;
   }
 
-  // @ts-ignore
-    bcrypt.hash(this.password, 10, (err, hash) => {
+  bcrypt.hash(this.password, 10, (err, hash) => {
     if (err) {
-      return next(err);
+      next(err);
+      return;
     }
 
-    // @ts-ignore
-        this.password = hash;
+    this.password = hash;
     next();
   });
 });
 
-export const UserModel = mongoose.model("User", userSchema);
+export const UserModel = mongoose.model('User', userSchema);

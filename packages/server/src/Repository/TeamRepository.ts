@@ -1,25 +1,26 @@
-import { Repository } from "./Repository";
-import { TeamModel } from "../models/TeamModel";
-import { Team } from "../structures/Team";
+import { Team } from '@bet/structures';
+import { Repository } from './Repository';
+import { TeamModel } from '../models/TeamModel';
+import { Query } from '../structures/Query';
 
-export class TeamRepository extends Repository<Team> {
+export class TeamRepository extends Repository<Team.Team> {
   constructor() {
     super(TeamModel);
   }
 
-  findById(id: string): Promise<Team> {
+  findById(id: string): Promise<Team.Team> {
     return super.findById(id);
   }
 
-  getOne(query: object): Promise<Team> {
+  getOne(query: Query): Promise<Team.Team> {
     return super.findOne(query);
   }
 
-  getMany(query: object): Promise<Team[]> {
+  getMany(query: Query): Promise<Team.Team[]> {
     return super.find(query);
   }
 
-  createOne(input: Team): Promise<Team> {
-    return super.create<Team>(input);
+  createOne(input: Team.Team): Promise<Team.Team> {
+    return super.create<Team.Team>(input);
   }
 }

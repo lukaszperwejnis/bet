@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { WithChildrenProps } from "../../../types/index";
-import { stylesConfig } from "../../../styles/styles-config";
+import styled from 'styled-components';
+import { WithChildrenProps } from '../../../types/index';
+import { stylesConfig } from '../../../styles/styles-config';
 
 export const Description = styled.span<WithChildrenProps>`
   color: ${stylesConfig.color.textColor};

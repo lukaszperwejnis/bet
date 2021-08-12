@@ -11,4 +11,11 @@ export namespace Password {
   };
 
   export type ResetSuccess = boolean;
+
+  export type UpdatePasswordPayload = {
+    userId: string;
+    password: string;
+  };
+
+  export type UpdatePasswordSuccess = boolean;
 }

@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
-import { WithExcludedChildrenProps } from "../../types";
-import { stylesConfig } from "../../styles/styles-config";
+import styled, { css } from 'styled-components';
+import { WithExcludedChildrenProps } from '../../types';
+import { stylesConfig } from '../../styles/styles-config';
 
 export interface InputProps extends WithExcludedChildrenProps {
   disabled?: boolean;
@@ -34,5 +34,5 @@ export const Input = styled.input<InputProps>`
 `;
 
 Input.defaultProps = {
-  type: "text",
+  type: 'text',
 };

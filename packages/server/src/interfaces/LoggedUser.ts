@@ -1,4 +1,4 @@
-import { User } from "../structures/User";
+import { User } from '../structures/User';
 
 export interface LoggedUser {
   accessToken: string;

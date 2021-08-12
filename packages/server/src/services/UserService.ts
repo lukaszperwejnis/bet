@@ -1,18 +1,18 @@
-import {Password, Signin, User, Signup} from "@bet/structures";
-import * as bcrypt from "bcrypt";
-import { mapSchemaValidationErrors } from "../helpers/mapSchemaValidationErrors";
-import * as Joi from "@hapi/joi";
-import { VALIDATION_SCHEMA_KEYS } from "../constants/validationSchemaKeys";
-import { UserRepository } from "../Repository/UserRepository";
-import { UserNotFoundError } from "../errors/UserNotFoundError";
-import { PasswordMatchPreviousError } from "../errors/PasswordMatchPreviousError";
-import { TokenService } from "./TokenService";
+import { Password, Signin, User, Signup } from '@bet/structures';
+import * as bcrypt from 'bcrypt';
+import * as Joi from '@hapi/joi';
+import { mapSchemaValidationErrors } from '../helpers/mapSchemaValidationErrors';
+import { VALIDATION_SCHEMA_KEYS } from '../constants/validationSchemaKeys';
+import { UserRepository } from '../Repository/UserRepository';
+import { UserNotFoundError } from '../errors/UserNotFoundError';
+import { PasswordMatchPreviousError } from '../errors/PasswordMatchPreviousError';
+import { TokenService } from './TokenService';
 import {
   FieldValidationError,
   UnauthorizedError,
   UserAlreadyExistError,
   UserByEmailNotFoundError,
-} from "../errors";
+} from '../errors';
 
 export class UserService {
   private userRepository = new UserRepository();
@@ -30,10 +30,8 @@ export class UserService {
     }
 
     const tokenPayload: any = await this.tokenService.verifyMailInvitationToken(
-      input.token
+      input.token,
     );
-
-    console.log({tokenPayload});
 
     const isUserAlreadyExists = await this.userRepository.findOne({
       email: tokenPayload.email,
@@ -46,7 +44,7 @@ export class UserService {
     const result = await this.userRepository.createOne({
       ...input,
       email: tokenPayload.email,
-    });
+    } as any);
 
     return Boolean(result);
   }
@@ -62,10 +60,7 @@ export class UserService {
       throw new FieldValidationError(mapSchemaValidationErrors(error.details));
     }
 
-    const doc = await this.userRepository.findOne(
-      { email: input.email },
-      true
-    );
+    const doc = await this.userRepository.findOne({ email: input.email }, true);
 
     if (!doc) {
       throw new UnauthorizedError();
@@ -85,7 +80,9 @@ export class UserService {
     };
   }
 
-  async updatePassword(input: any): Promise<Boolean> {
+  async updatePassword(
+    input: Password.UpdatePasswordPayload,
+  ): Promise<Password.UpdatePasswordSuccess> {
     const schema = Joi.object({
       password: VALIDATION_SCHEMA_KEYS.PASSWORD,
     });
@@ -110,13 +107,15 @@ export class UserService {
 
     const result = await this.userRepository.findOneAndUpdate(
       { _id: userId },
-      password
+      password,
     );
 
     return Boolean(result);
   }
 
-  async resetPassword(input: Password.ResetPayload): Promise<Password.ResetSuccess> {
+  async resetPassword(
+    input: Password.ResetPayload,
+  ): Promise<Password.ResetSuccess> {
     const schema = Joi.object({
       token: Joi.string().required(),
       password: VALIDATION_SCHEMA_KEYS.PASSWORD,
@@ -128,7 +127,7 @@ export class UserService {
     }
 
     const tokenPayload: any = await this.tokenService.verifyResetPasswordToken(
-      input.token
+      input.token,
     );
 
     const user = await this.userRepository.findOne({
@@ -149,21 +148,22 @@ export class UserService {
       { email: tokenPayload.email },
       {
         password: await UserService.hashPassword(input.password),
-      }
+      },
     );
 
     return Boolean(result);
   }
 
   async getOneById(id: string): Promise<User.User> {
-    return await this.userRepository.findById(id);
+    return this.userRepository.findById(id);
   }
 
-  checkPassword(passwordHash: string, password: string) {
+  checkPassword(passwordHash: string, password: string): unknown {
     return new Promise((resolve, reject) => {
       bcrypt.compare(password, passwordHash, (err, same) => {
         if (err) {
-          return reject(err);
+          reject(err);
+          return;
         }
 
         resolve(same);

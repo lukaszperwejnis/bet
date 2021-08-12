@@ -1,55 +1,55 @@
-import { storiesOf } from "@storybook/react";
-import centered from "@storybook/addon-centered/react";
-import { select } from "@storybook/addon-knobs";
-import { Icon, IconComponentType } from "./Icon";
+import { storiesOf } from '@storybook/react';
+import centered from '@storybook/addon-centered/react';
+import { select } from '@storybook/addon-knobs';
+import { Icon, IconComponentType } from './Icon';
 
-storiesOf("Icon", module)
+storiesOf('Icon', module)
   .addDecorator(centered)
-  .add("default", () => (
+  .add('default', () => (
     <Icon
       size={select(
-        "size",
+        'size',
         {
-          small: "small",
-          normal: "normal",
-          large: "large",
+          small: 'small',
+          normal: 'normal',
+          large: 'large',
         },
-        "normal"
+        'normal',
       )}
       icon={select(
-        "icon",
+        'icon',
         {
-          dashboard: "dashboard",
-          leftArrow: "leftArrow",
-          plusCircle: "plusCircle",
-          organization: "organization",
-          menu: "menu",
-          users: "users",
-          trash: "trash",
-          downArrow: "downArrow",
-          logout: "logout",
-          infoCircle: "infoCircle",
-          circleWithCross: "circleWithCross",
-          warning: "warning",
-          tick: "tick",
-          search: "search",
-          edit: "edit",
-          arrows: "arrows",
-          image: "image",
-          phoneIncoming: "phoneIncoming",
-          unknown: "unknown" as IconComponentType,
+          dashboard: 'dashboard',
+          leftArrow: 'leftArrow',
+          plusCircle: 'plusCircle',
+          organization: 'organization',
+          menu: 'menu',
+          users: 'users',
+          trash: 'trash',
+          downArrow: 'downArrow',
+          logout: 'logout',
+          infoCircle: 'infoCircle',
+          circleWithCross: 'circleWithCross',
+          warning: 'warning',
+          tick: 'tick',
+          search: 'search',
+          edit: 'edit',
+          arrows: 'arrows',
+          image: 'image',
+          phoneIncoming: 'phoneIncoming',
+          unknown: 'unknown' as IconComponentType,
         },
-        "dashboard"
+        'dashboard',
       )}
       type={select(
-        "type",
+        'type',
         {
-          default: "default",
-          primary: "primary",
-          secondary: "secondary",
-          error: "error",
+          default: 'default',
+          primary: 'primary',
+          secondary: 'secondary',
+          error: 'error',
         },
-        "default"
+        'default',
       )}
     />
   ));

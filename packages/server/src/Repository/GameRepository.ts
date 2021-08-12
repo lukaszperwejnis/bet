@@ -1,6 +1,7 @@
-import { Repository } from "./Repository";
-import { Game } from "../structures/Game";
-import { GameModel } from "../models/GameModel";
+import { Repository } from './Repository';
+import { Game } from '../structures/Game';
+import { GameModel } from '../models/GameModel';
+import { Query } from '../structures/Query';
 
 export class GameRepository extends Repository<Game> {
   constructor() {
@@ -11,7 +12,7 @@ export class GameRepository extends Repository<Game> {
     return super.findById(id);
   }
 
-  public getMany(query: object): Promise<Game[]> {
+  public getMany(query: Query): Promise<Game[]> {
     return super.find(query);
   }
 
@@ -23,11 +24,11 @@ export class GameRepository extends Repository<Game> {
     return super.findOne(input);
   }
 
-  public async updateOne(query: any, data: any): Promise<any> {
+  public async updateOne(query: Query, data: unknown): Promise<any> {
     return super.updateOne(query, data);
   }
 
-  public getOneAndUpdate(query: object, data: object): Promise<Game> {
+  public getOneAndUpdate(query: Query, data: unknown): Promise<Game> {
     return super.findOneAndUpdate(query, data);
   }
 }

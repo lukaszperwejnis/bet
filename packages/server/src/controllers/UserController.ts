@@ -1,8 +1,9 @@
-import { Controller } from "./Controller";
-import { NextFunction, Request, Response } from "express";
-import { UserService } from "../services/UserService";
-import { MailService } from "../services/MailService";
-import {Password} from "@bet/structures";
+import { NextFunction, Request, Response } from 'express';
+import { Password } from '@bet/structures';
+import { Controller } from './Controller';
+import { UserService } from '../services/UserService';
+import { MailService } from '../services/MailService';
+import { ResponseReturnType } from '../structures/ResponseReturnType';
 
 export class UserController extends Controller {
   private userService = new UserService();
@@ -18,31 +19,39 @@ export class UserController extends Controller {
   async startResetPassword(
     req: Request<Password.StartResetPayload>,
     res: Response,
-    next: NextFunction
-  ) {
+    next: NextFunction,
+  ): ResponseReturnType {
     try {
       const doc = await this.mailService.sendResetPasswordEmail(req.body);
       return this.ok(res, doc);
     } catch (error) {
-      next(error);
+      return next(error);
     }
   }
 
-  async resetPassword(req: Request<Password.ResetPayload>, res: Response, next: NextFunction) {
+  async resetPassword(
+    req: Request<Password.ResetPayload>,
+    res: Response,
+    next: NextFunction,
+  ): ResponseReturnType {
     try {
       const doc = await this.userService.resetPassword(req.body);
       return this.ok(res, doc);
     } catch (error) {
-      next(error);
+      return next(error);
     }
   }
 
-  async updatePassword(req: Request, res: Response, next: NextFunction) {
+  async updatePassword(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): ResponseReturnType {
     try {
       const doc = await this.userService.updatePassword(req.body);
       return this.ok(res, doc);
     } catch (error) {
-      next(error);
+      return next(error);
     }
   }
 }

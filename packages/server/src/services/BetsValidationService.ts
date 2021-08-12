@@ -1,13 +1,13 @@
-import { GameStage, GameStatus } from "@bet/structures";
-import { GameRepository } from "../Repository/GameRepository";
-import { Game } from "../structures/Game";
-import { GameBet } from "../structures/GameBet";
-import { RecalculateService } from "./RecalculateService";
-import { ChampionBet } from "../structures/ChampionBet";
-import { GameBetService } from "./GameBetService";
-import { ChampionBetService } from "./ChampionBetService";
-import { GameService } from "./GameService";
-import {Bet} from "../structures/Bet";
+import { GameStage, GameStatus } from '@bet/structures';
+import { GameRepository } from '../Repository/GameRepository';
+import { Game } from '../structures/Game';
+import { GameBet } from '../structures/GameBet';
+import { RecalculateService } from './RecalculateService';
+import { ChampionBet } from '../structures/ChampionBet';
+import { GameBetService } from './GameBetService';
+import { ChampionBetService } from './ChampionBetService';
+import { GameService } from './GameService';
+import { Bet } from '../structures/Bet';
 
 export class BetsValidationService {
   private gameRepository = new GameRepository();
@@ -16,7 +16,7 @@ export class BetsValidationService {
   private championBetService = new ChampionBetService();
   private recalculateService = new RecalculateService();
 
-  async validateMatchBets() {
+  async validateMatchBets(): Promise<void> {
     const gameStagesToValidate: string[] = await this.getGameStagesToValidate();
     let updatedBets: Bet[] = [];
 
@@ -24,22 +24,21 @@ export class BetsValidationService {
       return;
     }
 
-    const updatedGames: Game[] = await this.gamesService.getUpdatedGamesByStages(
-      gameStagesToValidate
-    );
+    const updatedGames: Game[] =
+      await this.gamesService.getUpdatedGamesByStages(gameStagesToValidate);
 
     if (!updatedGames.length) {
       return;
     }
 
-    const updatedGameBets: GameBet[] = await this.gameBetService.updateBetsByGames(
-      updatedGames
-    );
+    const updatedGameBets: GameBet[] =
+      await this.gameBetService.updateBetsByGames(updatedGames);
 
     updatedBets = [...updatedGameBets];
 
     if (gameStagesToValidate.includes(GameStage.Final)) {
-      const updatedChampionBets: ChampionBet[] = await this.championBetService.updateBets();
+      const updatedChampionBets: ChampionBet[] =
+        await this.championBetService.updateBets();
       updatedBets = [...updatedBets, ...updatedChampionBets];
     }
 
@@ -48,7 +47,7 @@ export class BetsValidationService {
     }
 
     await this.recalculateService.recalculateUsersScores(
-      updatedBets.map(({createdBy}) => createdBy._id)
+      updatedBets.map(({ createdBy }) => createdBy._id),
     );
   }
 

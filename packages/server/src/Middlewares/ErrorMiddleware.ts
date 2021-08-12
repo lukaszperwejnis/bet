@@ -1,14 +1,13 @@
-import { Response, Request, NextFunction } from "express";
-import { HttpError } from "../errors/HttpError";
+import { Response, Request } from 'express';
+import { HttpError } from '../errors/HttpError';
 
 export function errorMiddleware(
   error: HttpError,
   req: Request,
   response: Response,
-  next: NextFunction
-) {
+): void {
   const status = error.status || 500;
-  const message = error.message || "Something went wrong";
+  const message = error.message || 'Something went wrong';
 
   response.status(status).send({
     status,

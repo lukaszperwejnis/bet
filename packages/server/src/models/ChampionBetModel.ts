@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { BetStatus, Competition } from "@bet/structures";
+import mongoose from 'mongoose';
+import { BetStatus, Competition } from '@bet/structures';
 
 const championBetSchema = new mongoose.Schema(
   {
@@ -11,7 +11,7 @@ const championBetSchema = new mongoose.Schema(
     bet: {
       required: true,
       type: mongoose.SchemaTypes.ObjectId,
-      ref: "Team",
+      ref: 'Team',
     },
     competition: {
       type: String,
@@ -30,16 +30,16 @@ const championBetSchema = new mongoose.Schema(
     createdBy: {
       required: true,
       type: mongoose.SchemaTypes.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
   },
   {
-    collection: "championBet",
+    collection: 'championBet',
     timestamps: true,
-  }
+  },
 );
 
 export const ChampionBetModel: mongoose.Model<any> = mongoose.model<any>(
-  "ChampionBet",
-  championBetSchema
+  'ChampionBet',
+  championBetSchema,
 );

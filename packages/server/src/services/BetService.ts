@@ -1,10 +1,12 @@
-import { GameService } from "./GameService";
-import { ChampionBetService } from "./ChampionBetService";
-import { Game } from "../structures/Game";
-import { Team } from "../structures/Team";
-import { GameBetService } from "./GameBetService";
-import { GameBetRepository } from "../Repository/GameBetRepository";
-import { ChampionBetRepository } from "../Repository/ChampionBetRepository";
+import { Team } from '@bet/structures';
+import { GameService } from './GameService';
+import { ChampionBetService } from './ChampionBetService';
+import { Game } from '../structures/Game';
+import { GameBetService } from './GameBetService';
+import { GameBetRepository } from '../Repository/GameBetRepository';
+import { ChampionBetRepository } from '../Repository/ChampionBetRepository';
+import { GameBet } from '../structures/GameBet';
+import { ChampionBet } from '../structures/ChampionBet';
 
 type GameBetInput = { gameId: string; homeScore: number; awayScore: number };
 type ChampionBetInput = { teamId: string };
@@ -21,40 +23,37 @@ export class BetService {
   private gameBetRepository = new GameBetRepository();
   private championBetRepository = new ChampionBetRepository();
 
-  async getAvailableBetsByUserId(userId: string) {
+  async getAvailableBetsByUserId(
+    userId: string,
+  ): Promise<{ availableGames: Game[]; availableChampions: Team.Team[] }> {
     const availableGames: Game[] = await this.gameService.getAvailableByUserId(
-      userId
+      userId,
     );
-    const availableChampions: Team[] = await this.championBetService.getAvailableByUserId(
-      userId
-    );
+    const availableChampions: Team.Team[] =
+      await this.championBetService.getAvailableByUserId(userId);
     return {
       availableGames,
       availableChampions,
     };
   }
 
-  async createBets(userId: string, { games, champion }: CreateBetsInput) {
+  async createBets(
+    userId: string,
+    { games, champion }: CreateBetsInput,
+  ): Promise<unknown> {
     let result = {};
 
-    const hasValidGameBets = games ? await this.gameBetService.hasValidBets(
-      userId,
-      games
-    ) : false;
+    const hasValidGameBets = games
+      ? await this.gameBetService.hasValidBets(userId, games)
+      : false;
 
-    const hasValidChampionBet = champion ? await this.championBetService.isValidBet(
-      userId,
-      champion
-    ): false;
-
-    console.log({
-      hasValidGameBets,
-      hasValidChampionBet,
-    });
+    const hasValidChampionBet = champion
+      ? await this.championBetService.isValidBet(userId, champion)
+      : false;
 
     if (hasValidGameBets && games) {
       const gameBets = await Promise.all(
-        games.map((game) => this.gameBetService.createOne(userId, game))
+        games.map((game) => this.gameBetService.createOne(userId, game)),
       );
 
       result = {
@@ -66,7 +65,7 @@ export class BetService {
     if (hasValidChampionBet && champion) {
       const championBet = await this.championBetService.createOne(
         userId,
-        champion
+        champion,
       );
 
       result = {
@@ -78,17 +77,20 @@ export class BetService {
     return result;
   }
 
-  async getBetsByUserId(userId: string) {
+  async getBetsByUserId(userId: string): Promise<{
+    gameBets: GameBet[];
+    championBet: ChampionBet[];
+  }> {
     const gameBetsPipeline = [
       {
         $lookup: {
-          from: "game",
-          localField: "game",
-          foreignField: "_id",
-          as: "game",
+          from: 'game',
+          localField: 'game',
+          foreignField: '_id',
+          as: 'game',
         },
       },
-      { $unwind: "$game" },
+      { $unwind: '$game' },
       {
         $match: {
           createdBy: userId,
@@ -96,34 +98,34 @@ export class BetService {
       },
       {
         $lookup: {
-          from: "team",
-          localField: "game.homeTeam",
-          foreignField: "_id",
-          as: "game.homeTeam",
+          from: 'team',
+          localField: 'game.homeTeam',
+          foreignField: '_id',
+          as: 'game.homeTeam',
         },
       },
-      { $unwind: "$game.homeTeam" },
+      { $unwind: '$game.homeTeam' },
       {
         $lookup: {
-          from: "team",
-          localField: "game.awayTeam",
-          foreignField: "_id",
-          as: "game.awayTeam",
+          from: 'team',
+          localField: 'game.awayTeam',
+          foreignField: '_id',
+          as: 'game.awayTeam',
         },
       },
-      { $unwind: "$game.awayTeam" },
+      { $unwind: '$game.awayTeam' },
     ];
 
     const championBetPipeline = [
       {
         $lookup: {
-          from: "team",
-          localField: "bet",
-          foreignField: "_id",
-          as: "bet",
+          from: 'team',
+          localField: 'bet',
+          foreignField: '_id',
+          as: 'bet',
         },
       },
-      { $unwind: "$bet" },
+      { $unwind: '$bet' },
       {
         $match: {
           createdBy: userId,
@@ -134,7 +136,7 @@ export class BetService {
     return {
       gameBets: await this.gameBetRepository.aggregate(gameBetsPipeline),
       championBet: await this.championBetRepository.aggregate(
-        championBetPipeline
+        championBetPipeline,
       ),
     };
   }

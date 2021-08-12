@@ -1,10 +1,10 @@
-import { ReactElement, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { Message as MessageStructure } from "../../types";
-import { Container, Success, Error, Warning, Info } from "./styles";
+import { ReactElement, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import { Message as MessageStructure } from '../../types';
+import { Container, Success, Error, Warning, Info } from './styles';
 
 const defaultProps = Object.freeze({
-  root: "message-root",
+  root: 'message-root',
   duration: 3,
 });
 
@@ -37,19 +37,19 @@ export const Message = ({
   ...otherProps
 }: MessageProps): ReactElement => {
   const rootContainer = document.getElementById(root);
-  const el = document.createElement("div");
-  el.className = "c-message__root";
+  const el = document.createElement('div');
+  el.className = 'c-message__root';
   el.style.cssText =
-    "  position: fixed;\n" +
-    "  box-sizing: border-box;\n" +
-    "  padding: 0;\n" +
-    "  z-index: 1010;\n" +
-    "  top: 15px;\n" +
-    "  pointer-events: none;\n" +
-    "  display: flex;\n" +
-    "  justify-content: center;\n" +
-    "  left: 0;\n" +
-    "  right: 0;";
+    '  position: fixed;\n' +
+    '  box-sizing: border-box;\n' +
+    '  padding: 0;\n' +
+    '  z-index: 1010;\n' +
+    '  top: 15px;\n' +
+    '  pointer-events: none;\n' +
+    '  display: flex;\n' +
+    '  justify-content: center;\n' +
+    '  left: 0;\n' +
+    '  right: 0;';
 
   useEffect(() => {
     if (rootContainer) {

@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import { BetStatus } from "@bet/structures";
-import { WinnerType } from "../enums";
+import mongoose from 'mongoose';
+import { BetStatus } from '@bet/structures';
+import { WinnerType } from '../enums';
 
 const gameBetSchema = new mongoose.Schema(
   {
@@ -11,7 +11,7 @@ const gameBetSchema = new mongoose.Schema(
     },
     game: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Game",
+      ref: 'Game',
       required: true,
     },
     bet: {
@@ -42,17 +42,17 @@ const gameBetSchema = new mongoose.Schema(
     },
     createdBy: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
   },
   {
-    collection: "gameBet",
+    collection: 'gameBet',
     timestamps: true,
-  }
+  },
 );
 
 export const GameBetModel: mongoose.Model<any> = mongoose.model<any>(
-  "GameBet",
-  gameBetSchema
+  'GameBet',
+  gameBetSchema,
 );

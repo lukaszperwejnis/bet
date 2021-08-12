@@ -1,6 +1,6 @@
-import { ChangeEvent } from "react";
-import { WithExcludedChildrenProps } from "../../types/index";
-import { Select as SelectComponent } from "./styles";
+import { ChangeEvent } from 'react';
+import { WithExcludedChildrenProps } from '../../types/index';
+import { Select as SelectComponent } from './styles';
 
 interface SelectProps extends WithExcludedChildrenProps {
   id?: string;

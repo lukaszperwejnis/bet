@@ -1,7 +1,7 @@
-import { HttpError } from "./HttpError";
+import { HttpError } from './HttpError';
 
 export class TokenExpiredError extends HttpError {
   constructor() {
-    super(401, "Token expired");
+    super(401, 'Token expired');
   }
 }

@@ -1,5 +1,5 @@
 export interface SchemaValidationError {
-    field: string;
-    type: string;
-    message: string;
+  field: string;
+  type: string;
+  message: string;
 }

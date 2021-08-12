@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { WithExcludedChildrenProps } from "../types";
-import { config } from "../styles";
+import styled from 'styled-components';
+import { WithExcludedChildrenProps } from '../types';
+import { config } from '../styles';
 
 export const Loader = styled.div<WithExcludedChildrenProps>`
   position: absolute;

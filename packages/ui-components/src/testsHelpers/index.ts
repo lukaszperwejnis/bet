@@ -1,2 +1,2 @@
-export { actImmediate } from "./actImmediate";
-export { getPropertyFromComponent } from "./getPropertyFromComponent";
+export { actImmediate } from './actImmediate';
+export { getPropertyFromComponent } from './getPropertyFromComponent';

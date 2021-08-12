@@ -1,3 +1,3 @@
 export enum GameStage {
-  Final = "FINAL",
+  Final = 'FINAL',
 }

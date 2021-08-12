@@ -1,6 +1,6 @@
-import { FormEvent } from "react";
-import { RenderType } from "../../types/index";
-import { CheckboxInput, Inner, Label, Root } from "./styles";
+import { FormEvent } from 'react';
+import { RenderType } from '../../types/index';
+import { CheckboxInput, Inner, Label, Root } from './styles';
 
 type ToggleSwitchProps = {
   id?: string;

@@ -1,2 +1,2 @@
-export { ErrorCodes } from "./errorsCodes";
-export { InvalidIconError } from "./InvalidIconError";
+export { ErrorCodes } from './errorsCodes';
+export { InvalidIconError } from './InvalidIconError';

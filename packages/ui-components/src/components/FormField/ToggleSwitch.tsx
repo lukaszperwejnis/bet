@@ -1,7 +1,7 @@
-import { useField } from "formik";
-import { Wrapper, Error, Description } from "./components/index";
-import { ToggleSwitch as ToggleSwitchComponent } from "../ToggleSwitch/ToggleSwitch";
-import { RenderType, WithExcludedChildrenProps } from "../../types/index";
+import { useField } from 'formik';
+import { Wrapper, Error, Description } from './components/index';
+import { ToggleSwitch as ToggleSwitchComponent } from '../ToggleSwitch/ToggleSwitch';
+import { RenderType, WithExcludedChildrenProps } from '../../types/index';
 
 interface ToggleSwitchProps extends WithExcludedChildrenProps {
   name: string;

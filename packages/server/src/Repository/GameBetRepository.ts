@@ -1,6 +1,7 @@
-import { Repository } from "./Repository";
-import { GameBetModel } from "../models/GameBetModel";
-import { GameBet } from "../structures/GameBet";
+import { Repository } from './Repository';
+import { GameBetModel } from '../models/GameBetModel';
+import { GameBet } from '../structures/GameBet';
+import { Query } from '../structures/Query';
 
 export class GameBetRepository extends Repository<GameBet> {
   constructor() {
@@ -11,11 +12,11 @@ export class GameBetRepository extends Repository<GameBet> {
     return super.findById(id);
   }
 
-  public findOne(query: object): Promise<GameBet> {
+  public findOne(query: Query): Promise<GameBet> {
     return super.findOne(query);
   }
 
-  public getMany(query: object): Promise<GameBet[]> {
+  public getMany(query: Query): Promise<GameBet[]> {
     return super.find(query);
   }
 
@@ -23,7 +24,7 @@ export class GameBetRepository extends Repository<GameBet> {
     return super.create(input);
   }
 
-  public getOneAndUpdate(query: object, data: object): Promise<GameBet> {
+  public getOneAndUpdate(query: Query, data: unknown): Promise<GameBet> {
     return super.findOneAndUpdate(query, data);
   }
 

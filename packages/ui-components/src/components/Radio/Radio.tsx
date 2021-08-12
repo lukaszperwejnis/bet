@@ -1,12 +1,12 @@
-import { FormEvent } from "react";
-import { RenderType, WithExcludedChildrenProps } from "../../types/index";
+import { FormEvent } from 'react';
+import { RenderType, WithExcludedChildrenProps } from '../../types/index';
 import {
   Wrapper,
   Radio as RadioComponent,
   RadioInput,
   Inner,
   Label,
-} from "./styles";
+} from './styles';
 
 export interface RadioProps extends WithExcludedChildrenProps {
   name: string;

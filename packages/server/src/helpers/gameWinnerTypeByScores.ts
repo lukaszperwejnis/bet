@@ -1,8 +1,8 @@
-import { WinnerType } from "../enums";
+import { WinnerType } from '../enums';
 
 export function gameWinnerTypeByScores(
   homeScore: number,
-  awayScore: number
+  awayScore: number,
 ): WinnerType {
   switch (true) {
     case homeScore > awayScore:

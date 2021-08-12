@@ -1,6 +1,6 @@
-import { FormEvent } from "react";
-import { RenderType, WithExcludedChildrenProps } from "../../types";
-import { Wrapper, CheckboxInput, Inner, Label } from "./styles";
+import { FormEvent } from 'react';
+import { RenderType, WithExcludedChildrenProps } from '../../types';
+import { Wrapper, CheckboxInput, Inner, Label } from './styles';
 
 interface CheckboxProps extends WithExcludedChildrenProps {
   id?: string;

@@ -1,6 +1,5 @@
-import {Competition, GameStatus} from "@bet/structures";
-import {WinnerType} from "../enums";
-
+import { Competition, GameStatus } from '@bet/structures';
+import { WinnerType } from '../enums';
 
 export interface ExternalGame {
   externalId: number;

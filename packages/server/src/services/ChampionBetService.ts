@@ -1,23 +1,23 @@
-import * as Joi from "@hapi/joi";
-import { BetStatus } from "@bet/structures";
-import { ChampionBet } from "../structures/ChampionBet";
-import { TeamService } from "./TeamService";
-import { ChampionBetRepository } from "../Repository/ChampionBetRepository";
-import { Team } from "../structures/Team";
-import { TeamRepository } from "../Repository/TeamRepository";
-import { compareObjectsIds } from "../helpers/compareObjectIds";
-import { GameRepository } from "../Repository/GameRepository";
-import { Game } from "../structures/Game";
+import * as Joi from '@hapi/joi';
+import { BetStatus } from '@bet/structures';
+import { ChampionBet } from '../structures/ChampionBet';
+import { TeamService } from './TeamService';
+import { ChampionBetRepository } from '../Repository/ChampionBetRepository';
+import { Team } from '../structures/Team';
+import { TeamRepository } from '../Repository/TeamRepository';
+import { compareObjectsIds } from '../helpers/compareObjectIds';
+import { GameRepository } from '../Repository/GameRepository';
+import { Game } from '../structures/Game';
 import {
-  BetAlredyExistError,
+  BetAlreadyExistError,
   FieldValidationError,
   InvalidIdError,
   GameNotFoundError,
   TeamNotFoundError,
-} from "../errors";
-import { isValidObjectId } from "../helpers/isValidObjectId";
-import { VALIDATION_SCHEMA_KEYS } from "../constants/validationSchemaKeys";
-import { mapSchemaValidationErrors } from "../helpers/mapSchemaValidationErrors";
+} from '../errors';
+import { isValidObjectId } from '../helpers/isValidObjectId';
+import { VALIDATION_SCHEMA_KEYS } from '../constants/validationSchemaKeys';
+import { mapSchemaValidationErrors } from '../helpers/mapSchemaValidationErrors';
 
 type ChampionBetInput = {
   teamId: string;
@@ -31,7 +31,7 @@ export class ChampionBetService {
 
   async createOne(
     userId: string,
-    input: ChampionBetInput
+    input: ChampionBetInput,
   ): Promise<ChampionBet> {
     const schema = Joi.object({
       teamId: VALIDATION_SCHEMA_KEYS.ID,
@@ -46,7 +46,7 @@ export class ChampionBetService {
     const bet = await this.championBetRepository.getOne({ createdBy: userId });
 
     if (bet) {
-      throw new BetAlredyExistError(input.teamId);
+      throw new BetAlreadyExistError(input.teamId);
     }
 
     const team = await this.teamRepository.findById(input.teamId);
@@ -55,7 +55,7 @@ export class ChampionBetService {
       throw new TeamNotFoundError(input.teamId);
     }
 
-    return await this.championBetRepository.createOne({
+    return this.championBetRepository.createOne({
       bet: team,
       createdBy: userId,
     });
@@ -82,26 +82,28 @@ export class ChampionBetService {
       return [];
     }
 
-    const championBets: ChampionBet[] = await this.championBetRepository.getMany(
-      {
+    const championBets: ChampionBet[] =
+      await this.championBetRepository.getMany({
         status: BetStatus.Scheduled,
-      }
-    );
+      });
 
-    for (let championBet of championBets) {
+    for (const championBet of championBets) {
       const betTeam = await this.teamRepository.findById(championBet.bet._id);
-      const bet: ChampionBet = await this.championBetRepository.findOneAndUpdate(
-        { _id: championBet._id },
-        {
-          hasChampionCorrect: compareObjectsIds(
-            betTeam._id,
-            competitionWinner._id
-          ),
-          status: BetStatus.Finished,
-        }
-      );
+      const bet: ChampionBet =
+        await this.championBetRepository.findOneAndUpdate(
+          { _id: championBet._id },
+          {
+            hasChampionCorrect: compareObjectsIds(
+              betTeam._id,
+              competitionWinner._id,
+            ),
+            status: BetStatus.Finished,
+          },
+        );
 
-      bet && updatedBets.push(bet);
+      if (bet) {
+        updatedBets.push(bet);
+      }
     }
 
     return updatedBets;
@@ -119,20 +121,19 @@ export class ChampionBetService {
     const scheduledGames: Game[] = await this.gameRepository.getMany({
       status: BetStatus.Scheduled,
     });
-    const teamIds = scheduledGames.reduce((acc: Team[], { homeTeam, awayTeam }) => {
-      return [
-          ...acc,
-          homeTeam,
-          awayTeam
-      ];
-    }, []);
+    const teamIds = scheduledGames.reduce(
+      (acc: Team[], { homeTeam, awayTeam }) => {
+        return [...acc, homeTeam, awayTeam];
+      },
+      [],
+    );
 
     return await this.teamRepository.getMany({ _id: { $in: teamIds } });
   }
 
   async isValidBet(
     userId: string,
-    championBet: ChampionBetInput
+    championBet: ChampionBetInput,
   ): Promise<boolean> {
     if (!championBet) {
       return false;

@@ -1,41 +1,52 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.tokenService = void 0;
-const _constants_1 = require("@constants");
-const localStorage_service_1 = require("./localStorage.service");
+const _constants_1 = require('@constants');
+const localStorage_service_1 = require('./localStorage.service');
 class TokenService {
-    constructor() {
-        this.isTokenInvalid = (jwtToken) => {
-            return TokenService.isExpired(TokenService.getExpirationDate(jwtToken));
-        };
-        this.isInvalidTokenError = (error) => {
-            console.log({ error });
-            return error.status === 500 && error.message === 'jwt malformed';
-        };
+  constructor() {
+    this.isTokenInvalid = (jwtToken) => {
+      return TokenService.isExpired(TokenService.getExpirationDate(jwtToken));
+    };
+    this.isInvalidTokenError = (error) => {
+      console.log({ error });
+      return error.status === 500 && error.message === 'jwt malformed';
+    };
+  }
+  setTokens({ accessToken, refreshToken }) {
+    localStorage_service_1.localStorageService.set(
+      _constants_1.StorageKeys.AccessToken,
+      accessToken,
+    );
+    localStorage_service_1.localStorageService.set(
+      _constants_1.StorageKeys.RefreshToken,
+      refreshToken,
+    );
+  }
+  clearTokens() {
+    localStorage_service_1.localStorageService.remove(
+      _constants_1.StorageKeys.AccessToken,
+    );
+    localStorage_service_1.localStorageService.remove(
+      _constants_1.StorageKeys.RefreshToken,
+    );
+  }
+  getAccessToken() {
+    return localStorage_service_1.localStorageService.get(
+      _constants_1.StorageKeys.AccessToken,
+    );
+  }
+  static getExpirationDate(jwtToken) {
+    try {
+      const jwt = JSON.parse(atob(jwtToken.split('.')[1]));
+      return (jwt && jwt.exp && jwt.exp * 1000) || -1;
+    } catch (error) {
+      return -1;
     }
-    setTokens({ accessToken, refreshToken }) {
-        localStorage_service_1.localStorageService.set(_constants_1.StorageKeys.AccessToken, accessToken);
-        localStorage_service_1.localStorageService.set(_constants_1.StorageKeys.RefreshToken, refreshToken);
-    }
-    clearTokens() {
-        localStorage_service_1.localStorageService.remove(_constants_1.StorageKeys.AccessToken);
-        localStorage_service_1.localStorageService.remove(_constants_1.StorageKeys.RefreshToken);
-    }
-    getAccessToken() {
-        return localStorage_service_1.localStorageService.get(_constants_1.StorageKeys.AccessToken);
-    }
-    static getExpirationDate(jwtToken) {
-        try {
-            const jwt = JSON.parse(atob(jwtToken.split('.')[1]));
-            return (jwt && jwt.exp && jwt.exp * 1000) || -1;
-        }
-        catch (error) {
-            return -1;
-        }
-    }
-    static isExpired(exp) {
-        return exp ? Date.now() > exp : false;
-    }
+  }
+  static isExpired(exp) {
+    return exp ? Date.now() > exp : false;
+  }
 }
 // const setTokens = ({ accessToken, refreshToken }: Tokens): void => {
 //   localStorageService.set(StorageKeys.AccessToken, accessToken);

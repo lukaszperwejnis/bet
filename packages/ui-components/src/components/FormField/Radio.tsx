@@ -1,7 +1,7 @@
-import { useField } from "formik";
-import { Wrapper, Error, Description } from "./components";
-import { Radio as RadioComponent } from "../Radio/Radio";
-import { RenderType, WithExcludedChildrenProps } from "../../types";
+import { useField } from 'formik';
+import { Wrapper, Error, Description } from './components';
+import { Radio as RadioComponent } from '../Radio/Radio';
+import { RenderType, WithExcludedChildrenProps } from '../../types';
 
 interface FormFieldRadioProps extends WithExcludedChildrenProps {
   name: string;

@@ -1,6 +1,5 @@
-import * as mongoose from "mongoose";
-import { CreationType } from "../enums";
-import {Team} from "../structures/Team";
+import * as mongoose from 'mongoose';
+import { CreationType, Team } from '@bet/structures';
 
 const teamSchema = new mongoose.Schema(
   {
@@ -12,7 +11,7 @@ const teamSchema = new mongoose.Schema(
     externalId: {
       type: Number,
       required: [
-        function (this: Team) {
+        function checkCreationType(this: Team.Team) {
           return this.creationType !== CreationType.External;
         },
       ],
@@ -31,14 +30,14 @@ const teamSchema = new mongoose.Schema(
     },
   },
   {
-    collection: "team",
+    collection: 'team',
     timestamps: true,
-  }
+  },
 );
 
 teamSchema.index({ name: 1, externalId: 1 }, { unique: true, sparse: true });
 
 export const TeamModel: mongoose.Model<any> = mongoose.model<any>(
-  "Team",
-  teamSchema
+  'Team',
+  teamSchema,
 );

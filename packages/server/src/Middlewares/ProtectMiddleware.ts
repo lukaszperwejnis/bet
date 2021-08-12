@@ -1,8 +1,8 @@
-import { Response, NextFunction } from "express";
-import { GetUserAuthInfoRequest } from "../interfaces/GetUserAuthInfoRequest";
-import { UnauthorizedError } from "../errors";
-import { UserService } from "../services/UserService";
-import { TokenService } from "../services/TokenService";
+import { Response, NextFunction } from 'express';
+import { GetUserAuthInfoRequest } from '../interfaces/GetUserAuthInfoRequest';
+import { UnauthorizedError } from '../errors';
+import { UserService } from '../services/UserService';
+import { TokenService } from '../services/TokenService';
 
 export class ProtectMiddleware {
   private tokenService = new TokenService();
@@ -15,16 +15,14 @@ export class ProtectMiddleware {
   async protect(
     req: GetUserAuthInfoRequest,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<void> {
     if (!req.headers.authorization) {
       next(new UnauthorizedError());
       return;
     }
 
-    console.log(req.headers.authorization);
-
-    const token = req.headers.authorization.split("Bearer ")[1];
+    const token = req.headers.authorization.split('Bearer ')[1];
     if (!token) {
       next(new UnauthorizedError());
       return;

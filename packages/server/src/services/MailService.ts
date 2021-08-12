@@ -1,17 +1,17 @@
-import nodemailer from "nodemailer";
-import nodeMailerMailgun from "nodemailer-mailgun-transport";
-import * as Joi from "@hapi/joi";
-import config from "../config";
+import nodemailer from 'nodemailer';
+import nodeMailerMailgun from 'nodemailer-mailgun-transport';
+import * as Joi from '@hapi/joi';
+import { Password, Signup } from '@bet/structures';
+import config from '../config';
 import {
   FieldValidationError,
   UserAlreadyExistError,
   UserByEmailNotFoundError,
-} from "../errors";
-import { mapSchemaValidationErrors } from "../helpers/mapSchemaValidationErrors";
-import { VALIDATION_SCHEMA_KEYS } from "../constants/validationSchemaKeys";
-import { TokenService } from "./TokenService";
-import { UserRepository } from "../Repository/UserRepository";
-import { Password, Signup } from "@bet/structures";
+} from '../errors';
+import { mapSchemaValidationErrors } from '../helpers/mapSchemaValidationErrors';
+import { VALIDATION_SCHEMA_KEYS } from '../constants/validationSchemaKeys';
+import { TokenService } from './TokenService';
+import { UserRepository } from '../Repository/UserRepository';
 
 const auth = {
   auth: {
@@ -38,7 +38,9 @@ export class MailService {
     }
   }
 
-  async sendInvitationEmail(input: Signup.InvitationPayload): Promise<Signup.InvitationSuccess> {
+  async sendInvitationEmail(
+    input: Signup.InvitationPayload,
+  ): Promise<Signup.InvitationSuccess> {
     MailService.validateMail(input);
     const user = await this.userRepository.findOne({ email: input.email });
 
@@ -48,17 +50,19 @@ export class MailService {
 
     const token = this.tokenService.createInvitationToken(input.email);
     const result = await MailService.sendMail({
-      from: "bet@bet",
+      from: 'bet@bet',
       to: input.email,
-      subject: "Bet - rejestracja",
+      subject: 'Bet - rejestracja',
       text: `Klikaj i obstawiaj Sportowy Świrze! ${config.clientURL}/mail-invitation-signup?token=${token}&email=${input.email}`,
     });
 
     return Boolean(result);
   }
 
-  async sendResetPasswordEmail({email}: Password.StartResetPayload): Promise<Password.StartResetSuccess> {
-    MailService.validateMail({email});
+  async sendResetPasswordEmail({
+    email,
+  }: Password.StartResetPayload): Promise<Password.StartResetSuccess> {
+    MailService.validateMail({ email });
     const user = await this.userRepository.findOne({ email });
 
     if (!user) {
@@ -67,9 +71,9 @@ export class MailService {
 
     const token = this.tokenService.createResetPasswordToken(email);
     const result = await MailService.sendMail({
-      from: "bet@bet",
+      from: 'bet@bet',
       to: email,
-      subject: "Bet - reset hasła",
+      subject: 'Bet - reset hasła',
       text: `Klikaj i ustawiaj nowe hasło by obstawiać dalej! ${config.clientURL}/set-password?token=${token}`,
     });
 

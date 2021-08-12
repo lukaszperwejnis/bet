@@ -1,4 +1,4 @@
 export enum BetStatus {
-  Scheduled = "SCHEDULED",
-  Finished = "FINISHED",
+  Scheduled = 'SCHEDULED',
+  Finished = 'FINISHED',
 }

@@ -1,37 +1,59 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
+'use strict';
+var __createBinding =
+  (this && this.__createBinding) ||
+  (Object.create
+    ? function (o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        Object.defineProperty(o, k2, {
+          enumerable: true,
+          get: function () {
+            return m[k];
+          },
+        });
+      }
+    : function (o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        o[k2] = m[k];
+      });
+var __setModuleDefault =
+  (this && this.__setModuleDefault) ||
+  (Object.create
+    ? function (o, v) {
+        Object.defineProperty(o, 'default', { enumerable: true, value: v });
+      }
+    : function (o, v) {
+        o['default'] = v;
+      });
+var __importStar =
+  (this && this.__importStar) ||
+  function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null)
+      for (var k in mod)
+        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
+          __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Label = exports.Wrapper = exports.Inner = exports.CheckboxInput = void 0;
-const styled_components_1 = __importStar(require("styled-components"));
-const config_1 = require("../../../../styles/config");
-const mixins_1 = require("../../../../styles/mixins");
-exports.CheckboxInput = styled_components_1.default.input `
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
+exports.Label =
+  exports.Wrapper =
+  exports.Inner =
+  exports.CheckboxInput =
+    void 0;
+const styled_components_1 = __importStar(require('styled-components'));
+const config_1 = require('../../../../styles/config');
+const mixins_1 = require('../../../../styles/mixins');
+exports.CheckboxInput = styled_components_1.default.input`
   position: absolute;
   z-index: -1;
   opacity: 0;
 `;
 exports.CheckboxInput.defaultProps = {
-    type: 'checkbox',
+  type: 'checkbox',
 };
-exports.Inner = styled_components_1.default.label `
+exports.Inner = styled_components_1.default.label`
   position: relative;
   padding-left: 30px;
   cursor: pointer;
@@ -85,15 +107,16 @@ exports.Inner = styled_components_1.default.label `
     background-image: none;
   }
 `;
-exports.Wrapper = styled_components_1.default.label `
+exports.Wrapper = styled_components_1.default.label`
   position: relative;
   display: flex;
   height: 18px;
   transition: opacity 0.25s ease-in-out;
   cursor: pointer;
 
-  ${({ disabled }) => disabled &&
-    styled_components_1.css `
+  ${({ disabled }) =>
+    disabled &&
+    styled_components_1.css`
       opacity: ${config_1.config.opacity.disabled};
       cursor: not-allowed;
       ${exports.Inner} {
@@ -105,7 +128,7 @@ exports.Wrapper = styled_components_1.default.label `
     margin-top: ${config_1.config.spacing.small};
   }
 `;
-exports.Label = styled_components_1.default.span `
+exports.Label = styled_components_1.default.span`
   font-family: ${config_1.config.fontFamily.primary};
   color: ${config_1.config.color.textColor};
   font-size: ${config_1.config.fontSize.normal};

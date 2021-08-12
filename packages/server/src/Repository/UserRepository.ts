@@ -1,29 +1,35 @@
-import { User } from "@bet/structures";
-import { Repository } from "./Repository";
-import { UserModel } from "../models/UserModel";
+import { User } from '@bet/structures';
+import { Repository } from './Repository';
+import { UserModel } from '../models/UserModel';
+import { Query } from '../structures/Query';
 
 export class UserRepository extends Repository<User.User> {
   constructor() {
     super(UserModel);
   }
 
-  public findById(id: string, projection?: object): Promise<User.User> {
+  findById(id: string, projection?: unknown): Promise<User.User> {
     return super.findById(id, projection);
   }
 
-  public findOne(query: object, useLean?: boolean): Promise<User.User> {
+  findOne(query: Query, useLean?: boolean): Promise<User.User> {
     return super.findOne(query, useLean);
   }
 
-  public findMany(query: object): Promise<User.User[]> {
+  findMany(query: Query): Promise<User.User[]> {
     return super.find(query);
   }
 
-  public findManyByIds(ids: string[]): Promise<User.User[]> {
+  findManyByIds(ids: string[]): Promise<User.User[]> {
     return super.findByIds(ids);
   }
 
-  public async createOne(input: any): Promise<User.User> {
+  async createOne(input: {
+    email: string;
+    first_name: string;
+    last_name: string;
+    password: string;
+  }): Promise<User.User> {
     const user = {
       email: input.email,
       profile: {
@@ -35,11 +41,11 @@ export class UserRepository extends Repository<User.User> {
     return super.create<User.User>(user as User.User);
   }
 
-  public async getMany(query: object): Promise<User.User[]> {
+  async getMany(query: Query): Promise<User.User[]> {
     return super.find(query);
   }
 
-  public updateById(id: string, input: object): Promise<User.User> {
+  updateById(id: string, input: unknown): Promise<User.User> {
     return super.updateOne({ _id: id }, input);
   }
 }

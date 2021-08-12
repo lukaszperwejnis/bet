@@ -1,11 +1,11 @@
-import { MissingTokenError } from "../errors/MissingTokenError";
-import * as jwt from "jsonwebtoken";
-import config from "../config";
+import * as jwt from 'jsonwebtoken';
+import { MissingTokenError } from '../errors/MissingTokenError';
+import config from '../config';
 import {
   DataStoredInUserToken,
   DataStoredInSigninToken,
-} from "../interfaces/TokenData";
-import { TokenExpiredError } from "../errors";
+} from '../interfaces/TokenData';
+import { TokenExpiredError } from '../errors';
 
 export class TokenService {
   private verifyToken(token: string) {
@@ -16,28 +16,29 @@ export class TokenService {
     return new Promise((resolve, reject) => {
       jwt.verify(token, config.secrets.jwt, (err, payload) => {
         if (err) {
-          console.log(err, "ERROR");
-          return reject(err);
+          reject(err);
+          return;
         }
 
-        console.log(payload, "PAYLOAD");
         resolve(payload);
       });
     });
   }
 
-  verifySigninToken(token: string) {
+  verifySigninToken(token: string): Promise<unknown> {
     return this.verifyToken(token);
   }
 
-  verifyAccessToken(token: string) {
+  verifyAccessToken(token: string): Promise<unknown> {
     return this.verifyToken(token);
   }
 
-  async refreshAccessTokenByRefreshToken(token: string): Promise<{accessToken: string, refreshToken: string}> {
+  async refreshAccessTokenByRefreshToken(
+    token: string,
+  ): Promise<{ accessToken: string; refreshToken: string }> {
     const payload: any = await this.verifyToken(token);
     if (!payload) {
-      new TokenExpiredError();
+      throw new TokenExpiredError();
     }
 
     return {
@@ -46,11 +47,11 @@ export class TokenService {
     };
   }
 
-  verifyMailInvitationToken(token: string) {
+  verifyMailInvitationToken(token: string): Promise<unknown> {
     return this.verifyToken(token);
   }
 
-  verifyResetPasswordToken(token: string) {
+  verifyResetPasswordToken(token: string): Promise<unknown> {
     return this.verifyToken(token);
   }
 

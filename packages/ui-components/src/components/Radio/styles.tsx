@@ -1,6 +1,9 @@
-import styled, { css } from "styled-components";
-import { WithChildrenProps, WithExcludedChildrenProps } from "../../types/index";
-import { stylesConfig } from "../../styles/styles-config";
+import styled, { css } from 'styled-components';
+import {
+  WithChildrenProps,
+  WithExcludedChildrenProps,
+} from '../../types/index';
+import { stylesConfig } from '../../styles/styles-config';
 
 export const RadioInput = styled.input<WithExcludedChildrenProps>`
   position: absolute;
@@ -15,7 +18,7 @@ export const RadioInput = styled.input<WithExcludedChildrenProps>`
 `;
 
 RadioInput.defaultProps = {
-  type: "radio",
+  type: 'radio',
 };
 
 interface WrapperProps extends WithChildrenProps {
@@ -63,7 +66,7 @@ export const Inner = styled.span<InnerProps>`
     css`
       &:before {
         position: absolute;
-        content: "";
+        content: '';
         width: 100%;
         height: 100%;
         background-color: ${stylesConfig.color.primary};
@@ -78,7 +81,7 @@ export const Inner = styled.span<InnerProps>`
         top: 4px;
         border-radius: 100%;
         display: table;
-        content: "";
+        content: '';
         background-color: ${stylesConfig.color.white};
       }
     `}

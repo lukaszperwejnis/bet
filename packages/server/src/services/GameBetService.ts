@@ -1,21 +1,21 @@
-import {BetStatus} from "@bet/structures";
-import * as Joi from "@hapi/joi";
-import { Game } from "../structures/Game";
-import { GameBet } from "../structures/GameBet";
-import { GameBetRepository } from "../Repository/GameBetRepository";
-import { GameRepository } from "../Repository/GameRepository";
-import { VALIDATION_SCHEMA_KEYS } from "../constants/validationSchemaKeys";
+import { BetStatus } from '@bet/structures';
+import * as Joi from '@hapi/joi';
+import { Game } from '../structures/Game';
+import { GameBet } from '../structures/GameBet';
+import { GameBetRepository } from '../Repository/GameBetRepository';
+import { GameRepository } from '../Repository/GameRepository';
+import { VALIDATION_SCHEMA_KEYS } from '../constants/validationSchemaKeys';
 import {
-  BetAlredyExistError,
+  BetAlreadyExistError,
   BetLateError,
   FieldValidationError,
   InvalidIdError,
   GameNotFoundError,
-} from "../errors";
-import { mapSchemaValidationErrors } from "../helpers/mapSchemaValidationErrors";
-import { gameWinnerTypeByScores } from "../helpers/gameWinnerTypeByScores";
-import { isValidObjectId } from "../helpers/isValidObjectId";
-import { GameService } from "./GameService";
+} from '../errors';
+import { mapSchemaValidationErrors } from '../helpers/mapSchemaValidationErrors';
+import { gameWinnerTypeByScores } from '../helpers/gameWinnerTypeByScores';
+import { isValidObjectId } from '../helpers/isValidObjectId';
+import { GameService } from './GameService';
 
 type CreateGameBetInput = {
   gameId: string;
@@ -56,10 +56,10 @@ export class GameBetService {
     }
 
     if (gameBet) {
-      throw new BetAlredyExistError(gameId);
+      throw new BetAlreadyExistError(gameId);
     }
 
-    return await this.gameBetRepository.createOne({
+    return this.gameBetRepository.createOne({
       ...input,
       bet: gameWinnerTypeByScores(homeScore, awayScore),
       createdBy: userId,
@@ -84,23 +84,23 @@ export class GameBetService {
   }
 
   async getManyByUserId(userId: string): Promise<GameBet[]> {
-    return await this.gameBetRepository.find({ createdBy: userId });
+    return this.gameBetRepository.find({ createdBy: userId });
   }
 
   async updateBetsByGames(games: Game[]): Promise<GameBet[]> {
     const pipeline = [
       {
         $lookup: {
-          from: "game",
-          localField: "game",
-          foreignField: "_id",
-          as: "gameRecord",
+          from: 'game',
+          localField: 'game',
+          foreignField: '_id',
+          as: 'gameRecord',
         },
       },
-      { $unwind: "$gameRecord" },
+      { $unwind: '$gameRecord' },
       {
         $match: {
-          "gameRecord.externalId": {
+          'gameRecord.externalId': {
             $in: games.map((game) => game.externalId),
           },
         },
@@ -114,7 +114,7 @@ export class GameBetService {
 
     const updatedBets: GameBet[] = [];
 
-    for (let bet of betsToUpdate) {
+    for (const bet of betsToUpdate) {
       const updatedGameBet = await this.gameBetRepository.getOneAndUpdate(
         { _id: bet._id },
         {
@@ -123,7 +123,7 @@ export class GameBetService {
             bet.gameRecord.homeScore === bet.homeScore &&
             bet.gameRecord.awayScore === bet.awayScore,
           status: BetStatus.Finished,
-        }
+        },
       );
 
       updatedBets.push(updatedGameBet);
@@ -132,18 +132,21 @@ export class GameBetService {
     return updatedBets;
   }
 
-  async hasValidBets(userId: string, gameBets: CreateGameBetInput[]) {
+  async hasValidBets(
+    userId: string,
+    gameBets: CreateGameBetInput[],
+  ): Promise<boolean> {
     if (!gameBets) {
       return false;
     }
 
     const availableGames: Game[] = await this.gameService.getAvailableByUserId(
-      userId
+      userId,
     );
 
-    const gameIds = gameBets.map((gameBets) => gameBets.gameId);
+    const gameIds = gameBets.map((bets) => bets.gameId);
     const availableGamesIds = availableGames.map((availableGame) =>
-        (availableGame._id as any).toString()
+      (availableGame._id as any).toString(),
     );
 
     return gameIds.every((gameId) => availableGamesIds.includes(gameId));
