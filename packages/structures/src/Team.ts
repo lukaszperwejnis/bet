@@ -1,6 +1,7 @@
 import { CreationType } from './common';
 
 export namespace Team {
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   export declare class Team {
     readonly _id: string;
     readonly externalId?: number;
