@@ -12,12 +12,18 @@ type GameBetProps = {
   }) => void;
 };
 
+const Team = ({ name, onChange }: any) => (
+  <TeamWrapper>
+    {name} <input onChange={onChange} type="number" />
+  </TeamWrapper>
+);
+
 export const GameBet = ({
   gameId,
   homeTeamName,
   awayTeamName,
   onChange,
-}: GameBetProps) => {
+}: GameBetProps): JSX.Element => {
   const [homeTeamScore, setHomeTeamScore] = useState<number>(0);
   const [awayTeamScore, setAwayTeamScore] = useState<number>(0);
 
@@ -49,9 +55,3 @@ export const GameBet = ({
     </Wrapper>
   );
 };
-
-const Team = ({ name, onChange }: any) => (
-  <TeamWrapper>
-    {name} <input onChange={onChange} type="number" />
-  </TeamWrapper>
-);

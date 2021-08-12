@@ -4,8 +4,6 @@
     "composite": true,
     "pretty": true,
     "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./src",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },

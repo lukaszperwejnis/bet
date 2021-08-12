@@ -1,5 +1,5 @@
 import { StorageKeys } from '@constants';
-import { ApiError, ErrorApiResponse } from '@structures';
+import { ErrorApiResponse } from '@structures';
 import { localStorageService } from './localStorage.service';
 
 type Tokens = {
@@ -40,7 +40,6 @@ class TokenService {
   };
 
   isInvalidTokenError = (error: ErrorApiResponse): boolean => {
-    console.log({ error });
     return error.status === 500 && error.message === 'jwt malformed';
   };
 }

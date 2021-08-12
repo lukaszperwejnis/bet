@@ -29,10 +29,7 @@ export const Dashboard = (): ReactElement => {
       games: bets,
     };
 
-    console.log(data);
-
-    const result = await betService.createBets(data);
-    console.log(result);
+    betService.createBets(data);
   };
 
   const renderUserBets = (bet: any): JSX.Element => {

@@ -13,6 +13,7 @@ export class ErrorBoundary extends React.PureComponent {
   }
 
   render(): ReactNode {
+    // eslint-disable-next-line react/prop-types
     return this.state.hasError ? <ErrorScreen /> : this.props.children;
   }
 }

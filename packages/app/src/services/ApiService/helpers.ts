@@ -63,7 +63,6 @@ export function getMappedRequestOptions(
     };
   }
   const token = tokenService.getAccessToken();
-  console.log(token);
   if (!token) {
     throw new Error('Missing access token');
   }

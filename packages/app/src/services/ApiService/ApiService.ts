@@ -28,7 +28,6 @@ export abstract class ApiService {
     }
     const { payload, ...options } = config;
     const result = await getMappedRequestOptions(options);
-    console.log(result);
     return this.request.post(url, payload, result);
   }
 

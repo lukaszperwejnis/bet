@@ -8,7 +8,7 @@ type TemplateOptionsType = {
   fragment?: string;
 };
 
-export function createTemplate(pattern: string) {
+export function createTemplate(pattern: string): any {
   const toPath = compile(pattern, { encode: encodeURIComponent });
   const template = (options: TemplateOptionsType = {}) => {
     return (
@@ -16,8 +16,8 @@ export function createTemplate(pattern: string) {
       (options.query
         ? qs.stringify(options.query, { addQueryPrefix: true })
         : '') +
-      (options.hash ? '?' + options.hash : '') +
-      (options.fragment ? '#' + options.fragment : '')
+      (options.hash ? `?${options.hash}` : '') +
+      (options.fragment ? `#${options.fragment}` : '')
     );
   };
 
