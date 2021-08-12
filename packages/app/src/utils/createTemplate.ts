@@ -8,7 +8,7 @@ type TemplateOptionsType = Partial<{
   fragment: string;
 }>;
 
-export function createTemplate(pattern: string) {
+export function createTemplate(pattern: string): any {
   const toPath = compile(pattern, { encode: encodeURIComponent });
   const template = (options: TemplateOptionsType = {}) => {
     return (
@@ -22,10 +22,6 @@ export function createTemplate(pattern: string) {
   };
 
   template.pattern = pattern;
-
-  console.log({
-    template,
-  });
 
   return template;
 }
