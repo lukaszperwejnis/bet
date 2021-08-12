@@ -3,7 +3,7 @@ export declare const rootStore: import("redux").Store<import("redux").EmptyObjec
     auth: AuthStoreType;
     messages: MessageStoreType;
     password: PasswordStoreType;
-}, import("./actions").AuthActions | import("./actions").PasswordActions | import("./actions").MessageActions> & {
+}, import("./actions").MessageActions | import("./actions").PasswordActions | import("./actions").AuthActions> & {
     dispatch: unknown;
 };
 export declare type StoreType = {
