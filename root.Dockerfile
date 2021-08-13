@@ -6,9 +6,8 @@ COPY package.json yarn.lock lerna.json .eslintrc.json ./
 COPY scripts scripts/
 COPY packages packages/
 
-RUN yarn install && \
-    ./node_modules/.bin/lerna bootstrap && \
-    lerna run build
+RUN yarn install
+RUN lerna run build
 
 
 #
