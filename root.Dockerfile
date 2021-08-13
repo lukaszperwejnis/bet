@@ -2,7 +2,7 @@ FROM node:14
 
 WORKDIR /app_root
 
-COPY package.json yarn-lock.json lerna.json .eslintrc.json ./
+COPY package.json yarn.lock lerna.json .eslintrc.json ./
 COPY scripts scripts/
 COPY packages packages/
 

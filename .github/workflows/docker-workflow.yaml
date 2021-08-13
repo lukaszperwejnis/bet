@@ -22,9 +22,7 @@ jobs:
       - name: Grant access for script files
         run: chmod -R +x scripts
       - name: Build packages
-        run: |
-          lerna bootstrap
-          lerna run build
+        run: lerna run build
       - name: Run linters
         run: lerna run lint
       - name: docker login
