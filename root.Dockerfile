@@ -7,6 +7,7 @@ COPY scripts scripts/
 COPY packages packages/
 
 RUN yarn install
+RUN ls -la ./node_modules/.bin
 RUN ./node_modules/.bin/lerna run build
 
 
