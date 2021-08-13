@@ -2,18 +2,14 @@ FROM node:14
 
 WORKDIR /app_root
 
-COPY package.json package-lock.json lerna.json tslint.json ./
-COPY .config .config/
+COPY package.json yarn-lock.json lerna.json .eslintrc.json ./
 COPY scripts scripts/
+COPY packages packages/
 
-COPY packages/command-bus-client ./packages/command-bus-client/
-COPY packages/nodemailer-mailgun-transport ./packages/nodemailer-mailgun-transport/
+RUN yarn install && \
+    ./node_modules/.bin/lerna bootstrap && \
+    lerna run build
 
-RUN npm install && \
-    ./node_modules/.bin/lerna bootstrap \
-                            --scope @bh/command-bus-client \
-                            --scope @bh/nodemailer-mailgun-transport \
-                            --include-filtered-dependencies
 
 #
 #version: '2'

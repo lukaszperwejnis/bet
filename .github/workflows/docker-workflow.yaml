@@ -17,6 +17,14 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+      - name: Install required dependencies
+      - run: yarn
+      - name: Grant access for script files
+      - run: chmod -R +x scripts
+      - name: Build packages
+      - run: lerna run build
+      - name: Run linters
+      - run: lerna run lint
       - name: docker login
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
