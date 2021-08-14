@@ -3,6 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "rootDir": "src",
+    "outDir": "dist",
     "jsx": "react-jsx",
     "typeRoots": ["node_modules/@types"]
   },

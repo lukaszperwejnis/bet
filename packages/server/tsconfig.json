@@ -1,11 +1,12 @@
 {
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
+    "outDir": "dist",
     "composite": true,
     "pretty": true,
     "sourceMap": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
