@@ -1,10 +1,10 @@
-name: tag-dockerhub-deployment-workflow
+name: tag-docker-hub-deployment-workflow
 on:
   push:
     tags:
-      - "dockerhub-v*"
+      - "docker-hub-v*"
 jobs:
-  Run-dockerhub-deployment:
+  Run-docker-hub-deployment:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
