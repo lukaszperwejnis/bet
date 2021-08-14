@@ -27,7 +27,7 @@ reusable components for client webapp (typescript, storybook, react, styled-comp
 
 1. `lerna build` - to build packages
 2. `lerna clean` - to remove `tsconfig.tsbuildinfo` and `dist` directory from packages
-3. `lerna lint` - to lint packages (under development)
+3. `lerna lint`
 4. `lerna test` - to test packages (under development)
 
 ##Future improvements:
