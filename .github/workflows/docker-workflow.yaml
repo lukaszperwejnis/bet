@@ -34,7 +34,7 @@ jobs:
         run: docker build . -f root.Dockerfile -t bet --no-cache
       - name: docker push
         run: |
-               docker tag bet ${{ secrets.DOCKER_USER }}/bet:${{github.sha}}
-               docker push {{ secrets.DOCKER_USER }}/bet:${{github.sha}}
+          docker tag bet ${{ secrets.DOCKER_USER }}/bet:${{github.sha}}
+          docker push {{ secrets.DOCKER_USER }}/bet:${{github.sha}}
       #        run: docker push "bet/bet-common:${{github.sha}}"
       - run: echo "🍏 This job's status is ${{ job.status }}."
