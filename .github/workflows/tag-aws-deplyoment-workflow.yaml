@@ -14,22 +14,22 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-
-      - name: List files in the repository
-        run: ls ${{ github.workspace }}
-      - name: Install required dependencies
-        run: yarn
-
-      - name: Grant access for script files
-        run: chmod -R +x scripts
-
-      - name: Build packages
-        run: lerna run build
-
-      - name: Run linters
-        run: lerna run lint
+#      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+#      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+#
+#      - name: List files in the repository
+#        run: ls ${{ github.workspace }}
+#      - name: Install required dependencies
+#        run: yarn
+#
+#      - name: Grant access for script files
+#        run: chmod -R +x scripts
+#
+#      - name: Build packages
+#        run: lerna run build
+#
+#      - name: Run linters
+#        run: lerna run lint
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -48,7 +48,7 @@ jobs:
           ECR_REPOSITORY: bet
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build . -f root.Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build . -f root.Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --no-cache
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
