@@ -13,13 +13,12 @@ jobs:
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-            - name: Install required dependencies
-              run: yarn
-            - name: Grant access for script files
-              run: chmod -R +x scripts
-            - name: Build packages
-              run: lerna run build
-            - name: Run linters
-              run: lerna run lint
+        run: ls ${{ github.workspace }}
+      - name: Install required dependencies
+        run: yarn
+      - name: Grant access for script files
+        run: chmod -R +x scripts
+      - name: Build packages
+        run: lerna run build
+      - name: Run linters
+        run: lerna run lint
