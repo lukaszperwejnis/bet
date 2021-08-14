@@ -1,10 +1,10 @@
-name: develop-workflow
+name: tag-workflow
 on:
   push:
-    branches:
-      - develop
+    tags:
+      - v*.0
 jobs:
-  Run-CI:
+  Run-tagged-version:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -17,14 +17,14 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      #      - name: Install required dependencies
-      #        run: yarn
-      #      - name: Grant access for script files
-      #        run: chmod -R +x scripts
-      #      - name: Build packages
-      #        run: lerna run build
-      #      - name: Run linters
-      #        run: lerna run lint
+            - name: Install required dependencies
+              run: yarn
+            - name: Grant access for script files
+              run: chmod -R +x scripts
+            - name: Build packages
+              run: lerna run build
+            - name: Run linters
+              run: lerna run lint
       - name: docker login
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
