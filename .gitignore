@@ -1,6 +1,7 @@
 # compiled output
 /**/dist/
 /**/tsconfig.tsbuildinfo
+lerna-debug.log
 
 # dependencies
 /**/node_modules/
