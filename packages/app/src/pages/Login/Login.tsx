@@ -56,7 +56,6 @@ export const Login = (): JSX.Element => {
               type="password"
             />
             <>{error && <Error>{error}</Error>}</>
-            {isLoading}
             <Submit disabled={isLoading}>
               <FormattedMessage id="login.submit" />
             </Submit>

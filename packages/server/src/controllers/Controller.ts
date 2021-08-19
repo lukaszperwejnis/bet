@@ -16,4 +16,9 @@ export abstract class Controller {
 
     return res.status(201).json(data);
   }
+
+  redirect(res: Response, url: string): Response<any, Record<string, any>> {
+    res.set('location', url);
+    return res.status(301).send();
+  }
 }

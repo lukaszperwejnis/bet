@@ -22,6 +22,7 @@ import { BetsValidationService } from './services/BetsValidationService';
 import { BetRoutes } from './routes/betRoutes';
 import { CronService } from './services/CronService';
 import { MailService } from './services/MailService';
+import { RedirectRoutes } from './routes/redirectRoutes';
 
 export class App {
   app: express.Application;
@@ -38,7 +39,7 @@ export class App {
     this.initRoutes();
     App.fillDatabase();
     // TODO enter here mail for invitation
-    // this.mailService.sendInvitationEmail({email: 'mail@example.com'});
+    // this.mailService.sendInvitationEmail({ email: 'perwiperwi@gmail.com' });
     // this.initCrones();
   }
 
@@ -57,6 +58,7 @@ export class App {
     this.app.use('/signup', SignupRoutes);
     this.app.use('/signin', SigninRoutes);
     this.app.use('/reset-password', ResetPasswordRoutes);
+    this.app.use('/redirect', RedirectRoutes);
 
     // protected routes with /api prefix
     this.app.use('/api/bets', BetRoutes);
