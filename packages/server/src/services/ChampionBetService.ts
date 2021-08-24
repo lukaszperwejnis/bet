@@ -1,5 +1,5 @@
 import * as Joi from '@hapi/joi';
-import { BetStatus, Team } from '@bet/structures';
+import { BetStatus, GameStatus, Team } from '@bet/structures';
 import { ChampionBet } from '../structures/ChampionBet';
 import { TeamService } from './TeamService';
 import { ChampionBetRepository } from '../Repository/ChampionBetRepository';
@@ -10,13 +10,14 @@ import { Game } from '../structures/Game';
 import {
   BetAlreadyExistError,
   FieldValidationError,
-  InvalidIdError,
   GameNotFoundError,
+  InvalidIdError,
   TeamNotFoundError,
 } from '../errors';
 import { isValidObjectId } from '../helpers/isValidObjectId';
 import { VALIDATION_SCHEMA_KEYS } from '../constants/validationSchemaKeys';
 import { mapSchemaValidationErrors } from '../helpers/mapSchemaValidationErrors';
+import { BetFilters } from '../structures/Bet';
 
 type ChampionBetInput = {
   teamId: string;
@@ -108,7 +109,8 @@ export class ChampionBetService {
     return updatedBets;
   }
 
-  async getAvailableByUserId(userId: string): Promise<Team.Team[]> {
+  async getChampionBet(filters: BetFilters): Promise<Team.Team[]> {
+    const { userId, status } = filters;
     const championBet: ChampionBet = await this.championBetRepository.getOne({
       createdBy: userId,
     });
@@ -118,8 +120,9 @@ export class ChampionBetService {
     }
 
     const scheduledGames: Game[] = await this.gameRepository.getMany({
-      status: BetStatus.Scheduled,
+      status,
     });
+
     const teamIds = scheduledGames.reduce(
       (acc: Team.Team[], { homeTeam, awayTeam }) => {
         return [...acc, homeTeam, awayTeam];
@@ -138,19 +141,20 @@ export class ChampionBetService {
       return false;
     }
 
-    const availableChampions: Team.Team[] = await this.getAvailableByUserId(
+    const availableChampions: Team.Team[] = await this.getChampionBet({
+      status: GameStatus.Scheduled,
       userId,
-    );
+    });
 
     return availableChampions
       .map((champion) => champion._id.toString())
       .includes(championBet.teamId);
   }
 
-  getOneByUserId(userId: string): Promise<ChampionBet> {
-    return this.championBetRepository.getOne({
-      createdBy: userId,
-      status: BetStatus.Scheduled,
-    });
-  }
+  // getOneByUserId(userId: string): Promise<ChampionBet> {
+  //   return this.championBetRepository.getOne({
+  //     createdBy: userId,
+  //     status: BetStatus.Scheduled,
+  //   });
+  // }
 }

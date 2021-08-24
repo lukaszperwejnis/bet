@@ -1,4 +1,4 @@
-import { BetStatus, Competition, User } from '@bet/structures';
+import { BetStatus, Competition, GameStatus, User } from '@bet/structures';
 
 export declare class Bet {
   readonly _id?: string;
@@ -6,3 +6,8 @@ export declare class Bet {
   readonly status: BetStatus;
   readonly createdBy: User.User;
 }
+
+export type BetFilters = {
+  userId: string;
+  status?: GameStatus;
+};
