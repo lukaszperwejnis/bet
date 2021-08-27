@@ -1,4 +1,4 @@
-import { BetStatus } from '@bet/structures';
+import { BetStatus, GameStatus } from '@bet/structures';
 import * as Joi from '@hapi/joi';
 import { Game } from '../structures/Game';
 import { GameBet } from '../structures/GameBet';
@@ -9,8 +9,8 @@ import {
   BetAlreadyExistError,
   BetLateError,
   FieldValidationError,
-  InvalidIdError,
   GameNotFoundError,
+  InvalidIdError,
 } from '../errors';
 import { mapSchemaValidationErrors } from '../helpers/mapSchemaValidationErrors';
 import { gameWinnerTypeByScores } from '../helpers/gameWinnerTypeByScores';
@@ -140,9 +140,10 @@ export class GameBetService {
       return false;
     }
 
-    const availableGames: Game[] = await this.gameService.getAvailableByUserId(
+    const availableGames: Game[] = await this.gameService.getGames({
       userId,
-    );
+      status: GameStatus.Scheduled,
+    });
 
     const gameIds = gameBets.map((bets) => bets.gameId);
     const availableGamesIds = availableGames.map((availableGame) =>

@@ -22,21 +22,22 @@ export class BetController extends Controller {
 
   constructor() {
     super();
-    this.getAvailable = this.getAvailable.bind(this);
+    this.getBets = this.getBets.bind(this);
     this.createBets = this.createBets.bind(this);
     this.getUserBets = this.getUserBets.bind(this);
   }
 
-  async getAvailable(
+  async getBets(
     req: GetUserAuthInfoRequest,
     res: Response,
     next: NextFunction,
   ): ResponseReturnType {
     try {
-      const availableBets = await this.betService.getAvailableBetsByUserId(
-        req.user._id,
-      );
-      return this.ok(res, availableBets);
+      const bets = await this.betService.getBets({
+        userId: req.user._id,
+        ...req.query,
+      });
+      return this.ok(res, bets);
     } catch (error) {
       return next(error);
     }
@@ -61,7 +62,12 @@ export class BetController extends Controller {
     next: NextFunction,
   ): ResponseReturnType {
     try {
-      const result = await this.betService.getBetsByUserId(req.user._id);
+      const result = await this.betService.getBetsByUserId({
+        userId: req.user._id,
+        ...req.query,
+      });
+
+      console.log(result);
       return this.ok(res, result);
     } catch (error) {
       return next(error);

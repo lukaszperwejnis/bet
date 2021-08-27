@@ -1,4 +1,4 @@
-import { BetStatus, CreationType, GameStatus } from '@bet/structures';
+import { CreationType, GameStatus } from '@bet/structures';
 import { TeamRepository } from '../Repository/TeamRepository';
 import { GameRepository } from '../Repository/GameRepository';
 import { Game } from '../structures/Game';
@@ -6,6 +6,7 @@ import { ExternalGame } from '../interfaces/ExternalGame';
 import { ExternalGamesService } from './ExternalGamesService';
 import { GameBet } from '../structures/GameBet';
 import { GameBetRepository } from '../Repository/GameBetRepository';
+import { BetFilters } from '../structures/Bet';
 
 export class GameService {
   private gameRepository = new GameRepository();
@@ -93,9 +94,10 @@ export class GameService {
     return updatedGames;
   }
 
-  async getAvailableByUserId(userId: string): Promise<Game[]> {
+  async getGames(filters: BetFilters): Promise<Game[]> {
+    const { userId, status } = filters;
     const userGameBets: GameBet[] = await this.gameBetRepository.getMany({
-      status: BetStatus.Scheduled,
+      status,
       createdBy: userId,
     });
 
@@ -103,7 +105,7 @@ export class GameService {
       _id: {
         $nin: userGameBets.map((el) => el.game._id),
       },
-      status: GameStatus.Scheduled,
+      status,
     });
 
     const pipeline = [
@@ -130,7 +132,7 @@ export class GameService {
           _id: {
             $nin: userGameBets.map((el) => el.game._id),
           },
-          status: GameStatus.Scheduled,
+          status,
           'homeTeam._id': { $in: games.map((el) => el.homeTeam) },
           'awayTeam._id': { $in: games.map((el) => el.awayTeam) },
         },

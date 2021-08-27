@@ -1,10 +1,12 @@
-name: tag-aws-deployment-workflow
+name: docker-hub-deployment-workflow
 on:
   push:
+    branches:
+      - develop
     tags:
-      - "v*"
+      - "docker-hub-v*"
 jobs:
-  Run-aws-deployment:
+  Run-docker-hub-deployment:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -31,24 +33,32 @@ jobs:
       - name: Run linters
         run: lerna run lint
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-1
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Build, tag, and push image to Amazon ECR
+      - name: docker login
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: bet
-          IMAGE_TAG: ${{ github.sha }}
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - name: Build docker image
+        run: docker build . -f Dockerfile -t bet --no-cache
+
+      - name: Snyk container scan
+        continue-on-error: true
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: bet
+          args: --file=Dockerfile
+
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk.sarif
+
+      - name: docker push
         run: |
-          docker build . -f root.Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --no-cache
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker tag bet ${{ secrets.DOCKER_USER }}/bet:${{github.sha}}
+          docker push ${{ secrets.DOCKER_USER }}/bet:${{github.sha}}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."

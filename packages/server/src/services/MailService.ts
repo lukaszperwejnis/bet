@@ -53,7 +53,7 @@ export class MailService {
       from: 'bet@bet',
       to: input.email,
       subject: 'Bet - rejestracja',
-      html: `Klikaj i obstawiaj Sportowy Świrze! Otwórz w <a href="${config.clientURL}/mail-invitation-signup?token=${token}&email=${input.email}">przeglądarce</a> lub <a href="http://127.0.0.1:3010/redirect?url=betmobileapp://signup/${token}/${input.email}">na urządzeniu mobilnym</a>`,
+      html: `Klikaj i obstawiaj Sportowy Świrze! Otwórz w <a href="${config.clientURL}/mail-invitation-signup?token=${token}&email=${input.email}">przeglądarce</a> lub <a href="http://192.168.1.38:3010/redirect?url=betmobileapp://signup/${token}/${input.email}">na urządzeniu mobilnym</a>`,
     });
 
     return Boolean(result);
@@ -74,7 +74,7 @@ export class MailService {
       from: 'bet@bet',
       to: email,
       subject: 'Bet - reset hasła',
-      html: `Klikaj i ustawiaj nowe hasło by obstawiać dalej! Otwórz w <a href="${config.clientURL}/set-password?token=${token}">przeglądarce</a> lub <a href="http://127.0.0.1:3010/redirect?url=betmobileapp://reset-password/${token}">na urządzeniu mobilnym</a>`,
+      html: `Klikaj i ustawiaj nowe hasło by obstawiać dalej! Otwórz w <a href="${config.clientURL}/set-password?token=${token}">przeglądarce</a> lub <a href="http://192.168.1.38:3010/redirect?url=betmobileapp://reset-password/${token}">na urządzeniu mobilnym</a>`,
     });
 
     return Boolean(result);

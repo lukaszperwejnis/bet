@@ -6,6 +6,6 @@ export const BetRoutes: Router = Router();
 
 BetRoutes.route('/user').get(betController.getUserBets as any);
 
-BetRoutes.route('/available').get(betController.getAvailable as any);
+BetRoutes.route('/').get(betController.getBets as any);
 
 BetRoutes.route('/').post(betController.createBets as any);

@@ -1,5 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { betService, userService } from '@services';
+import { GameStatus } from '@bet/structures';
 import { GameBet } from '../../components/GameBet/GameBet';
 
 export const Dashboard = (): ReactElement => {
@@ -19,9 +20,11 @@ export const Dashboard = (): ReactElement => {
       setAvailableChampionBets(result.data.availableChampions);
     });
 
-    betService.getUserBets().then((result: any) => {
-      setUserBets(result.data.gameBets);
-    });
+    betService
+      .getUserBets({ status: GameStatus.Scheduled })
+      .then((result: any) => {
+        setUserBets(result.data.gameBets);
+      });
   }, []);
 
   const createBets = async () => {

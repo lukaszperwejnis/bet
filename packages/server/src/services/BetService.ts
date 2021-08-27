@@ -7,6 +7,7 @@ import { GameBetRepository } from '../Repository/GameBetRepository';
 import { ChampionBetRepository } from '../Repository/ChampionBetRepository';
 import { GameBet } from '../structures/GameBet';
 import { ChampionBet } from '../structures/ChampionBet';
+import { BetFilters } from '../structures/Bet';
 
 type GameBetInput = { gameId: string; homeScore: number; awayScore: number };
 type ChampionBetInput = { teamId: string };
@@ -23,14 +24,13 @@ export class BetService {
   private gameBetRepository = new GameBetRepository();
   private championBetRepository = new ChampionBetRepository();
 
-  async getAvailableBetsByUserId(
-    userId: string,
+  async getBets(
+    filters: BetFilters,
   ): Promise<{ availableGames: Game[]; availableChampions: Team.Team[] }> {
-    const availableGames: Game[] = await this.gameService.getAvailableByUserId(
-      userId,
-    );
+    const availableGames: Game[] = await this.gameService.getGames(filters);
     const availableChampions: Team.Team[] =
-      await this.championBetService.getAvailableByUserId(userId);
+      await this.championBetService.getChampionBet(filters);
+
     return {
       availableGames,
       availableChampions,
@@ -77,9 +77,9 @@ export class BetService {
     return result;
   }
 
-  async getBetsByUserId(userId: string): Promise<{
+  async getBetsByUserId({ userId, status }: BetFilters): Promise<{
     gameBets: GameBet[];
-    championBet: ChampionBet[];
+    championBet: ChampionBet | null;
   }> {
     const gameBetsPipeline = [
       {
@@ -94,6 +94,7 @@ export class BetService {
       {
         $match: {
           createdBy: userId,
+          status,
         },
       },
       {
@@ -129,15 +130,19 @@ export class BetService {
       {
         $match: {
           createdBy: userId,
+          status,
         },
       },
     ];
 
+    const championBetAggregationResult =
+      await this.championBetRepository.aggregate(championBetPipeline);
+
     return {
       gameBets: await this.gameBetRepository.aggregate(gameBetsPipeline),
-      championBet: await this.championBetRepository.aggregate(
-        championBetPipeline,
-      ),
+      championBet: championBetAggregationResult.length
+        ? championBetAggregationResult[0]
+        : null,
     };
   }
 }
