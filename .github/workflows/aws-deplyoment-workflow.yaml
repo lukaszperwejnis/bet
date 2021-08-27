@@ -2,7 +2,7 @@ name: aws-deployment-workflow
 on:
   push:
     branches:
-      - develop
+      - master
     tags:
       - "v*"
 jobs:
