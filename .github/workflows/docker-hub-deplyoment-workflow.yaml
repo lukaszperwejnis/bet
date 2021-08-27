@@ -43,6 +43,7 @@ jobs:
         run: docker build . -f Dockerfile -t bet --no-cache
 
       - name: Snyk container scan
+        continue-on-error: true
         uses: snyk/actions/docker@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
