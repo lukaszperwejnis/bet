@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:14.8.0-slim
 
 WORKDIR /app_root
 

@@ -1,6 +1,8 @@
-name: tag-docker-hub-deployment-workflow
+name: docker-hub-deployment-workflow
 on:
   push:
+    branches:
+      - develop
     tags:
       - "docker-hub-v*"
 jobs:
@@ -38,7 +40,20 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - name: Build docker image
-        run: docker build . -f root.Dockerfile -t bet --no-cache
+        run: docker build . -f Dockerfile -t bet --no-cache
+
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: bet
+          args: --file=Dockerfile
+
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk.sarif
 
       - name: docker push
         run: |

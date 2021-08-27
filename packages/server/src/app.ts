@@ -37,7 +37,7 @@ export class App {
     connectToDatabase();
     this.initMiddlewares();
     this.initRoutes();
-    App.fillDatabase();
+    // App.fillDatabase();
     // TODO enter here mail for invitation
     // this.mailService.sendInvitationEmail({ email: 'perwiperwi@gmail.com' });
     // this.initCrones();
