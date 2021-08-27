@@ -42,8 +42,8 @@ jobs:
       - name: Build docker image
         run: docker build . -f Dockerfile -t bet --no-cache
 
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
+      - name: Snyk container scan
+        uses: snyk/actions/docker@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
