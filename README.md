@@ -34,3 +34,9 @@ reusable components for client webapp (typescript, storybook, react, styled-comp
 
 1. Add babel `@bet/server` to change `module` from `commonjs` to `esnext`
 2. Add tests for all packages
+
+
+## Docker
+
+1. To build image run `docker build . -f Dockerfile -t bet` or pull image directly from the docker hub  `docker pull lukaszperwejnis/bet`
+2. To start image run `docker run -d lukaszperwejnis/bet`
