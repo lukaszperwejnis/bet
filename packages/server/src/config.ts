@@ -8,10 +8,10 @@ const config = {
     jwtInvitationExp: 60 * 60 * 60,
     jwtResetExp: 24 * 60 * 60,
   },
-  externalAPIAuthToken: 'b6565257ac824b0aaf3e6d883c156e27',
+  externalAPIAuthToken: 'XXXX',
   mailgun: {
-    API_KEY: 'key-934fc1822136a8f05869dc8343f8b06f',
-    domain: 'sandboxf5c28a28100246ba9811abffb3ae2632.mailgun.org',
+    API_KEY: 'XXXX',
+    domain: 'XXXX',
   },
   clientURL: 'http://localhost:4200',
 };
