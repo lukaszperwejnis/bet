@@ -1,4 +1,5 @@
 export enum GameStatus {
-  Scheduled = 'SCHEDULED',
+  Timed = 'TIMED',
   Finished = 'FINISHED',
+  Scheduled = 'SCHEDULED',
 }

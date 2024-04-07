@@ -8,3 +8,5 @@ export { Select } from './components/Select/Select';
 export { Checkbox } from './components/Checkbox/Checkbox';
 export { Message } from './components/Message/Message';
 export { Loader } from './components/Loader';
+
+export type { TileProps } from './components/Tile/Tile';

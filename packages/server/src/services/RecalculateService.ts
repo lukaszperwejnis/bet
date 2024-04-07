@@ -1,10 +1,8 @@
-import { BetStatus } from '@bet/structures';
+import { BetStatus, ChampionBet, GameBet } from '@bet/structures';
 import { UserRepository } from '../Repository/UserRepository';
 import { User } from '../structures/User';
-import { GameBet } from '../structures/GameBet';
 import { GameBetRepository } from '../Repository/GameBetRepository';
 import { ChampionBetRepository } from '../Repository/ChampionBetRepository';
-import { ChampionBet } from '../structures/ChampionBet';
 import { TeamService } from './TeamService';
 import { ScoreValue } from '../enums';
 

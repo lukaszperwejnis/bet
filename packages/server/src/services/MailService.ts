@@ -41,6 +41,7 @@ export class MailService {
   async sendInvitationEmail(
     input: Signup.InvitationPayload,
   ): Promise<Signup.InvitationSuccess> {
+    console.log('SEND INVITATION EMAIL');
     MailService.validateMail(input);
     const user = await this.userRepository.findOne({ email: input.email });
 
@@ -55,6 +56,8 @@ export class MailService {
       subject: 'Bet - rejestracja',
       html: `Klikaj i obstawiaj Sportowy Świrze! Otwórz w <a href="${config.clientURL}/mail-invitation-signup?token=${token}&email=${input.email}">przeglądarce</a> lub <a href="http://192.168.1.38:3010/redirect?url=betmobileapp://signup/${token}/${input.email}">na urządzeniu mobilnym</a>`,
     });
+
+    console.log(result);
 
     return Boolean(result);
   }

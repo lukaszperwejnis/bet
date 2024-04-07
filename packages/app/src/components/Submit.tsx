@@ -8,5 +8,5 @@ export const Submit = styled(Button)`
 `;
 
 Submit.defaultProps = {
-  htmlType: 'submit',
+  type: 'submit',
 };

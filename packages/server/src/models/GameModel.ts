@@ -1,7 +1,11 @@
 import * as mongoose from 'mongoose';
-import { Competition, CreationType, GameStatus } from '@bet/structures';
-import { WinnerType } from '../enums';
-import { Game } from '../structures/Game';
+import {
+  Competition,
+  CreationType,
+  Game,
+  GameStatus,
+  Winner,
+} from '@bet/structures';
 
 const gameSchema = new mongoose.Schema(
   {
@@ -20,7 +24,7 @@ const gameSchema = new mongoose.Schema(
     },
     winner: {
       type: String,
-      enum: [null, WinnerType.HomeTeam, WinnerType.Draw, WinnerType.AwayTeam],
+      enum: [null, Winner.HomeTeam, Winner.Draw, Winner.AwayTeam],
       required: [
         function checkGameStatus(this: Game) {
           return this.status === GameStatus.Finished;
@@ -54,7 +58,7 @@ const gameSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: [GameStatus.Scheduled, GameStatus.Finished],
+      enum: [GameStatus.Timed, GameStatus.Finished, GameStatus.Scheduled],
       default: GameStatus.Scheduled,
     },
     creationType: {
@@ -72,7 +76,7 @@ const gameSchema = new mongoose.Schema(
   },
 );
 
-export const GameModel: mongoose.Model<any> = mongoose.model<any>(
+export const GameModel: mongoose.Model<Game> = mongoose.model<Game>(
   'Game',
   gameSchema,
 );

@@ -14,7 +14,7 @@ import {
 } from '@components';
 import { FormField } from '@bet/ui-components';
 import { reset as resetPassword } from '@stores/actions';
-import { StoreType } from '@stores/index';
+import { StoreType } from '@stores/types';
 import { passwordSchema, confirmedPasswordSchema } from '@schemas';
 import { invalidTokenReset } from '@stores/actions/password.actions';
 

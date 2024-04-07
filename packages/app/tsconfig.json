@@ -17,8 +17,12 @@
       "@styles": ["styles/index.ts"],
       "@utils": ["utils/index.ts"]
     },
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": [
+      "node_modules/@types",
+      "../../node_modules/@types"
+    ],
+    "types": ["jest", "node"]
   },
-  "include": ["src/**/*"],
+  "include": ["jest.d.ts", "./src/**/**.*"],
   "exclude": ["node_modules", "dist", "**/*.spec.ts"]
 }

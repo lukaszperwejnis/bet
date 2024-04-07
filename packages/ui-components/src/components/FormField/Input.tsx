@@ -40,7 +40,11 @@ export const Input = ({
         isInvalid={hasError}
         {...props}
       />
-      <>{hasError && error && <Error data-error={field.name}>{error}</Error>}</>
+      <>
+        {hasError && error && (
+          <Error data-testid={`${field.name}__validation-error`}>{error}</Error>
+        )}
+      </>
       <>{description && <Description>{description}</Description>}</>
     </Wrapper>
   );

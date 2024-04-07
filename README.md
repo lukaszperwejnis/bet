@@ -25,10 +25,10 @@ reusable components for client webapp (typescript, storybook, react, styled-comp
 
 ## Available workspace monorepo commands:
 
-1. `lerna build` - to build packages
-2. `lerna clean` - to remove `tsconfig.tsbuildinfo` and `dist` directory from packages
-3. `lerna lint` - to lint all packages
-4. `lerna test` - to test packages (under development)
+1. `lerna run build` - to build packages
+2. `lerna run clean` - to remove `tsconfig.tsbuildinfo` and `dist` directory from packages
+3. `lerna run lint` - to lint all packages
+4. `lerna run test` - to test packages (under development)
 
 ## Future improvements:
 

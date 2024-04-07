@@ -1,12 +1,17 @@
 import * as Joi from '@hapi/joi';
-import { BetStatus, GameStatus, Team } from '@bet/structures';
-import { ChampionBet } from '../structures/ChampionBet';
+import {
+  BetFilters,
+  BetStatus,
+  ChampionBet,
+  Game,
+  GameStatus,
+  Team,
+} from '@bet/structures';
 import { TeamService } from './TeamService';
 import { ChampionBetRepository } from '../Repository/ChampionBetRepository';
 import { TeamRepository } from '../Repository/TeamRepository';
 import { compareObjectsIds } from '../helpers/compareObjectIds';
 import { GameRepository } from '../Repository/GameRepository';
-import { Game } from '../structures/Game';
 import {
   BetAlreadyExistError,
   FieldValidationError,
@@ -17,7 +22,6 @@ import {
 import { isValidObjectId } from '../helpers/isValidObjectId';
 import { VALIDATION_SCHEMA_KEYS } from '../constants/validationSchemaKeys';
 import { mapSchemaValidationErrors } from '../helpers/mapSchemaValidationErrors';
-import { BetFilters } from '../structures/Bet';
 
 type ChampionBetInput = {
   teamId: string;
@@ -142,7 +146,7 @@ export class ChampionBetService {
     }
 
     const availableChampions: Team.Team[] = await this.getChampionBet({
-      status: GameStatus.Scheduled,
+      status: BetStatus.Scheduled,
       userId,
     });
 

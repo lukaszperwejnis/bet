@@ -1,6 +1,6 @@
+import { ChampionBet } from '@bet/structures';
 import { Repository } from './Repository';
 import { ChampionBetModel } from '../models/ChampionBetModel';
-import { ChampionBet } from '../structures/ChampionBet';
 import { Query } from '../structures/Query';
 
 export class ChampionBetRepository extends Repository<ChampionBet> {

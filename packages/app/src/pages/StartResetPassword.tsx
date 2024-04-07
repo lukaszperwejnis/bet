@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { useTranslation } from '@hooks';
 import { Page, PageTile, StyledForm, Submit } from '@components';
 import { FormField } from '@bet/ui-components';
-import { StoreType } from '@stores/index';
+import { StoreType } from '@stores/types';
 import { startReset } from '@stores/actions';
 import { emailSchema } from '@schemas';
 

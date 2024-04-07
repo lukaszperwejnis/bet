@@ -1,5 +1,4 @@
-import { Competition, GameStatus } from '@bet/structures';
-import { WinnerType } from '../enums';
+import { Competition, GameStatus, Winner } from '@bet/structures';
 
 export interface ExternalGame {
   externalId: number;
@@ -15,14 +14,15 @@ export interface ExternalGame {
 interface Team {
   externalId: number;
   name: string;
+  crest: string;
 }
 
 interface Score {
-  winner: WinnerType;
+  winner: Winner;
   fullTime: GameResult;
 }
 
 interface GameResult {
-  homeTeam: number;
-  awayTeam: number;
+  home: number;
+  away: number;
 }

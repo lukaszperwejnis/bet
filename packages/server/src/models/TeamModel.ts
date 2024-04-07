@@ -28,6 +28,10 @@ const teamSchema = new mongoose.Schema(
       enum: [CreationType.Manual, CreationType.External],
       default: CreationType.External,
     },
+    crest: {
+      type: String,
+      required: true,
+    },
   },
   {
     collection: 'team',
@@ -37,7 +41,7 @@ const teamSchema = new mongoose.Schema(
 
 teamSchema.index({ name: 1, externalId: 1 }, { unique: true, sparse: true });
 
-export const TeamModel: mongoose.Model<any> = mongoose.model<any>(
+export const TeamModel: mongoose.Model<Team.Team> = mongoose.model<Team.Team>(
   'Team',
   teamSchema,
 );

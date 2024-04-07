@@ -9,7 +9,7 @@ import { CONFIG } from '../../config';
 const baseURL = CONFIG.API_URL;
 
 export abstract class ApiService {
-  private request: AxiosInstance;
+  request: AxiosInstance;
 
   constructor() {
     this.request = axios.create({ baseURL });

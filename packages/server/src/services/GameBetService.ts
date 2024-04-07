@@ -1,7 +1,5 @@
-import { BetStatus, GameStatus } from '@bet/structures';
+import { BetStatus, Game, GameBet, GameStatus } from '@bet/structures';
 import * as Joi from '@hapi/joi';
-import { Game } from '../structures/Game';
-import { GameBet } from '../structures/GameBet';
 import { GameBetRepository } from '../Repository/GameBetRepository';
 import { GameRepository } from '../Repository/GameRepository';
 import { VALIDATION_SCHEMA_KEYS } from '../constants/validationSchemaKeys';
@@ -142,7 +140,7 @@ export class GameBetService {
 
     const availableGames: Game[] = await this.gameService.getGames({
       userId,
-      status: GameStatus.Scheduled,
+      status: BetStatus.Scheduled,
     });
 
     const gameIds = gameBets.map((bets) => bets.gameId);

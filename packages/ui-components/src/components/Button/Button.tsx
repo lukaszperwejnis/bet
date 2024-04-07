@@ -1,8 +1,7 @@
-import { MouseEvent } from 'react';
-import { StyledButton } from './styles';
-import { WithChildrenProps } from '../../types/index';
+import { ButtonHTMLAttributes } from 'react';
+import { StyledButton } from './Button.styles';
 
-export enum ColorType {
+export enum Variant {
   Primary = 'primary',
   Secondary = 'secondary',
   Error = 'error',
@@ -11,25 +10,16 @@ export enum ColorType {
   Empty = 'empty',
 }
 
-type ButtonHtmlType = 'submit' | 'button';
-
-interface ButtonProps extends WithChildrenProps {
-  onClick?(event: MouseEvent): void;
-  isHollow?: boolean;
-  disabled?: boolean;
-  isEmpty?: boolean;
-  title?: string;
-}
-
-interface ButtonComponentProps extends ButtonProps {
-  type?: ColorType;
-  htmlType?: ButtonHtmlType;
-}
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
+  Partial<{
+    variant: Variant;
+    isEmpty: boolean;
+    isHollow: boolean;
+  }>;
 
 export const Button = ({
-  type = ColorType.Primary,
-  htmlType = 'button',
-  ...otherProps
-}: ButtonComponentProps): JSX.Element => (
-  <StyledButton type={htmlType} colorType={type} {...otherProps} />
+  variant = Variant.Primary,
+  ...buttonProps
+}: ButtonProps): JSX.Element => (
+  <StyledButton variant={variant} {...buttonProps} />
 );

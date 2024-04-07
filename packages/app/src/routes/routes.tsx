@@ -11,6 +11,7 @@ import { AppUrls } from '@config';
 import { useAuth } from '@hooks';
 import { history } from '@utils';
 import { Layout } from '@components';
+import { Navbar } from '../components/Navbar/Navbar';
 
 const PublicRoutes = (): JSX.Element => (
   <ErrorBoundary>
@@ -29,9 +30,8 @@ const PublicRoutes = (): JSX.Element => (
 
 const PrivateRoutes = (): JSX.Element => (
   <ErrorBoundary>
-    {/* <SidebarMenu/> */}
     <Layout>
-      {/* <Navbar /> */}
+      <Navbar />
       <Switch>
         <Route path={AppUrls.DASHBOARD.pattern} component={Dashboard} />
         <Redirect to={AppUrls.DASHBOARD.pattern} />

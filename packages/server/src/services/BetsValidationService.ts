@@ -1,13 +1,16 @@
-import { GameStage, GameStatus } from '@bet/structures';
+import {
+  Bet,
+  BetStatus,
+  ChampionBet,
+  Game,
+  GameBet,
+  GameStage,
+} from '@bet/structures';
 import { GameRepository } from '../Repository/GameRepository';
-import { Game } from '../structures/Game';
-import { GameBet } from '../structures/GameBet';
 import { RecalculateService } from './RecalculateService';
-import { ChampionBet } from '../structures/ChampionBet';
 import { GameBetService } from './GameBetService';
 import { ChampionBetService } from './ChampionBetService';
 import { GameService } from './GameService';
-import { Bet } from '../structures/Bet';
 
 export class BetsValidationService {
   private gameRepository = new GameRepository();
@@ -54,7 +57,7 @@ export class BetsValidationService {
   private async getGameStagesToValidate(): Promise<string[]> {
     const stages = await this.gameRepository
       .getMany({
-        status: GameStatus.Scheduled,
+        status: BetStatus.Scheduled,
       })
       .then((data) => data.map((game) => game.stage));
 

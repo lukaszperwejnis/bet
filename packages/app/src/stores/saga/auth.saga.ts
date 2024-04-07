@@ -19,21 +19,39 @@ type LoginAction = { payload: Signin.Payload };
 type SignupAction = { payload: Signup.Payload };
 
 function* login(action: SagaParameter<LoginAction>) {
+  console.log('LOGIN SAGA');
+  console.log('LOGIN SAGA');
+  console.log('LOGIN SAGA');
+  console.log('LOGIN SAGA');
+  console.log('LOGIN SAGA');
   try {
     const { data } = (yield call(
       authService.login,
       action.payload,
     )) as SuccessApiResponse<Signin.Success>;
 
+    console.log({ data }, 'RESULT');
+    console.log({ data }, 'RESULT');
+    console.log({ data }, 'RESULT');
+    console.log({ data }, 'RESULT');
+    console.log({ data }, 'RESULT');
+    console.log({ data }, 'RESULT');
+
     const { user, ...tokens } = data;
 
     yield call(tokenService.setTokens, tokens);
     yield call(userService.setUser, user);
+    console.log('SUCCESS');
+    console.log('SUCCESS');
+    console.log('SUCCESS');
     AuthProvider.getInstance().notify();
 
     yield put(successLogin<User.DTO>(user));
     yield call(redirect as any, AppUrls.DASHBOARD.pattern);
   } catch (error) {
+    console.log('FAILURE');
+    console.log('FAILURE');
+    console.log('FAILURE');
     const errorMessage = mapErrorToMessage(error);
     yield put(failedLogin(errorMessage));
     yield call(messageActions.error, errorMessage);
@@ -58,11 +76,11 @@ function* signup(action: SagaParameter<SignupAction>) {
   }
 }
 
-function* watchLogin(): unknown {
+export function* watchLogin(): unknown {
   yield takeLatest(AuthActionType.Login, login);
 }
 
-function* watchSignup(): unknown {
+export function* watchSignup(): unknown {
   yield takeLatest(AuthActionType.Signup, signup);
 }
 

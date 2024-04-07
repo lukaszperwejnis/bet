@@ -8,3 +8,5 @@ export const rootReducer = combineReducers({
   messages: messageReducer,
   password: passwordReducer,
 });
+
+export { messageReducer, authReducer, passwordReducer };

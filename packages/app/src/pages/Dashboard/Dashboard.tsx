@@ -1,27 +1,45 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { betService, userService } from '@services';
-import { GameStatus } from '@bet/structures';
-import { GameBet } from '../../components/GameBet/GameBet';
+import { BetStatus, Game, GameBetInput, GameBet, Team } from '@bet/structures';
+import {
+  Page,
+  GameBet as GameBetComponent,
+  GameBetPreview,
+  GameBetFinished,
+} from '@components';
+import { BetWrapper, Header } from './Dashboard.styles';
+
+type GameDTO = Game & {
+  scheduledDate: string;
+};
 
 export const Dashboard = (): ReactElement => {
-  const [availableGameBets, setAvailableGameBets] = useState<unknown[]>([]);
-  const [availableChampionBets, setAvailableChampionBets] = useState<unknown[]>(
-    [],
-  );
+  const [availableGameBets, setAvailableGameBets] = useState<GameDTO[]>([]);
+  const [availableChampionBets, setAvailableChampionBets] = useState<
+    Team.Team[]
+  >([]);
+  const [finishedGameBets, setFinishedGameBets] = useState<GameBet[]>([]);
   const [userBets, setUserBets] = useState<any>([]);
-  const [bets, setBets] = useState<any>([]);
+  const [bets, setBets] = useState<Map<string, GameBetInput>>(new Map());
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const logout = (): void => {
     userService.logout();
   };
 
   useEffect(() => {
-    betService.getAvailableBets().then((result: any) => {
-      setAvailableGameBets(result.data.availableGames);
+    betService.getAvailableBets().then((result) => {
+      setAvailableGameBets(result.data.availableGames as GameDTO[]);
       setAvailableChampionBets(result.data.availableChampions);
     });
 
     betService
-      .getUserBets({ status: GameStatus.Scheduled })
+      .getUserBets({ status: BetStatus.Finished })
+      .then((result: any) => {
+        setFinishedGameBets(result.data.gameBets);
+      });
+
+    betService
+      .getUserBets({ status: BetStatus.Scheduled })
       .then((result: any) => {
         setUserBets(result.data.gameBets);
       });
@@ -29,66 +47,79 @@ export const Dashboard = (): ReactElement => {
 
   const createBets = async () => {
     const data = {
-      games: bets,
+      games: Array.from(bets.values()),
     };
 
-    betService.createBets(data);
+    setIsLoading(true);
+    await betService.createBets(data);
+
+    betService
+      .getUserBets({ status: BetStatus.Scheduled })
+      .then((result: any) => {
+        setUserBets(result.data.gameBets);
+      });
+
+    betService.getAvailableBets().then((result) => {
+      setAvailableGameBets(result.data.availableGames as GameDTO[]);
+      setAvailableChampionBets(result.data.availableChampions);
+      setIsLoading(false);
+      setBets(new Map());
+    });
   };
 
-  const renderUserBets = (bet: any): JSX.Element => {
-    return (
-      <div key={bet._id}>
-        {bet.game.homeTeam.name} : {bet.game.awayTeam.name}
-        <br />
-        {bet.awayScore} : {bet.homeScore}
-      </div>
-    );
-  };
-
-  const onAddBet = ({ homeTeamScore, awayTeamScore, gameId }: any) => {
-    setBets([
-      ...bets,
-      {
-        gameId,
-        homeScore: Number.parseInt(homeTeamScore, 10),
-        awayScore: Number.parseInt(awayTeamScore, 10),
-      },
-    ]);
+  const onAddBet = (gameBetInput: GameBetInput) => {
+    bets.set(gameBetInput.gameId, gameBetInput);
   };
 
   const renderAvailableGamesBet = ({
     _id,
     homeTeam,
     awayTeam,
-  }: any): JSX.Element => {
+    scheduledDate,
+  }: GameDTO): JSX.Element => {
     return (
-      <GameBet
+      <GameBetComponent
         key={_id}
-        gameId={_id}
-        homeTeamName={homeTeam.name}
-        awayTeamName={awayTeam.name}
-        onChange={onAddBet}
+        homeTeam={homeTeam}
+        awayTeam={awayTeam}
+        scheduledDate={scheduledDate}
+        onChange={({ homeScore, awayScore }) =>
+          onAddBet({ gameId: _id as string, homeScore, awayScore })
+        }
       />
     );
   };
 
+  const renderUserGameBets = (gameBet: GameBet): JSX.Element => {
+    return <GameBetPreview key={gameBet._id} gameBet={gameBet} />;
+  };
+
+  const renderUserFinishedBets = (gameBet: GameBet): JSX.Element => {
+    return <GameBetFinished key={gameBet._id} gameBet={gameBet} />;
+  };
+
   return (
-    <div>
-      Hello from dashboard
+    <Page>
       <button type="button" onClick={logout}>
         Logout
       </button>
       <br />
-      <br />
-      User BETS
-      {userBets.map(renderUserBets)}
-      <br />
-      <br />
-      Available bets
-      {availableGameBets.map(renderAvailableGamesBet)}
-      <button type="button" onClick={createBets}>
-        Postaw zakłady!!!
+      <button disabled={isLoading} type="button" onClick={createBets}>
+        Postaw zakłady!
       </button>
-    </div>
+      <br />
+      <BetWrapper>
+        <Header>Postawione zakłady</Header>
+        {userBets.map(renderUserGameBets)}
+      </BetWrapper>
+      <BetWrapper>
+        <Header>Dostępne zakłady</Header>
+        {availableGameBets.map(renderAvailableGamesBet)}
+      </BetWrapper>
+      <BetWrapper>
+        <Header>Zakończone zakłady</Header>
+        {finishedGameBets.map(renderUserFinishedBets)}
+      </BetWrapper>
+    </Page>
   );
 };

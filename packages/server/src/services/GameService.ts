@@ -1,12 +1,17 @@
-import { CreationType, GameStatus } from '@bet/structures';
+import {
+  BetFilters,
+  BetStatus,
+  CreationType,
+  Game,
+  GameBet,
+  GameStatus,
+  Winner,
+} from '@bet/structures';
 import { TeamRepository } from '../Repository/TeamRepository';
 import { GameRepository } from '../Repository/GameRepository';
-import { Game } from '../structures/Game';
 import { ExternalGame } from '../interfaces/ExternalGame';
 import { ExternalGamesService } from './ExternalGamesService';
-import { GameBet } from '../structures/GameBet';
 import { GameBetRepository } from '../Repository/GameBetRepository';
-import { BetFilters } from '../structures/Bet';
 
 export class GameService {
   private gameRepository = new GameRepository();
@@ -23,7 +28,7 @@ export class GameService {
 
   private mapToGames(matches: ExternalGame[]): Promise<Game[]> {
     return Promise.all(
-      matches.map(async ({ homeTeam, awayTeam, score, ...values }) => {
+      matches.map(async ({ homeTeam, awayTeam, score, status, ...values }) => {
         const homeTeamDoc = await this.teamRepository.getOne({
           externalId: homeTeam.externalId,
         });
@@ -33,12 +38,13 @@ export class GameService {
         });
         return {
           ...values,
+          status: status === GameStatus.Timed ? GameStatus.Scheduled : status,
           creationType: CreationType.External,
           homeTeam: homeTeamDoc,
           awayTeam: awayTeamDoc,
           winner: score.winner,
-          homeScore: score.fullTime.homeTeam,
-          awayScore: score.fullTime.awayTeam,
+          homeScore: score.fullTime.home,
+          awayScore: score.fullTime.away,
         };
       }),
     );
@@ -61,10 +67,30 @@ export class GameService {
   }
 
   async getUpdatedGamesByStages(stages: string[]): Promise<Game[]> {
+    // const finishedGames = await this.externalGamesService
+    //   .getGamesByStages(stages.join(','))
+    //   .then((data) =>
+    //     data.filter((game) => game.status === GameStatus.Finished),
+    //   );
     const finishedGames = await this.externalGamesService
       .getGamesByStages(stages.join(','))
       .then((data) =>
-        data.filter((game) => game.status === GameStatus.Finished),
+        data.map((game) => ({
+          ...game,
+          status: GameStatus.Finished,
+          score: {
+            winner: Winner.HomeTeam,
+            duration: 'REGULAR',
+            fullTime: {
+              home: 3,
+              away: 0,
+            },
+            halfTime: {
+              home: 1,
+              away: 0,
+            },
+          },
+        })),
       );
 
     if (!finishedGames.length) {
@@ -79,8 +105,8 @@ export class GameService {
           status: GameStatus.Scheduled,
         },
         {
-          homeScore: finishedGame.score.fullTime.homeTeam,
-          awayScore: finishedGame.score.fullTime.awayTeam,
+          homeScore: finishedGame.score.fullTime.home,
+          awayScore: finishedGame.score.fullTime.away,
           winner: finishedGame.score.winner,
           status: finishedGame.status,
         },
@@ -95,9 +121,9 @@ export class GameService {
   }
 
   async getGames(filters: BetFilters): Promise<Game[]> {
-    const { userId, status } = filters;
+    const { userId, status, from, to } = filters;
     const userGameBets: GameBet[] = await this.gameBetRepository.getMany({
-      status,
+      status: BetStatus.Scheduled,
       createdBy: userId,
     });
 
@@ -135,6 +161,14 @@ export class GameService {
           status,
           'homeTeam._id': { $in: games.map((el) => el.homeTeam) },
           'awayTeam._id': { $in: games.map((el) => el.awayTeam) },
+          scheduledDate: {
+            $gte: from ? new Date(from) : '',
+            $lt: to ? new Date(to) : '',
+          },
+          // scheduledDate: {
+          //   $gte: new Date(2012, 7, 14),
+          //   $lt: new Date(2021, 7, 14),
+          // },
         },
       },
     ];

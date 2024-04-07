@@ -1,5 +1,5 @@
+import { Game } from '@bet/structures';
 import { Repository } from './Repository';
-import { Game } from '../structures/Game';
 import { GameModel } from '../models/GameModel';
 import { Query } from '../structures/Query';
 
@@ -24,7 +24,7 @@ export class GameRepository extends Repository<Game> {
     return super.findOne(input);
   }
 
-  public async updateOne(query: Query, data: unknown): Promise<any> {
+  public async updateOne(query: Query, data: unknown): Promise<Game> {
     return super.updateOne(query, data);
   }
 

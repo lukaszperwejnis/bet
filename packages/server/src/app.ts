@@ -37,10 +37,10 @@ export class App {
     connectToDatabase();
     this.initMiddlewares();
     this.initRoutes();
-    // App.fillDatabase();
+    App.fillDatabase();
     // TODO enter here mail for invitation
     // this.mailService.sendInvitationEmail({ email: 'perwiperwi@gmail.com' });
-    // this.initCrones();
+    this.initCrones();
   }
 
   private initMiddlewares(): void {
@@ -84,6 +84,7 @@ export class App {
   private static async fillDatabase() {
     await new TeamService().addTeamsToDatabase();
     await new GameService().addScheduledMatchesToDatabase();
-    await new BetsValidationService().validateMatchBets();
+
+    // await new BetsValidationService().validateMatchBets();
   }
 }

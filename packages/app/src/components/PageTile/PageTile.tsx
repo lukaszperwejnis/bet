@@ -1,6 +1,6 @@
 import { RenderType, WithChildrenProps } from '@structures';
 import { Loader } from '@bet/ui-components';
-import { Description, Header, StyledTile } from './styles';
+import { Description, Header, StyledTile } from './PageTile.styles';
 
 interface PageTitleProps extends WithChildrenProps {
   header?: RenderType;
@@ -15,6 +15,6 @@ export const PageTile = ({
   <StyledTile isLoading={isLoading}>
     <>{header && <Header>{header}</Header>}</>
     <Description>{children}</Description>
-    <>{isLoading && <Loader />}</>
+    <>{isLoading && <Loader data-testid="loader" />}</>
   </StyledTile>
 );

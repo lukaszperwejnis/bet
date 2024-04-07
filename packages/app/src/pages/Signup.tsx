@@ -14,7 +14,7 @@ import {
 } from '@components';
 import { FormField, Input, FormComponents } from '@bet/ui-components';
 import { confirmedPasswordSchema, passwordSchema } from '@schemas';
-import { StoreType } from '@stores/index';
+import { StoreType } from '@stores/types';
 import { signup } from '@stores/actions';
 import { invalidTokenSignup } from '@stores/actions/auth.actions';
 

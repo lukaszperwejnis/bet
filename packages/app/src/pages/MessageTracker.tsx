@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { StoreType } from '@stores/index';
+import { StoreType } from '@stores/types';
 import { Message } from '@structures';
 import { Message as MessageComponent } from '@bet/ui-components';
 

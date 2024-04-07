@@ -1,9 +1,14 @@
 import * as Joi from '@hapi/joi';
-import { Competition, GameStatus, Team, CreationType } from '@bet/structures';
+import {
+  Competition,
+  GameStatus,
+  Team,
+  CreationType,
+  Game,
+  Winner,
+} from '@bet/structures';
 import { TeamRepository } from '../Repository/TeamRepository';
-import { WinnerType } from '../enums';
 import { GameRepository } from '../Repository/GameRepository';
-import { Game } from '../structures/Game';
 import { ExternalGamesService } from './ExternalGamesService';
 import {
   FieldValidationError,
@@ -78,11 +83,13 @@ export class TeamService {
             name: homeTeam.name,
             externalId: homeTeam.externalId,
             creationType: CreationType.External,
+            crest: homeTeam.crest,
           } as Team.Team,
           {
             name: awayTeam.name,
             externalId: awayTeam.externalId,
             creationType: CreationType.External,
+            crest: awayTeam.crest,
           } as Team.Team,
         ];
       },
@@ -119,7 +126,7 @@ export class TeamService {
     }
 
     const winnerTeamId =
-      finalGame.winner === WinnerType.HomeTeam
+      finalGame.winner === Winner.HomeTeam
         ? finalGame.homeTeam
         : finalGame.awayTeam;
     return this.teamRepository.getOne({

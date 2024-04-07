@@ -1,57 +1,118 @@
-import React, { useState } from 'react';
-import { TeamWrapper, Wrapper } from './styles';
+import * as Yup from 'yup';
+import { Formik } from 'formik';
+import { FormattedMessage } from 'react-intl';
+import { betScoreValidationSchema } from '@schemas';
+import { useState } from 'react';
+import {
+  TeamName,
+  TeamNames,
+  BetContainer,
+  StyledForm,
+  CrestWrapper,
+  Crest,
+  Separator,
+  TeamWrapper,
+  ScoreFormField,
+  Submit,
+  SeparatorWrapper,
+  ScheduledDate,
+} from './GameBet.styles';
 
 type GameBetProps = {
-  gameId: string;
-  homeTeamName: any;
-  awayTeamName: any;
-  onChange: (data: {
-    homeTeamScore: number;
-    awayTeamScore: number;
-    gameId: string;
-  }) => void;
+  homeTeam: {
+    name: string;
+    crest: string;
+    betScore?: number;
+  };
+  awayTeam: {
+    name: string;
+    crest: string;
+    betScore?: number;
+  };
+  scheduledDate: string;
+  onChange: (data: { homeScore: number; awayScore: number }) => void;
 };
 
-const Team = ({ name, onChange }: any) => (
-  <TeamWrapper>
-    {name} <input onChange={onChange} type="number" />
-  </TeamWrapper>
-);
+type FormValues = {
+  homeScore: string | number;
+  awayScore: string | number;
+};
+
+const formInitialValues: FormValues = {
+  homeScore: '',
+  awayScore: '',
+};
 
 export const GameBet = ({
-  gameId,
-  homeTeamName,
-  awayTeamName,
+  homeTeam,
+  awayTeam,
   onChange,
+  scheduledDate,
 }: GameBetProps): JSX.Element => {
-  const [homeTeamScore, setHomeTeamScore] = useState<number>(0);
-  const [awayTeamScore, setAwayTeamScore] = useState<number>(0);
+  const [isExpanded, setIsExpanded] = useState<boolean>(true);
 
-  const onHomeTeamScoreChange = (event: any) => {
-    event.persist();
-    setHomeTeamScore(event.target.value);
-  };
+  const validationSchema = Yup.object({
+    homeScore: betScoreValidationSchema,
+    awayScore: betScoreValidationSchema,
+  });
 
-  const onAwayTeamScoreChange = (event: any) => {
-    event.persist();
-    setAwayTeamScore(event.target.value);
-  };
-
-  const onAddBet = () => {
+  const onSubmit = ({ homeScore, awayScore }: FormValues) => {
     onChange({
-      homeTeamScore,
-      awayTeamScore,
-      gameId,
+      homeScore: +homeScore,
+      awayScore: +awayScore,
     });
+
+    // setIsExpanded(false);
+  };
+
+  const handleOnClick = () => {
+    // setIsExpanded(!isExpanded);
   };
 
   return (
-    <Wrapper>
-      <Team name={homeTeamName} onChange={onHomeTeamScoreChange} />
-      <Team name={awayTeamName} onChange={onAwayTeamScoreChange} />
-      <button type="button" onClick={onAddBet}>
-        Postaw zakład
-      </button>
-    </Wrapper>
+    <BetContainer onClick={handleOnClick}>
+      <Formik
+        validationSchema={validationSchema}
+        initialValues={formInitialValues}
+        onSubmit={onSubmit}
+        validateOnMount
+      >
+        {({ isValid }) => (
+          <StyledForm>
+            <TeamNames>
+              <TeamWrapper>
+                <CrestWrapper>
+                  <Crest src={homeTeam.crest} />
+                </CrestWrapper>
+                <TeamName>{homeTeam.name}</TeamName>
+                {isExpanded && (
+                  <ScoreFormField name="homeScore" type="number" />
+                )}
+              </TeamWrapper>
+              <SeparatorWrapper>
+                <ScheduledDate>
+                  {new Date(scheduledDate).toLocaleString()}
+                </ScheduledDate>
+                <Separator />
+              </SeparatorWrapper>
+              <TeamWrapper>
+                <CrestWrapper>
+                  <Crest src={awayTeam.crest} />
+                </CrestWrapper>
+                <TeamName>{awayTeam.name}</TeamName>
+                {isExpanded && (
+                  <ScoreFormField name="awayScore" type="number" />
+                )}
+              </TeamWrapper>
+            </TeamNames>
+            {isExpanded && (
+              <Submit disabled={!isValid} type="submit">
+                <FormattedMessage id="gameBet.cta.add" />
+              </Submit>
+            )}
+          </StyledForm>
+        )}
+      </Formik>
+    </BetContainer>
   );
 };

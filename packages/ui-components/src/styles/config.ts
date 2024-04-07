@@ -46,4 +46,4 @@ export const config = {
     dropdowns: 300,
     overlays: 500,
   },
-};
+} as const;

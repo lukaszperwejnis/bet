@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { AppUrls } from '@config';
 import { useTranslation } from '@hooks';
 import { login } from '@stores/actions';
-import { StoreType } from '@stores/index';
+import { StoreType } from '@stores/types';
 import { emailSchema, getRequiredStringSchema } from '@schemas';
 import { FormField } from '@bet/ui-components';
 import { Page, PageTile, StyledForm, Submit } from '@components';
@@ -49,14 +49,16 @@ export const Login = (): JSX.Element => {
             <FormField.Input
               name="email"
               placeholder={translate('fields.email')}
+              data-testid="email"
             />
             <FormField.Input
               name="password"
               placeholder={translate('fields.password')}
               type="password"
+              data-testid="password"
             />
             <>{error && <Error>{error}</Error>}</>
-            <Submit disabled={isLoading}>
+            <Submit disabled={isLoading} data-testid="submit">
               <FormattedMessage id="login.submit" />
             </Submit>
           </StyledForm>

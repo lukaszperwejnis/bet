@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import { WithChildrenProps } from '../../types/index';
+import { WithChildrenProps } from '../../types';
 import { stylesConfig } from '../../styles/styles-config';
 
-interface TileProps extends WithChildrenProps {
+export interface TileProps extends WithChildrenProps {
   isRound?: boolean;
 }
 

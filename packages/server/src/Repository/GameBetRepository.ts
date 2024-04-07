@@ -1,6 +1,6 @@
+import { GameBet } from '@bet/structures';
 import { Repository } from './Repository';
 import { GameBetModel } from '../models/GameBetModel';
-import { GameBet } from '../structures/GameBet';
 import { Query } from '../structures/Query';
 
 export class GameBetRepository extends Repository<GameBet> {

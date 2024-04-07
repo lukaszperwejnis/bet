@@ -1,23 +1,9 @@
-import { MouseEvent } from 'react';
 import styled, { css } from 'styled-components';
 import { darken, lighten } from 'polished';
-import { ColorType } from './Button';
-import { breakpoints, config } from '../../styles/index';
-import { WithChildrenProps } from '../../types/index';
+import { ButtonProps, Variant } from './Button';
+import { breakpoints, config } from '../../styles';
 
-interface ButtonProps extends WithChildrenProps {
-  onClick?(event: MouseEvent): void;
-  isHollow?: boolean;
-  disabled?: boolean;
-  isEmpty?: boolean;
-  title?: string;
-}
-
-interface StyledButtonProps extends ButtonProps {
-  colorType: ColorType;
-}
-
-export const StyledButton = styled.button<StyledButtonProps>`
+export const StyledButton = styled.button<ButtonProps>`
   border: none;
   border-radius: 4px;
   color: ${config.color.white};
@@ -39,15 +25,16 @@ export const StyledButton = styled.button<StyledButtonProps>`
     font-size: ${config.fontSize.normal};
   }
 
-  ${({ disabled }: StyledButtonProps) =>
+  ${({ disabled }) =>
     disabled &&
     css`
       opacity: ${config.opacity.disabled};
       cursor: auto;
     `};
 
-  ${({ colorType }: StyledButtonProps) =>
-    colorType === 'primary' &&
+  // Primary variant
+  ${({ variant }) =>
+    variant === Variant.Primary &&
     css`
       background-color: ${config.color.primary};
       &:hover {
@@ -55,8 +42,8 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `};
 
-  ${({ colorType, isHollow }: StyledButtonProps) =>
-    colorType === 'primary' &&
+  ${({ variant, isHollow }) =>
+    variant === Variant.Primary &&
     isHollow &&
     css`
       color: ${config.color.primary};
@@ -65,8 +52,10 @@ export const StyledButton = styled.button<StyledButtonProps>`
         background-color: ${config.color.primary};
       }
     `};
-  ${({ colorType }: StyledButtonProps) =>
-    colorType === 'secondary' &&
+
+  // Secondary variant
+  ${({ variant }) =>
+    variant === Variant.Secondary &&
     css`
       color: ${config.color.textColor};
       background-color: ${config.color.secondary};
@@ -75,8 +64,8 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `};
 
-  ${({ colorType, isHollow }: StyledButtonProps) =>
-    colorType === 'secondary' &&
+  ${({ variant, isHollow }) =>
+    variant === Variant.Secondary &&
     isHollow &&
     css`
       color: ${config.color.secondary};
@@ -85,8 +74,10 @@ export const StyledButton = styled.button<StyledButtonProps>`
         background-color: ${config.color.secondary};
       }
     `};
-  ${({ colorType }: StyledButtonProps) =>
-    colorType === 'error' &&
+
+  // Error variant
+  ${({ variant }) =>
+    variant === Variant.Error &&
     css`
       background-color: ${config.color.guardsmanRed};
       &:hover {
@@ -94,8 +85,8 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `};
 
-  ${({ colorType, isHollow }: StyledButtonProps) =>
-    colorType === 'error' &&
+  ${({ variant, isHollow }) =>
+    variant === Variant.Error &&
     isHollow &&
     css`
       color: ${config.color.guardsmanRed};
@@ -105,8 +96,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `};
 
-  ${({ colorType }: StyledButtonProps) =>
-    colorType === 'warning' &&
+  // Warning variant
+  ${({ variant }) =>
+    variant === Variant.Warning &&
     css`
       background-color: ${config.color.warning};
       &:hover {
@@ -114,8 +106,8 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `};
 
-  ${({ colorType, isHollow }: StyledButtonProps) =>
-    colorType === 'warning' &&
+  ${({ variant, isHollow }) =>
+    variant === Variant.Error &&
     isHollow &&
     css`
       color: ${config.color.warning};
@@ -125,8 +117,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `};
 
-  ${({ colorType }: StyledButtonProps) =>
-    colorType === 'success' &&
+  // Success variant
+  ${({ variant }) =>
+    variant === Variant.Success &&
     css`
       background-color: ${config.color.success};
       &:hover {
@@ -134,8 +127,8 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `};
 
-  ${({ colorType, isHollow }: StyledButtonProps) =>
-    colorType === 'success' &&
+  ${({ variant, isHollow }) =>
+    variant === Variant.Success &&
     isHollow &&
     css`
       color: ${config.color.success};
@@ -145,8 +138,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `};
 
-  ${({ colorType }: StyledButtonProps) =>
-    colorType === 'empty' &&
+  // Empty variant
+  ${({ variant }) =>
+    variant === Variant.Empty &&
     css`
       margin: 0;
       background: none;
@@ -159,7 +153,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `};
 
-  ${({ isHollow }: ButtonProps) =>
+  ${({ isHollow }) =>
     isHollow &&
     css`
       background-color: ${config.color.white};
